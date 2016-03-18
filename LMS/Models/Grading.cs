@@ -14,6 +14,7 @@ namespace LMS.Models
 
         public int Teacher_Id { get; set; }
 
+        // NOTE: For now, this is a boolean, 0 means failed, 1 means approved
         public int Grade { get; set; }
 
         [Required]

@@ -21,5 +21,12 @@ namespace LMS.Models
         public virtual Teacher Teacher { get; set; }
 
         public virtual ICollection<Student> Students { get; set; }
+        public virtual ICollection<Schedule> Schedules { get; set; }
+
+        public Group()
+        {
+            Students = new List<Student>();
+            Schedules = new List<Schedule>();
+        }
     }
 }

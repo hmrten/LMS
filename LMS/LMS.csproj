@@ -926,15 +926,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603171343037_initial.cs" />
-    <Compile Include="Migrations\201603171343037_initial.Designer.cs">
-      <DependentUpon>201603171343037_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201603181300521_initial.cs" />
+    <Compile Include="Migrations\201603181300521_initial.Designer.cs">
+      <DependentUpon>201603181300521_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\Grading.cs" />
     <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentAssignment.cs" />
     <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\Task.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -953,8 +957,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603171343037_initial.resx">
-      <DependentUpon>201603171343037_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603181300521_initial.resx">
+      <DependentUpon>201603181300521_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

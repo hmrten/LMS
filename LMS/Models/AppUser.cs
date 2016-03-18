@@ -6,6 +6,7 @@ using System.Web;
 
 namespace LMS.Models
 {
+    // TODO: Derive from IdentityUser and hook into Indetity.Core and Identity.EntityFramework
     public class AppUser
     {
         [Key]
@@ -21,8 +22,5 @@ namespace LMS.Models
         {
             get { return FirstName + " " + LastName; }
         }
-
-        [StringLength(256)]
-        public string Email { get; set; }
     }
 }

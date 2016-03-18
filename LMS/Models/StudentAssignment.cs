@@ -18,6 +18,7 @@ namespace LMS.Models
 
         public int? Grading_Id { get; set; }
 
+        [Required]
         public DateTime SubmitDate { get; set; }
 
         public string Comment { get; set; }

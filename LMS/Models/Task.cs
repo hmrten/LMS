@@ -12,16 +12,19 @@ namespace LMS.Models
         [Key]
         public int Id { get; set; }
 
-        public int Schedule_Id { get; set; }
-
         [Required, StringLength(128)]
         public string Title { get; set; }
 
+        [StringLength(256)]
         public string FileName { get; set; }
 
-        [ForeignKey("Schedule_Id")]
-        public virtual Schedule Schedule { get; set; }
+        public string Description { get; set; }
 
         public virtual ICollection<StudentAssignment> StudentAssignments { get; set; }
+
+        public Task()
+        {
+            StudentAssignments = new List<StudentAssignment>();
+        }
     }
 }

@@ -21,5 +21,12 @@ namespace LMS.Models
 
         [ForeignKey("Group_Id")]
         public virtual Group Group { get; set; }
+
+        public virtual ICollection<StudentAssignment> Assignments { get; set; }
+
+        public Student()
+        {
+            Assignments = new List<StudentAssignment>();
+        }
     }
 }
