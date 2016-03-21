@@ -1,4 +1,7 @@
 ﻿using LMS.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,9 +11,9 @@ using System.Web;
 
 namespace LMS.DataAccess
 {
-    public class LMSContext : DbContext
+    public class LMSContext : IdentityDbContext<AppUser, IntRole, int, IntUserLogin, IntUserRole, IntUserClaim>
     {
-        public DbSet<AppUser> AppUsers { get; set; }
+        //public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Group> Groups { get; set; }
@@ -51,24 +54,51 @@ namespace LMS.DataAccess
                 .WithMany(a => a.Schedules)
                 .HasForeignKey(s => s.Author_Id)
                 .WillCascadeOnDelete(false);
+
+            base.OnModelCreating(mb);
         }
 
         public void Seed()
         {
-            AppUsers.AddOrUpdate(u => u.Id,
-                new AppUser { Id = 1, FirstName = "Anders", LastName = "Andersson" });
+            //AppUsers.AddOrUpdate(u => u.Id,
+            //    new AppUser { Id = 1, FirstName = "Anders", LastName = "Andersson" });
 
-            Teachers.AddOrUpdate(t => t.Id,
-                new Teacher { Id = 1, AppUser_Id = 1 });
+            //Teachers.AddOrUpdate(t => t.Id,
+            //    new Teacher { Id = 1, AppUser_Id = 1 });
 
-            Subjects.AddOrUpdate(s => s.Id,
-                new Subject { Id = 1, Title = "Maths 1", Description = "Algebra and Calculus" });
+            //Subjects.AddOrUpdate(s => s.Id,
+            //    new Subject { Id = 1, Title = "Maths 1", Description = "Algebra and Calculus" });
 
-            SaveChanges();
+            //SaveChanges();
 
-            var subj = Subjects.Find(1);
-            var teacher = Teachers.Find(1);
-            teacher.Subjects.Add(subj);
+            //var subj = Subjects.Find(1);
+            //var teacher = Teachers.Find(1);
+            //teacher.Subjects.Add(subj);
+
+            if (!Users.Any(u => u.UserName == "admin"))
+            {
+                var store = new IntUserStore(this);
+                var manager = AppUserManager.Create(store);
+                var user = new AppUser
+                {
+                    UserName = "admin",
+                    Email = "admin@admin.com",
+                    FirstName = "admin",
+                    LastName = "admin"
+                };
+                var res = manager.Create(user, "admin");
+                if (!res.Succeeded)
+                {
+                    throw new Exception(res.Errors.Aggregate("", (a, b) => a + b + "\n"));
+                }
+                //SaveChanges();
+            }
+
+        }
+
+        public static LMSContext Create()
+        {
+            return new LMSContext();
         }
     }
 }

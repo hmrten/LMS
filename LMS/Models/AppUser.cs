@@ -1,17 +1,33 @@
-﻿using System;
+﻿using LMS.DataAccess;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace LMS.Models
 {
-    // TODO: Derive from IdentityUser and hook into Indetity.Core and Identity.EntityFramework
-    public class AppUser
+    public class IntUserLogin : IdentityUserLogin<int> { }
+    public class IntUserRole : IdentityUserRole<int> { }
+    public class IntUserClaim : IdentityUserClaim<int> { }
+    public class IntRole : IdentityRole<int, IntUserRole>
     {
-        [Key]
-        public int Id { get; set; }
+        public IntRole() { }
+        public IntRole(string name) { Name = name; }
+    }
 
+    public class IntUserStore : UserStore<AppUser, IntRole, int, IntUserLogin, IntUserRole, IntUserClaim>
+    {
+        public IntUserStore(LMSContext ctx) : base(ctx) { }
+    }
+
+    public class AppUser : IdentityUser<int, IntUserLogin, IntUserRole, IntUserClaim>, IUser<int>
+    {
         [Required, StringLength(128)]
         public string FirstName { get; set; }
 
@@ -21,6 +37,11 @@ namespace LMS.Models
         public string FullName
         {
             get { return FirstName + " " + LastName; }
+        }
+
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<AppUser, int> manager)
+        {
+            return await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
         }
     }
 }

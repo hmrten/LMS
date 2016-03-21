@@ -54,8 +54,12 @@
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security">
       <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
@@ -923,15 +927,17 @@
     <Content Include="Scripts\version.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DataAccess\LMSContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603181300521_initial.cs" />
-    <Compile Include="Migrations\201603181300521_initial.Designer.cs">
-      <DependentUpon>201603181300521_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201603211308346_initial.cs" />
+    <Compile Include="Migrations\201603211308346_initial.Designer.cs">
+      <DependentUpon>201603211308346_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppUser.cs" />
@@ -944,6 +950,7 @@
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -960,10 +967,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Shared\Menus\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603181300521_initial.resx">
-      <DependentUpon>201603181300521_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603211308346_initial.resx">
+      <DependentUpon>201603211308346_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

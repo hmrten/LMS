@@ -8,16 +8,6 @@ namespace LMS.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.AppUsers",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        FirstName = c.String(nullable: false, maxLength: 128),
-                        LastName = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
                 "dbo.Gradings",
                 c => new
                     {
@@ -39,8 +29,68 @@ namespace LMS.Migrations
                         AppUser_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AppUsers", t => t.AppUser_Id, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.AppUser_Id, cascadeDelete: true)
                 .Index(t => t.AppUser_Id);
+            
+            CreateTable(
+                "dbo.AspNetUsers",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(nullable: false, maxLength: 128),
+                        LastName = c.String(nullable: false, maxLength: 128),
+                        Email = c.String(maxLength: 256),
+                        EmailConfirmed = c.Boolean(nullable: false),
+                        PasswordHash = c.String(),
+                        SecurityStamp = c.String(),
+                        PhoneNumber = c.String(),
+                        PhoneNumberConfirmed = c.Boolean(nullable: false),
+                        TwoFactorEnabled = c.Boolean(nullable: false),
+                        LockoutEndDateUtc = c.DateTime(),
+                        LockoutEnabled = c.Boolean(nullable: false),
+                        AccessFailedCount = c.Int(nullable: false),
+                        UserName = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
+            
+            CreateTable(
+                "dbo.AspNetUserClaims",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.Int(nullable: false),
+                        ClaimType = c.String(),
+                        ClaimValue = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.AspNetUserLogins",
+                c => new
+                    {
+                        LoginProvider = c.String(nullable: false, maxLength: 128),
+                        ProviderKey = c.String(nullable: false, maxLength: 128),
+                        UserId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.Int(nullable: false),
+                        RoleId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
             
             CreateTable(
                 "dbo.Schedules",
@@ -90,7 +140,7 @@ namespace LMS.Migrations
                         Group_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AppUsers", t => t.AppUser_Id, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.AppUser_Id, cascadeDelete: true)
                 .ForeignKey("dbo.Groups", t => t.Group_Id)
                 .Index(t => t.AppUser_Id)
                 .Index(t => t.Group_Id);
@@ -148,6 +198,16 @@ namespace LMS.Migrations
                 .Index(t => t.Name, unique: true);
             
             CreateTable(
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
+            CreateTable(
                 "dbo.SubjectTeachers",
                 c => new
                     {
@@ -164,6 +224,7 @@ namespace LMS.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Gradings", "Teacher_Id", "dbo.Teachers");
             DropForeignKey("dbo.Schedules", "ScheduleType_Id", "dbo.ScheduleTypes");
             DropForeignKey("dbo.Schedules", "Task_Id", "dbo.Tasks");
@@ -176,11 +237,15 @@ namespace LMS.Migrations
             DropForeignKey("dbo.StudentAssignments", "Task_Id", "dbo.Tasks");
             DropForeignKey("dbo.StudentAssignments", "Student_Id", "dbo.Students");
             DropForeignKey("dbo.StudentAssignments", "Grading_Id", "dbo.Gradings");
-            DropForeignKey("dbo.Students", "AppUser_Id", "dbo.AppUsers");
+            DropForeignKey("dbo.Students", "AppUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Schedules", "Author_Id", "dbo.Teachers");
-            DropForeignKey("dbo.Teachers", "AppUser_Id", "dbo.AppUsers");
+            DropForeignKey("dbo.Teachers", "AppUser_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropIndex("dbo.SubjectTeachers", new[] { "Teacher_Id" });
             DropIndex("dbo.SubjectTeachers", new[] { "Subject_Id" });
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.ScheduleTypes", new[] { "Name" });
             DropIndex("dbo.Subjects", new[] { "Title" });
             DropIndex("dbo.StudentAssignments", new[] { "Grading_Id" });
@@ -195,9 +260,15 @@ namespace LMS.Migrations
             DropIndex("dbo.Schedules", new[] { "Subject_Id" });
             DropIndex("dbo.Schedules", new[] { "Group_Id" });
             DropIndex("dbo.Schedules", new[] { "ScheduleType_Id" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Teachers", new[] { "AppUser_Id" });
             DropIndex("dbo.Gradings", new[] { "Teacher_Id" });
             DropTable("dbo.SubjectTeachers");
+            DropTable("dbo.AspNetRoles");
             DropTable("dbo.ScheduleTypes");
             DropTable("dbo.Subjects");
             DropTable("dbo.Tasks");
@@ -205,9 +276,12 @@ namespace LMS.Migrations
             DropTable("dbo.Students");
             DropTable("dbo.Groups");
             DropTable("dbo.Schedules");
+            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.AspNetUserClaims");
+            DropTable("dbo.AspNetUsers");
             DropTable("dbo.Teachers");
             DropTable("dbo.Gradings");
-            DropTable("dbo.AppUsers");
         }
     }
 }
