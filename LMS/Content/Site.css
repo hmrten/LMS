@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 10px;
     padding-bottom: 20px;
 }
 
@@ -16,3 +16,45 @@ textarea {
     max-width: 280px;
 }
 
+.clear {clear:both;height:1px;overflow:hidden}
+
+/* HEADER */
+.header {position:relative;}
+.header-container {}
+.header-logo-holder {
+    padding-right:15px;
+}
+.header-logo {
+    position:relative;
+    float:left;
+    height:50px;
+    width:300px;
+    font-size:40px;
+    margin-right:0px;
+    padding:0;
+}
+.login-holder {
+    float:right;
+}
+
+.main-menu-holder {
+    float:right;
+}
+.login-name,
+.login-link {
+    text-align:right;
+}
+#main-menu {}
+
+ #main-menu li {
+    display:block;
+    float:left;
+    padding-right:5px;
+}
+ #main-menu li:last-child {
+     padding-right:0px;
+ }
+
+ #sub-menu {
+     margin-top:20px;
+ }

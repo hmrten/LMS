@@ -9,25 +9,22 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Login as admin", "Login", "Account", new { user="admin", pass="admin" }, null)</li>
-                    <li>@Html.ActionLink("Login as teacher", "Login", "Account", new { user = "teacher", pass = "teacher" }, null)</li>
-                    <li>@Html.ActionLink("Login as student", "Login", "Account", new { user = "student", pass = "student" }, null)</li>
-                    <li>@Html.ActionLink("Logout", "Logout", "Account", null, null)</li>
-                </ul>
-            </div>
+    <div class="container header header-container">
+        <div id="logo-log-in" class="header header-logo-holder">
+            @Html.Partial("_LogInPartial")
         </div>
+        <div class="header main-menu-holder">
+            <ul class="nav" id="main-menu">
+                <li>@Html.ActionLink("Hem", "Index", "Home")</li>
+                <li>@Html.ActionLink("Om", "About", "Home")</li>
+                <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+            </ul>
+        </div>
+        <div class="clear">&nbsp;</div>
+    </div>
+
+    <div id="Main-nav-bar">
+        @Html.Partial("_MainNavPartial")
     </div>
 
     <div class="container body-content">
