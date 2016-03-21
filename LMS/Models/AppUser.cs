@@ -26,6 +26,11 @@ namespace LMS.Models
         public IntUserStore(LMSContext ctx) : base(ctx) { }
     }
 
+    public class IntRoleStore : RoleStore<IntRole, int, IntUserRole>
+    {
+        public IntRoleStore(LMSContext ctx) : base(ctx) {}
+    }
+
     public class AppUser : IdentityUser<int, IntUserLogin, IntUserRole, IntUserClaim>, IUser<int>
     {
         [Required, StringLength(128)]

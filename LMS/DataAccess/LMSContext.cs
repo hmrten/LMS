@@ -75,6 +75,12 @@ namespace LMS.DataAccess
             //var teacher = Teachers.Find(1);
             //teacher.Subjects.Add(subj);
 
+            if (!Roles.Any(r => r.Name == "admin"))
+            {
+                var rm = new RoleManager<IntRole, int>(new IntRoleStore(this));
+                rm.Create(new IntRole { Name = "admin" });
+            }
+
             if (!Users.Any(u => u.UserName == "admin"))
             {
                 var store = new IntUserStore(this);
@@ -93,7 +99,11 @@ namespace LMS.DataAccess
                 }
                 //SaveChanges();
             }
-
+            else
+            {
+                var manager = AppUserManager.Create(new IntUserStore(this));
+                manager.AddToRole(1, "admin");
+            }
         }
 
         public static LMSContext Create()
