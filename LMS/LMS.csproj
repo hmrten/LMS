@@ -981,6 +981,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Menu\_StudentPortalMenu.cshtml" />
     <Content Include="Views\Menu\_SubjectMenu.cshtml" />
+    <Content Include="Views\Subject\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -992,7 +993,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Group\" />
     <Folder Include="Views\Schedule\" />
-    <Folder Include="Views\Subject\" />
     <Folder Include="Views\Task\" />
   </ItemGroup>
   <ItemGroup>
