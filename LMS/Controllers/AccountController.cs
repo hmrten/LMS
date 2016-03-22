@@ -7,11 +7,16 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Net;
+using System.Security.Claims;
+using LMS.Models;
+using LMS.DataAccess;
 
 namespace LMS.Controllers
 {
     public class AccountController : Controller
     {
+		private LMSContext db = new LMSContext();
+
         public AppUserManager UserManager
         {
             get { return HttpContext.GetOwinContext().GetUserManager<AppUserManager>(); }
@@ -35,9 +40,10 @@ namespace LMS.Controllers
             if (status == SignInStatus.Success)
             {
 				var u = UserManager.FindByName(user);
-				HttpContext.GetOwinContext().get;
+				var role = db.Roles.Find(u.Roles.First().RoleId).Name;
 
-				u.Roles.Single().RoleId;
+				Session["role"] = role;
+
                 RedirectToAction("Index");
             }
             ViewBag.Message = "faield to login";
@@ -52,6 +58,7 @@ namespace LMS.Controllers
         public ActionResult Logout()
         {
             HttpContext.GetOwinContext().Authentication.SignOut();
+			Session["role"] = "guest";
             return RedirectToAction("Index");
         }
 
