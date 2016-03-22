@@ -24,6 +24,7 @@ namespace LMS.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.roles = UserHelpers.GetRoles();
             return View();
         }
 
