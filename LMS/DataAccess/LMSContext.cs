@@ -58,52 +58,49 @@ namespace LMS.DataAccess
             base.OnModelCreating(mb);
         }
 
-        public void Seed()
+        private void TryAddToRole(AppUserManager manager, int userId, string role)
         {
-            //AppUsers.AddOrUpdate(u => u.Id,
-            //    new AppUser { Id = 1, FirstName = "Anders", LastName = "Andersson" });
+            if (!manager.IsInRole(userId, role))
+                manager.AddToRole(userId, role);
+        }
 
-            //Teachers.AddOrUpdate(t => t.Id,
-            //    new Teacher { Id = 1, AppUser_Id = 1 });
-
-            //Subjects.AddOrUpdate(s => s.Id,
-            //    new Subject { Id = 1, Title = "Maths 1", Description = "Algebra and Calculus" });
-
-            //SaveChanges();
-
-            //var subj = Subjects.Find(1);
-            //var teacher = Teachers.Find(1);
-            //teacher.Subjects.Add(subj);
-
-            if (!Roles.Any(r => r.Name == "admin"))
+        private void AddUserAndRole(AppUserManager manager, string name, string role)
+        {
+            var user = manager.FindByName(name);
+            if (user == null)
             {
-                var rm = new RoleManager<IntRole, int>(new IntRoleStore(this));
-                rm.Create(new IntRole { Name = "admin" });
-            }
-
-            if (!Users.Any(u => u.UserName == "admin"))
-            {
-                var store = new IntUserStore(this);
-                var manager = AppUserManager.Create(store);
-                var user = new AppUser
+                user = new AppUser
                 {
-                    UserName = "admin",
-                    Email = "admin@admin.com",
-                    FirstName = "admin",
-                    LastName = "admin"
+                    UserName = name,
+                    Email = name + "@" + name + ".com",
+                    FirstName = name,
+                    LastName = name
                 };
-                var res = manager.Create(user, "admin");
+                var res = manager.Create(user, name);
                 if (!res.Succeeded)
                 {
                     throw new Exception(res.Errors.Aggregate("", (a, b) => a + b + "\n"));
                 }
-                //SaveChanges();
             }
-            else
+
+            TryAddToRole(manager, user.Id, role);
+        }
+
+        public void Seed()
+        {
+            var roleManager = new RoleManager<IntRole, int>(new IntRoleStore(this));
+            var userManager = AppUserManager.Create(new IntUserStore(this));
+
+            string[] roleNames = { "admin", "teacher", "student" };
+            foreach (var name in roleNames)
             {
-                var manager = AppUserManager.Create(new IntUserStore(this));
-                manager.AddToRole(1, "admin");
+                if (!Roles.Any(r => r.Name == name))
+                    roleManager.Create(new IntRole { Name = name });
             }
+
+            AddUserAndRole(userManager, "admin", "admin");
+            AddUserAndRole(userManager, "teacher", "teacher");
+            AddUserAndRole(userManager, "student", "student");
         }
 
         public static LMSContext Create()
