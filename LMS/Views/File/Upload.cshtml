@@ -1,0 +1,30 @@
+﻿@model LMS.Models.File
+
+@{
+    ViewBag.Title = "Upload";
+}
+
+<h2>Upload</h2>
+
+@using (Html.BeginForm("Upload", "File", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>File</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label for="upload" class="control-label col-md-2">Välj fil:</label>
+            <div class="col-md-10">
+                <input class="" type="file" name="upload" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Ladda upp" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

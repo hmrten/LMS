@@ -937,6 +937,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
@@ -953,6 +954,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\File.cs" />
     <Compile Include="Models\Grading.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Schedule.cs" />
@@ -963,6 +965,7 @@
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="UserHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -984,6 +987,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Menu\Teacher\_MainNav.cshtml" />
     <Content Include="Views\Menu\Student\_MainNav.cshtml" />
+    <Content Include="Views\File\Upload.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -993,6 +997,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\" />
     <Folder Include="Views\Group\" />
     <Folder Include="Views\Schedule\" />
     <Folder Include="Views\Task\" />
