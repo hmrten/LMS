@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 
 namespace LMS.DataAccess
@@ -26,12 +27,31 @@ namespace LMS.DataAccess
 
         public LMSContext() : base("LMS") { }
 
+        private static void OneToManyRelation<TEntity, TRequired>(DbModelBuilder mb,
+            Expression<Func<TEntity, TRequired>> hasRequiredExpr,
+            Expression<Func<TRequired, ICollection<TEntity>>> withManyExpr,
+            Expression<Func<TEntity, int>> foreignKeyExpr)
+            where TEntity : class
+            where TRequired : class
+        {
+            mb.Entity<TEntity>()
+                .HasRequired(hasRequiredExpr)
+                .WithMany(withManyExpr)
+                .HasForeignKey(foreignKeyExpr)
+                .WillCascadeOnDelete(false);
+        }
+
         // NOTE: For final presentation, talk about Fluent API
         protected override void OnModelCreating(DbModelBuilder mb)
         {
-            // NOTE: Have to setup tentity relations manually because we have circular depdencies
-            //       and we don't want on cascade delete with the foreign keys
-            mb.Entity<Schedule>()
+            base.OnModelCreating(mb);
+
+            OneToManyRelation<Schedule, ScheduleType>(mb, r => r.Type, m => m.Schedules, k => k.ScheduleType_Id);
+            OneToManyRelation<Schedule, Group>(mb, r => r.Group, m => m.Schedules, k => k.Group_Id);
+            OneToManyRelation<Schedule, Subject>(mb, r => r.Subject, m => m.Schedules, k => k.Subject_Id);
+            OneToManyRelation<Schedule, Teacher>(mb, r => r.Author, m => m.Schedules, k => k.Author_Id);
+
+            /*mb.Entity<Schedule>()
                 .HasRequired(s => s.Type)
                 .WithMany(t => t.Schedules)
                 .HasForeignKey(s => s.ScheduleType_Id)
@@ -53,9 +73,7 @@ namespace LMS.DataAccess
                 .HasRequired(s => s.Author)
                 .WithMany(a => a.Schedules)
                 .HasForeignKey(s => s.Author_Id)
-                .WillCascadeOnDelete(false);
-
-            base.OnModelCreating(mb);
+                .WillCascadeOnDelete(false);*/
         }
 
         private void TryAddToRole(AppUserManager manager, int userId, string role)
