@@ -7,6 +7,11 @@
 
 @if (Request.IsAuthenticated)
 {
+    <h4>Hello @User.Identity.Name</h4>
+    if (User.IsInRole("teacher"))
+    {
+        <strong>You are a teacher</strong>
+    }
     <p>This is a secret...</p>
 }
 

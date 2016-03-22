@@ -960,6 +960,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\IndexAdmin.cshtml" />
+    <Content Include="Views\Account\IndexTeacher.cshtml" />
+    <Content Include="Views\Account\IndexStudent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -969,7 +972,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Shared\Menus\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201603211308346_initial.resx">

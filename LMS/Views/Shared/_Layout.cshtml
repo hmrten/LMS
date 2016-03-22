@@ -21,7 +21,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Kontakt</a></li>
+                    <li>@Html.ActionLink("Login as admin", "Login", "Account", new { user="admin", pass="admin" }, null)</li>
+                    <li>@Html.ActionLink("Login as teacher", "Login", "Account", new { user = "teacher", pass = "teacher" }, null)</li>
+                    <li>@Html.ActionLink("Login as student", "Login", "Account", new { user = "student", pass = "student" }, null)</li>
+                    <li>@Html.ActionLink("Logout", "Logout", "Account", null, null)</li>
                 </ul>
             </div>
         </div>

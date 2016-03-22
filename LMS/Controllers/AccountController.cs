@@ -43,5 +43,23 @@ namespace LMS.Controllers
             HttpContext.GetOwinContext().Authentication.SignOut();
             return RedirectToAction("Index");
         }
+
+        [Authorize(Roles="admin")]
+        public ViewResult IndexAdmin()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "admin, teacher")]
+        public ViewResult IndexTeacher()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "student")]
+        public ViewResult IndexStudent()
+        {
+            return View();
+        }
     }
 }
