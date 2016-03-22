@@ -1,19 +1,19 @@
 ﻿@model LMS.Models.AppUser
 
 <div class="header header-logo">LMS</div>
-@{var login = true;}
-@if (login)
+
+@if (Request.IsAuthenticated)
 {
     <div class="login-holder">
-        <div class="login-name">Inloggad som: Pernilla Svedberg</div>
-        <div class="login-link">Logga ut</div>
+        <div class="login-name">Inloggad som: @User.Identity.Name</div>
+        <div class="login-link">@Html.ActionLink("Logga ut", "Logout", "Account")</div>
         <div class="clear">&nbsp;</div>
     </div>
 }
 else
 {
     <div class="login-holder">
-        <div class="login-link">Logga in</div>
+        <div class="login-link">@Html.ActionLink("Logga in", "Login", "Account")</div>
     </div>
 }
 

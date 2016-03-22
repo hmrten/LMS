@@ -977,11 +977,13 @@
     <Content Include="Views\Shared\_LogInPartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Shared\_MainNavPartial.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Menu\_StudentPortalMenu.cshtml" />
+    <Content Include="Views\Menu\Student\_PortalMenu.cshtml" />
     <Content Include="Views\Menu\_SubjectMenu.cshtml" />
     <Content Include="Views\Subject\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Menu\Teacher\_MainNav.cshtml" />
+    <Content Include="Views\Menu\Student\_MainNav.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

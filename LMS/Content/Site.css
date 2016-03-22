@@ -1,4 +1,5 @@
-﻿body {
+﻿@import url('bootstrap.css');
+body {
     padding-top: 10px;
     padding-bottom: 20px;
 }
@@ -39,6 +40,7 @@ textarea {
 
 .main-menu-holder {
     float:right;
+    bottom:-1px;
 }
 .login-name,
 .login-link {
@@ -46,15 +48,30 @@ textarea {
 }
 #main-menu {}
 
- #main-menu li {
+#main-menu li {
     display:block;
     float:left;
-    padding-right:5px;
+    padding-right:1px;
+    border: 1px solid #ccc;
+    border-radius: 10px 10px 0 0;
 }
- #main-menu li:last-child {
+#main-menu li:last-child {
      padding-right:0px;
  }
-
- #sub-menu {
+#main-menu.nav>li>a {
+    padding:8px 15px 2px 15px;
+}
+    #main-menu.nav > li > a:hover {
+        background-color:none;
+    }
+#sub-menu {
      margin-top:20px;
  }
+.nav > li > a:hover {
+    border-radius:10px 10px 0 0;
+}
+/*Content*/
+.left-col {
+
+}
+

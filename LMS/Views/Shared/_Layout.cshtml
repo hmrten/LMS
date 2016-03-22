@@ -23,8 +23,23 @@
         <div class="clear">&nbsp;</div>
     </div>
 
-    <div id="Main-nav-bar">
-        @Html.Partial("_MainNavPartial")
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+        
+        @if (Request.IsAuthenticated)
+        {
+           @Html.Partial("~/Views/Menu/" + Session["role"] + "/_MainNav.cshtml")
+           @*@Html.Partial("~/Views/Menu/Student/_MainNav.cshtml")*@
+        }
+        
+        </div>
     </div>
 
     <div class="container body-content">

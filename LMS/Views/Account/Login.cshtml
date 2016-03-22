@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="row">
+    <div class="col-md-3 left-col">&nbsp;</div>
+    <div class="col-md-6">
+        <h2>Logga in</h2>
+
+
+            @using (Html.BeginForm())
+            {
+                <div class="form-group">
+                    @*<label class="form-control-label">Användarnamn</label>*@
+                    <input class="form-control form-control-sm" type="text" placeholder="Användarnamn" name="user">
+                </div>
+                <div class="form-group">
+                    @*<label class="form-control-label">Lösenord</label>*@
+                    <input class="form-control form-control-sm" type="password" placeholder="Lösenord" name="pass">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">Logga in</button>
+                </div>
+             }
+
+        </div>
+    <div class="col-md-3">&nbsp;</div>
+</div>

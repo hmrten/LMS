@@ -27,17 +27,27 @@ namespace LMS.Controllers
             return View();
         }
 
+		[HttpPost]
         public ActionResult Login(string user, string pass)
         {
             var status = SignInManager.PasswordSignIn(user, pass, true, false);
             if (status == SignInStatus.Success)
             {
+				var u = UserManager.FindByName(user);
+				HttpContext.GetOwinContext().get;
+
+				u.Roles.Single().RoleId;
                 RedirectToAction("Index");
             }
             ViewBag.Message = "faield to login";
             return RedirectToAction("Index");
         }
 
+		public ActionResult Login()
+		{
+			return View();
+		}
+	
         public ActionResult Logout()
         {
             HttpContext.GetOwinContext().Authentication.SignOut();
