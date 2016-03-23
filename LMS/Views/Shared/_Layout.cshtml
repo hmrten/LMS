@@ -52,5 +52,14 @@
 
     <script src="~/Scripts/jquery-1.9.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/i18n/angular-locale_sv-se.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+    <script>
+        window.LMS = {};
+        LMS.rootPath = '@Url.Content("~")';
+    </script>
+    <script src="~/App/baseModule.js"></script>
+    @RenderSection("scripts", false)
 </body>
 </html>

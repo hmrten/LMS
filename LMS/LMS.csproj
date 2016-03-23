@@ -118,6 +118,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\baseModule.js" />
+    <Content Include="App\task\taskModule.js" />
+    <Content Include="App\task\indexCtrl.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -990,6 +993,7 @@
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\Schedule.cshtml" />
     <Content Include="Views\Teacher\Task\Create.cshtml" />
+    <Content Include="Views\Teacher\Task.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -998,6 +1002,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\task\view\" />
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Teacher\Schedule\" />

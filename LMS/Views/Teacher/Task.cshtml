@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Task";
+}
+
+@section scripts {
+    <script src="~/App/Teacher/Task/taskModule.js"></script>
+    <script src="~/App/Teacher/Task/Ctrls/taskIndexCtrl.js"></script>
+    <script src="~/App/Teacher/Task/Ctrls/taskTestCtrl.js"></script>
+}
+
+<div class="row" data-ng-app="task" data-ng-controller="taskIndexCtrl">
+    <div class="col-md-3">
+        <div id="sub-menu" data-ng-include="menu"></div>
+    </div>
+    <div class="col-md-6">
+        <h2>Task</h2>
+        <p>{{ message }}</p>
+
+        <div data-ng-view="">
+
+        </div>
+
+    </div>
+    <div class="col-md-3">Höger sidospalt</div>
+</div>
+
