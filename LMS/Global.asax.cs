@@ -21,7 +21,11 @@ namespace LMS
 			var ctx = app.Context;
 			if (ctx != null && ctx.Session != null)
 			{
-				if (ctx.Session["role"] == null)
+                if (ctx.Request.IsAuthenticated)
+                {
+                    ctx.Session["role"] = UserHelpers.GetRoles().First();
+                }
+                else
 				{
 					ctx.Session["role"] = "guest";
 				}
