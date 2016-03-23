@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LMS.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace LMS.Controllers
 {
     public class TeacherController : Controller
     {
+		private LMSContext db = new LMSContext();
+
         // GET: Teacher
         public ActionResult Index()
         {
@@ -19,5 +22,14 @@ namespace LMS.Controllers
 		{
 			return View("~/Views/Teacher/Subject/" + section + ".cshtml");
 		}
+
+		//POST:Teacher/Subject/Create
+		[HttpPost]
+		public ActionResult Create()
+		{
+
+			return View();
+		}
+
     }
 }

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<LMS.Models.Subject>
+
+@{
+    ViewBag.Title = "List";
+}
+<div class="row">
+    <div class="col-md-3">
+        <div id="sub-menu">
+            @Html.Partial("~/Views/Teacher/Subject/_Nav.cshtml")
+        </div>
+    </div>
+    <div class="col-md-9">
+        <h2>Lista alla ämnen</h2>
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

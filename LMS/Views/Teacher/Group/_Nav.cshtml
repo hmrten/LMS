@@ -1,5 +1,6 @@
 ﻿<ul class="level1">
-    <li>@Html.ActionLink("Lista alla klasser", "Group", "Teacher")</li>
-    <li>@Html.ActionLink("Lägg till klass", "Group", "Add")</li>
+    <li>@Html.ActionLink("Lista alla klasser", "Group", "Teacher", new { section = "List" }, null)</li>
+    <li>@Html.ActionLink("Lägg till klass", "Group", "Teacher", new { section = "Create" }, null)</li>
+    <li>@Html.ActionLink("Redigera klass", "Group", "Teacher", new { section = "Edit" }, null)</li>
 </ul>
 

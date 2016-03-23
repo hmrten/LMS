@@ -119,6 +119,29 @@ namespace LMS.DataAccess
             AddUserAndRole(userManager, "admin", "admin");
             AddUserAndRole(userManager, "teacher", "teacher");
             AddUserAndRole(userManager, "student", "student");
+
+			Subjects.AddOrUpdate(s => s.Id,
+				new Subject { Id = 1, Title = "Hemkunskap", Description = "Liten kort beskrivning" },
+				new Subject { Id = 2, Title = "Engelska", Description = "Liten kort beskrivning" },
+				new Subject { Id = 3, Title = "Samhällskunskap", Description = "Liten kort beskrivning" }
+				);
+
+			ScheduleTypes.AddOrUpdate(s => s.Id,
+				new ScheduleType { Id = 1, Name = "Inlämning" },
+				new ScheduleType { Id = 2, Name = "Självstudier" },
+				new ScheduleType { Id = 3, Name = "Eget arbete" },
+				new ScheduleType { Id = 4, Name = "Träff" }
+				);
+
+			Groups.AddOrUpdate(t => t.Id,
+				new Group { Id = 1, Name = "Samhällsvetenskap"},
+				new Group { Id = 2, Name = "Teknik"},
+				new Group { Id = 3, Name = "Ekonomi" },
+				new Group { Id = 4, Name = "Naturvetenskap" }
+				);
+
+
+			SaveChanges();
         }
 
         public static LMSContext Create()

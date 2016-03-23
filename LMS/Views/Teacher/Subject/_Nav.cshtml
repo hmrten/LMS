@@ -1,4 +1,6 @@
 ﻿<ul class="level1">
-    <li>@Html.ActionLink("Lista alla ämnen", "Subject", "List")</li>
-    <li>@Html.ActionLink("Lägg till ämne", "Subject", "Create")</li>
+    <li>@Html.ActionLink("Lista alla ämnen", "Subject", "Teacher", new {section = "List" }, null)</li>
+    <li>@Html.ActionLink("Lägg till ämne", "Subject", "Teacher", new { section = "Create" }, null)</li>
+    <li>@Html.ActionLink("Redigera ämne", "Subject", "Teacher", new { section = "Edit" }, null)</li>
+    <li>@Html.ActionLink("Ta bort ämne", "Subject", "Teacher", new { section = "Delete" }, null)</li>
 </ul>
