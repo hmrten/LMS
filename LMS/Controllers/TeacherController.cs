@@ -6,18 +6,18 @@ using System.Web.Mvc;
 
 namespace LMS.Controllers
 {
-    public class SubjectController : Controller
+    public class TeacherController : Controller
     {
-        // GET: Subject
+        // GET: Teacher
         public ActionResult Index()
         {
             return View();
         }
 
-		// GET: Subject/Create
-		public ActionResult Create()
+		//GET: Teacher/Subject
+		public ViewResult Subject(string section)
 		{
-			return View();
+			return View("~/Views/Teacher/Subject/" + section + ".cshtml");
 		}
     }
 }

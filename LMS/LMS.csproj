@@ -938,12 +938,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FileController.cs" />
-    <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ScheduleController.cs" />
-    <Compile Include="Controllers\SubjectController.cs" />
-    <Compile Include="Controllers\TaskController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="DataAccess\LMSContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -980,17 +977,18 @@
     <Content Include="Views\Shared\_LogInPartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Menu\Student\_PortalMenu.cshtml" />
-    <Content Include="Views\Menu\_SubjectMenu.cshtml" />
-    <Content Include="Views\Subject\Index.cshtml" />
+    <Content Include="Views\Student\_Nav.cshtml" />
+    <Content Include="Views\Teacher\Group\_Nav.cshtml" />
+    <Content Include="Views\Teacher\Subject\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Menu\Teacher\_MainNav.cshtml" />
-    <Content Include="Views\Menu\Student\_MainNav.cshtml" />
+    <Content Include="Views\Teacher\_MainNav.cshtml" />
+    <Content Include="Views\Student\_MainNav.cshtml" />
     <Content Include="Views\File\Upload.cshtml" />
-    <Content Include="Views\Menu\Guest\_MainNav.cshtml" />
-    <Content Include="Views\Menu\Teacher\_SubjectNav.cshtml" />
-    <Content Include="Views\Subject\Create.cshtml" />
+    <Content Include="Views\Teacher\Subject\_Nav.cshtml" />
+    <Content Include="Views\Teacher\Subject\Create.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\Schedule.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1001,9 +999,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
-    <Folder Include="Views\Group\" />
-    <Folder Include="Views\Schedule\" />
-    <Folder Include="Views\Task\" />
+    <Folder Include="Views\Teacher\Schedule\" />
+    <Folder Include="Views\Teacher\Task\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201603211308346_initial.resx">

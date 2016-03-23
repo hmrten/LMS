@@ -13,6 +13,12 @@ namespace LMS
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+			routes.MapRoute(
+				name: "Teacher",
+				url: "Teacher/{action}/{section}",
+				defaults: new { controller = "Teacher", action = "Index", section = "Index" }
+			);
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

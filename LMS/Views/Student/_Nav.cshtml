@@ -1,0 +1,13 @@
+﻿<ul class="level1">
+    <li>@Html.ActionLink("Schema","Schedule","Student")</li>
+    <li>@Html.ActionLink("Klasslista", "Group", "Student")</li>
+    <li>@Html.ActionLink("Delade filer", "File", "Student")</li>
+    <li>@Html.ActionLink("Inlämningar", "Task", "Student")</li>
+    <li>
+        <ul class="level2">
+            <li>@Html.ActionLink("Aktuella uppgifter", "Task", "Student")</li>
+            <li>@Html.ActionLink("Inlämnade uppgifter", "Task", "Student")</li>
+        </ul>
+    </li>
+    <li>@Html.ActionLink("Ändra lösenord", "Edit", "Account")</li>
+</ul>

@@ -35,8 +35,7 @@
         
         @if (Request.IsAuthenticated)
         {
-           @Html.Partial("~/Views/Menu/" + Session["role"] + "/_MainNav.cshtml")
-           @*@Html.Partial("~/Views/Menu/Student/_MainNav.cshtml")*@
+           @Html.Partial("~/Views/" + Session["role"] + "/_MainNav.cshtml")
         }
         
         </div>

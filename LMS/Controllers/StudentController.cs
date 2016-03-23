@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace LMS.Controllers
 {
-    public class GroupController : Controller
+    public class StudentController : Controller
     {
-        // GET: Group
+        // GET: Student
         public ActionResult Index()
         {
             return View();
