@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LMS.Models;
 
 namespace LMS.Controllers
 {
@@ -17,7 +18,10 @@ namespace LMS.Controllers
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase upload)
         {
-            string ts = DateTime.Now.Ticks.ToString();
+            //var file = new UploadedFile { OriginalFileName = upload.FileName, FileName = DateTime.Now.Ticks.ToString() };
+            string fileName = Server.MapPath("~/Files/") + DateTime.Now.Ticks.ToString() + Path.GetRandomFileName();
+            upload.SaveAs(fileName);
+
             return RedirectToAction("Index");
         }
     }

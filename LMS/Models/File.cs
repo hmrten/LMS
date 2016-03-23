@@ -5,15 +5,16 @@ using System.Web;
 
 namespace LMS.Models
 {
-    public enum FileType
+    public enum UploadedFileType
     {
         TaskOut,
         TaskIn
     }
 
-    public class File
+    public class UploadedFile
     {
-        public FileType Type { get; set; }
+        public UploadedFileType Type { get; set; }
+        public string OriginalFileName { get; set; }
         public string FileName { get; set; }
     }
 }
