@@ -989,6 +989,7 @@
     <Content Include="Views\Teacher\Index.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\Schedule.cshtml" />
+    <Content Include="Views\Teacher\Task\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1000,7 +1001,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Teacher\Schedule\" />
-    <Folder Include="Views\Teacher\Task\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201603211308346_initial.resx">
