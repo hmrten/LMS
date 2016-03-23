@@ -119,8 +119,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\baseModule.js" />
-    <Content Include="App\task\taskModule.js" />
-    <Content Include="App\task\indexCtrl.js" />
+    <Content Include="App\Teacher\Task\Views\taskMenuView.html" />
+    <Content Include="App\Teacher\Task\taskModule.js" />
+    <Content Include="App\Teacher\Task\Ctrls\taskIndexCtrl.js" />
+    <Content Include="App\Teacher\Task\Ctrls\taskTestCtrl.js" />
+    <Content Include="App\Teacher\Task\Views\taskTestView.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -1002,7 +1005,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\task\view\" />
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Teacher\Schedule\" />
