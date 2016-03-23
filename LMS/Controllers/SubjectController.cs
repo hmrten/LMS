@@ -13,5 +13,11 @@ namespace LMS.Controllers
         {
             return View();
         }
+
+		// GET: Subject/Create
+		public ActionResult Create()
+		{
+			return View();
+		}
     }
 }

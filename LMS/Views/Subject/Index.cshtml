@@ -4,36 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="row">
+    <div class="col-md-3">
+        <div id="sub-menu">
+            Teacher/Subject/Menu
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h2>Index/Ämne</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut diam id tellus semper tristique. Maecenas non lectus est. Duis pellentesque efficitur erat et tristique. Ut vel elit ac ligula placerat ullamcorper ut nec turpis. Maecenas pharetra vitae sapien ac aliquam. Donec turpis nisi, vehicula nec pulvinar sit amet, blandit vel odio. Quisque euismod lorem nulla, vitae ornare turpis tincidunt a. Suspendisse vel tellus neque. Proin facilisis convallis sodales. Duis eget ex at arcu posuere malesuada vitae id ante. Vivamus auctor vitae enim ut euismod. Pellentesque finibus commodo velit, id finibus urna cursus quis. Praesent dignissim nisi a nunc volutpat, fringilla dapibus tortor sodales. Etiam convallis elit non bibendum malesuada.</p>
+    </div>
+    <div class="col-md-3">Höger sidospalt</div>
+</div>

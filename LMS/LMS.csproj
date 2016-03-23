@@ -989,6 +989,8 @@
     <Content Include="Views\Menu\Student\_MainNav.cshtml" />
     <Content Include="Views\File\Upload.cshtml" />
     <Content Include="Views\Menu\Guest\_MainNav.cshtml" />
+    <Content Include="Views\Menu\Teacher\_SubjectNav.cshtml" />
+    <Content Include="Views\Subject\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
