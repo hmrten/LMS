@@ -181,11 +181,11 @@ namespace LMS.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Title = c.String(nullable: false, maxLength: 64),
+                        Name = c.String(nullable: false, maxLength: 64),
                         Description = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .Index(t => t.Title, unique: true);
+                .Index(t => t.Name, unique: true);
             
             CreateTable(
                 "dbo.ScheduleTypes",
@@ -247,7 +247,7 @@ namespace LMS.Migrations
             DropIndex("dbo.SubjectTeachers", new[] { "Subject_Id" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.ScheduleTypes", new[] { "Name" });
-            DropIndex("dbo.Subjects", new[] { "Title" });
+            DropIndex("dbo.Subjects", new[] { "Name" });
             DropIndex("dbo.StudentAssignments", new[] { "Grading_Id" });
             DropIndex("dbo.StudentAssignments", new[] { "Task_Id" });
             DropIndex("dbo.StudentAssignments", new[] { "Student_Id" });

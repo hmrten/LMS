@@ -13,7 +13,7 @@ namespace LMS.Models
         public int Id { get; set; }
 
         [Required, StringLength(64), Index(IsUnique=true)]
-        public string Title { get; set; }
+        public string Name { get; set; }
 
         public string Description { get; set; }
 

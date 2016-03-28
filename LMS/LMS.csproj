@@ -950,9 +950,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603211308346_initial.cs" />
-    <Compile Include="Migrations\201603211308346_initial.Designer.cs">
-      <DependentUpon>201603211308346_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201603281849188_initial.cs" />
+    <Compile Include="Migrations\201603281849188_initial.Designer.cs">
+      <DependentUpon>201603281849188_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppUser.cs" />
@@ -1009,8 +1009,8 @@
     <Folder Include="Views\Teacher\Schedule\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603211308346_initial.resx">
-      <DependentUpon>201603211308346_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603281849188_initial.resx">
+      <DependentUpon>201603281849188_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

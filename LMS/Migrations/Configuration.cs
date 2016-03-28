@@ -14,7 +14,7 @@ namespace LMS.Migrations
 
         protected override void Seed(LMS.DataAccess.LMSContext context)
         {
-            context.Seed();
+			context.Seed();
         }
     }
 }
