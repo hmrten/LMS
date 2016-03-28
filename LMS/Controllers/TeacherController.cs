@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace LMS.Controllers
 {
+	[Authorize(Roles="teacher")]
     public class TeacherController : Controller
     {
         private ViewResult SectionView(string action, string section)

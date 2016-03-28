@@ -19,6 +19,18 @@ namespace LMS
 				defaults: new { controller = "Teacher", action = "Index", section = "Index" }
 			);*/
 
+			routes.MapRoute(
+				name: "appview",
+				url: "Teacher/AppView/{*name}",
+				defaults: new { controller = "Teacher", action = "AppView" }
+			);
+
+			routes.MapRoute(
+				name: "teacher",
+				url: "Teacher/{action}/{*catch-all}",
+				defaults: new { controller = "Teacher", action = "Index" }
+			);
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

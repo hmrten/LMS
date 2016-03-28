@@ -119,10 +119,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\baseModule.js" />
-    <Content Include="App\Teacher\Task\Views\taskMenuView.html" />
     <Content Include="App\Teacher\Task\taskModule.js" />
-    <Content Include="App\Teacher\Task\Ctrls\taskIndexCtrl.js" />
-    <Content Include="App\Teacher\Task\Ctrls\taskTestCtrl.js" />
+    <Content Include="App\Teacher\Task\taskIndexCtrl.js" />
+    <Content Include="App\Teacher\Task\taskTestCtrl.js" />
     <Content Include="App\Teacher\Task\Views\taskTestView.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
