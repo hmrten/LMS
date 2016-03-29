@@ -12,12 +12,12 @@ namespace LMS.Models
         [Key]
         public int Id { get; set; }
 
-        public int AppUser_Id { get; set; }
+        public int User_Id { get; set; }
 
         public int? Group_Id { get; set; }
 
-        [ForeignKey("AppUser_Id")]
-        public virtual AppUser AppUser { get; set; }
+        [ForeignKey("User_Id")]
+        public virtual User User { get; set; }
 
         [ForeignKey("Group_Id")]
         public virtual Group Group { get; set; }

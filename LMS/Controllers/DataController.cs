@@ -40,9 +40,9 @@ namespace LMS.Controllers
 				new
 				{
 					id = s.Id,
-					firstname = s.AppUser.FirstName,
-					lastname = s.AppUser.LastName,
-					email = s.AppUser.Email,
+					firstname = s.User.FirstName,
+					lastname = s.User.LastName,
+					email = s.User.Email,
 					subjects = s.Subjects.Select(ss =>
 						new
 						{

@@ -14,9 +14,9 @@ using System.Web;
 
 namespace LMS
 {
-    public class AppUserManager : UserManager<AppUser, int>
+    public class AppUserManager : UserManager<User, int>
     {
-        public AppUserManager(IUserStore<AppUser, int> store) :
+        public AppUserManager(IUserStore<User, int> store) :
             base(store)
         {
         }
@@ -25,7 +25,7 @@ namespace LMS
         {
             var manager = new AppUserManager(store);
 
-            manager.UserValidator = new UserValidator<AppUser, int>(manager)
+            manager.UserValidator = new UserValidator<User, int>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
@@ -53,14 +53,14 @@ namespace LMS
         }
     }
 
-    public class AppSignInManager : SignInManager<AppUser, int>
+    public class AppSignInManager : SignInManager<User, int>
     {
         public AppSignInManager(AppUserManager userManager, IAuthenticationManager authManager) :
             base(userManager, authManager)
         {
         }
 
-        public override Task<ClaimsIdentity> CreateUserIdentityAsync(AppUser user)
+        public override Task<ClaimsIdentity> CreateUserIdentityAsync(User user)
         {
             return user.GenerateUserIdentityAsync(UserManager as AppUserManager);
         }

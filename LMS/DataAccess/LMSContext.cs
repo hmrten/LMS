@@ -12,9 +12,8 @@ using System.Web;
 
 namespace LMS.DataAccess
 {
-	public class LMSContext : IdentityDbContext<AppUser, IntRole, int, IntUserLogin, IntUserRole, IntUserClaim>
+	public class LMSContext : IdentityDbContext<User, IntRole, int, IntUserLogin, IntUserRole, IntUserClaim>
 	{
-		//public DbSet<AppUser> AppUsers { get; set; }
 		public DbSet<Student> Students { get; set; }
 		public DbSet<Teacher> Teachers { get; set; }
 		public DbSet<Group> Groups { get; set; }
@@ -50,30 +49,6 @@ namespace LMS.DataAccess
 			OneToManyRelation<Schedule, Group>(mb, r => r.Group, m => m.Schedules, k => k.Group_Id);
 			OneToManyRelation<Schedule, Subject>(mb, r => r.Subject, m => m.Schedules, k => k.Subject_Id);
 			OneToManyRelation<Schedule, Teacher>(mb, r => r.Author, m => m.Schedules, k => k.Author_Id);
-
-			/*mb.Entity<Schedule>()
-				.HasRequired(s => s.Type)
-				.WithMany(t => t.Schedules)
-				.HasForeignKey(s => s.ScheduleType_Id)
-				.WillCascadeOnDelete(false);
-
-			mb.Entity<Schedule>()
-				.HasRequired(s => s.Group)
-				.WithMany(g => g.Schedules)
-				.HasForeignKey(s => s.Group_Id)
-				.WillCascadeOnDelete(false);
-
-			mb.Entity<Schedule>()
-				.HasRequired(s => s.Subject)
-				.WithMany(s => s.Schedules)
-				.HasForeignKey(s => s.Subject_Id)
-				.WillCascadeOnDelete(false);
-
-			mb.Entity<Schedule>()
-				.HasRequired(s => s.Author)
-				.WithMany(a => a.Schedules)
-				.HasForeignKey(s => s.Author_Id)
-				.WillCascadeOnDelete(false);*/
 		}
 
 		private void TryAddToRole(AppUserManager manager, int userId, string role)
@@ -82,12 +57,12 @@ namespace LMS.DataAccess
 				manager.AddToRole(userId, role);
 		}
 
-		private AppUser AddUserAndRole(AppUserManager manager, string userName, string password, string firstName, string lastName, string role)
+		private User AddUserAndRole(AppUserManager manager, string userName, string password, string firstName, string lastName, string role)
 		{
 			var user = manager.FindByName(userName);
 			if (user == null)
 			{
-				user = new AppUser
+				user = new User
 				{
 					UserName = userName,
 					Email = userName + "@" + userName + ".com",
@@ -108,7 +83,7 @@ namespace LMS.DataAccess
 		private Teacher AddTeacher(AppUserManager manager, int id, string userName, string password, string firstName, string lastName)
 		{
 			var user = AddUserAndRole(manager, userName, password, firstName, lastName, "teacher");
-			var teacher = new Teacher { Id = id, AppUser_Id = user.Id };
+			var teacher = new Teacher { Id = id, User_Id = user.Id };
 			Teachers.AddOrUpdate(t => t.Id, teacher);
 			SaveChanges();
 			return teacher;
@@ -116,7 +91,7 @@ namespace LMS.DataAccess
 		private Student AddStudent(AppUserManager manager, int id, string userName, string password, string firstName, string lastName)
 		{
 			var user = AddUserAndRole(manager, userName, password, firstName, lastName, "student");
-			var student = new Student { Id = id, AppUser_Id = user.Id };
+			var student = new Student { Id = id, User_Id = user.Id };
 			Students.AddOrUpdate(s => s.Id, student);
 			SaveChanges();
 			return student;

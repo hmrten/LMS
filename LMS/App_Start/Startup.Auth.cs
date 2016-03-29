@@ -26,7 +26,7 @@ namespace LMS
                 LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider
                 {
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<AppUserManager, AppUser, int>(
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<AppUserManager, User, int>(
                         TimeSpan.FromMinutes(30), (m, u) => u.GenerateUserIdentityAsync(m), ci => ci.GetUserId<int>())
                 }
             });

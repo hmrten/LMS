@@ -21,7 +21,7 @@ namespace LMS.Models
         public IntRole(string name) { Name = name; }
     }
 
-    public class IntUserStore : UserStore<AppUser, IntRole, int, IntUserLogin, IntUserRole, IntUserClaim>
+    public class IntUserStore : UserStore<User, IntRole, int, IntUserLogin, IntUserRole, IntUserClaim>
     {
         public IntUserStore(LMSContext ctx) : base(ctx) { }
     }
@@ -31,7 +31,7 @@ namespace LMS.Models
         public IntRoleStore(LMSContext ctx) : base(ctx) {}
     }
 
-    public class AppUser : IdentityUser<int, IntUserLogin, IntUserRole, IntUserClaim>, IUser<int>
+    public class User : IdentityUser<int, IntUserLogin, IntUserRole, IntUserClaim>, IUser<int>
     {
         [Required, StringLength(128)]
         public string FirstName { get; set; }
@@ -44,7 +44,7 @@ namespace LMS.Models
             get { return FirstName + " " + LastName; }
         }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<AppUser, int> manager)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, int> manager)
         {
             return await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
         }
