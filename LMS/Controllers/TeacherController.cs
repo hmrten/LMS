@@ -10,7 +10,7 @@ namespace LMS.Controllers
 	[Authorize(Roles="teacher")]
     public class TeacherController : Controller
     {
-	private LMSContext db = new LMSContext();
+	    private LMSContext db = new LMSContext();
 	
         private ViewResult SectionView(string action, string section)
         {
@@ -23,21 +23,21 @@ namespace LMS.Controllers
             return View();
         }
 
-	//GET: Teacher/Subject
-	public ViewResult Subject(string section)
-	{
-		return View("~/Views/Teacher/Subject/" + section + ".cshtml");
-	}
+	    //GET: Teacher/Subject
+	    public ViewResult Subject(string section)
+	    {
+		    return View("~/Views/Teacher/Subject/" + section + ".cshtml", db.Subjects);
+	    }
 
         public ViewResult Assignment()
         {
             return View();
         }
 
-	[HttpPost]
-	public ActionResult Create()
-	{
-		return View();
-	}
+	    [HttpPost]
+	    public ActionResult Create()
+	    {
+		    return View();
+	    }
     }
 }

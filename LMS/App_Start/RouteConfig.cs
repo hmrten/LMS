@@ -13,20 +13,14 @@ namespace LMS
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-			/*routes.MapRoute(
-				name: "Teacher",
-				url: "Teacher/{action}/{section}",
-				defaults: new { controller = "Teacher", action = "Index", section = "Index" }
-			);*/
+            routes.MapRoute(
+                name: "Teacher",
+                url: "Teacher/{action}/{section}",
+                defaults: new { controller = "Teacher", action = "Index", section = "Index" }
+            );
 
 			routes.MapRoute(
-				name: "appview",
-				url: "Teacher/AppView/{*name}",
-				defaults: new { controller = "Teacher", action = "AppView" }
-			);
-
-			routes.MapRoute(
-				name: "teacher",
+				name: "AngularMapping",
 				url: "Teacher/{action}/{*catch-all}",
 				defaults: new { controller = "Teacher", action = "Index" }
 			);
