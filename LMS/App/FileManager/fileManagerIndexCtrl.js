@@ -1,22 +1,25 @@
 ﻿(function () {
     var app = angular.module('fileManager');
 
-    app.directive('expandTree', ['$parse', function ($parse) {
+    app.directive('expandTree', ['$parse', '$compile', function ($parse, $compile) {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
                 element.on('click', function () {
                     if (!element.hasClass('expanded')) {
                         element.addClass('expanded');
-                        var name = attrs.expandTree;
+                        var dirs = angular.fromJson(attrs.expandTree).children;
                         var ul = angular.element('<ul></ul>');
-                        ul.append(angular.element('<li>' + name + ': test 1</li>'));
-                        ul.append(angular.element('<li>' + name + ': test 2</li>'));
-                        ul.append(angular.element('<li>' + name + ': test 3</li>'));
+                        dirs.forEach(function (e, i, a) {
+                            var li = angular.element('<li></li>');
+                            li.append('<a href="#" expand-tree=' + angular.toJson(e) + '>' + e.name + '</a>');
+                            ul.append(li);
+                            $compile(li)(scope);
+                        });
                         element.parent().append(ul);
                     } else {
                         element.removeClass('expanded');
-                        element.parent().remove('ul');
+                        element.parent().children()[1].remove();
                     }
                 });
             }
