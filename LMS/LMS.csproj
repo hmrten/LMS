@@ -999,6 +999,18 @@
     <Content Include="Views\Student\Schedule.cshtml" />
     <Content Include="Views\Teacher\Task\Create.cshtml" />
     <Content Include="Views\Teacher\Assignment.cshtml" />
+    <Content Include="Views\Student\Group.cshtml" />
+    <Content Include="Views\Student\File.cshtml" />
+    <Content Include="Views\Student\Task.cshtml" />
+    <Content Include="Views\Teacher\Subject\Edit.cshtml" />
+    <Content Include="Views\Teacher\Subject\List.cshtml" />
+    <Content Include="Views\Teacher\Subject\Delete.cshtml" />
+    <Content Include="Views\Teacher\Group\List.cshtml" />
+    <Content Include="Views\Teacher\Group\Create.cshtml" />
+    <Content Include="Views\Teacher\Group\Edit.cshtml" />
+    <Content Include="Views\Teacher\Schedule\_Nav.cshtml" />
+    <Content Include="Views\Teacher\Schedule\List.cshtml" />
+    <Content Include="Views\Teacher\Schedule\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1011,6 +1023,7 @@
     <Folder Include="Files\" />
     <Folder Include="Views\Data\" />
     <Folder Include="Views\Teacher\Schedule\" />
+    <Folder Include="Views\Teacher\Task\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201603290740063_initial.resx">

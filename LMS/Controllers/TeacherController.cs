@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LMS.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,8 @@ namespace LMS.Controllers
 	[Authorize(Roles="teacher")]
     public class TeacherController : Controller
     {
+	private LMSContext db = new LMSContext();
+	
         private ViewResult SectionView(string action, string section)
         {
             return View("~/Views/Teacher/" + action + "/" + section + ".cshtml");
@@ -20,15 +23,21 @@ namespace LMS.Controllers
             return View();
         }
 
-		//GET: Teacher/Subject
-		public ViewResult Subject(string section)
-		{
-			return View("~/Views/Teacher/Subject/" + section + ".cshtml");
-		}
+	//GET: Teacher/Subject
+	public ViewResult Subject(string section)
+	{
+		return View("~/Views/Teacher/Subject/" + section + ".cshtml");
+	}
 
         public ViewResult Assignment()
         {
             return View();
         }
+
+	[HttpPost]
+	public ActionResult Create()
+	{
+		return View();
+	}
     }
 }
