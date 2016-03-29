@@ -11,7 +11,7 @@
     <div class="col-md-3">
         <div id="sub-menu">
             <ul ng-repeat="dir in dirs">
-                <li><a href="#/">{{ dir }}</a></li>
+                <li><a href="#" expand-tree="{{ dir.name }}">{{ dir.name }}</a></li>
             </ul>
         </div>
     </div>
