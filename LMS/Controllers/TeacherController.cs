@@ -26,7 +26,7 @@ namespace LMS.Controllers
 			return View("~/Views/Teacher/Subject/" + section + ".cshtml");
 		}
 
-        public ViewResult Task()
+        public ViewResult Assignment()
         {
             return View();
         }

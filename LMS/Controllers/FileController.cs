@@ -16,13 +16,11 @@ namespace LMS.Controllers
         }
 
         [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase upload)
+        public HttpStatusCodeResult Upload(string title, string description, HttpPostedFileBase file)
         {
-            //var file = new UploadedFile { OriginalFileName = upload.FileName, FileName = DateTime.Now.Ticks.ToString() };
             string fileName = Server.MapPath("~/Files/") + DateTime.Now.Ticks.ToString() + Path.GetRandomFileName();
-            upload.SaveAs(fileName);
-
-            return RedirectToAction("Index");
+            file.SaveAs(fileName);
+            return new HttpStatusCodeResult(200, fileName + " uploaded successfully");
         }
     }
 }

@@ -119,10 +119,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\baseApp.js" />
-    <Content Include="App\Teacher\Task\taskApp.js" />
-    <Content Include="App\Teacher\Task\taskIndexCtrl.js" />
-    <Content Include="App\Teacher\Task\taskTestCtrl.js" />
-    <Content Include="App\Teacher\Task\Views\taskTestView.html" />
+    <Content Include="App\Teacher\Assignment\assignmentApp.js" />
+    <Content Include="App\Teacher\Assignment\assignmentIndexCtrl.js" />
+    <Content Include="App\Teacher\Assignment\assignmentCreateCtrl.js" />
+    <Content Include="App\Teacher\Assignment\Views\assignmentIndexView.html" />
+    <Content Include="App\Teacher\Assignment\Views\assignmentCreateView.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -997,7 +998,7 @@
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\Schedule.cshtml" />
     <Content Include="Views\Teacher\Task\Create.cshtml" />
-    <Content Include="Views\Teacher\Task.cshtml" />
+    <Content Include="Views\Teacher\Assignment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

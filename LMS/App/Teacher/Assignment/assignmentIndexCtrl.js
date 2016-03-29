@@ -1,7 +1,7 @@
 ﻿(function () {
-    var app = angular.module('task');
+    var app = angular.module('assignment');
 
-    app.controller('taskIndexCtrl', ['$scope', '$location', '$window', function ($scope, $location, $window) {
+    app.controller('assignmentIndexCtrl', ['$scope', '$location', '$window', function ($scope, $location, $window) {
         $scope.message = 'hello from angular';
 
         $scope.navigate = function (path) {
