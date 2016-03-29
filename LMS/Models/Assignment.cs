@@ -7,7 +7,7 @@ using System.Web;
 
 namespace LMS.Models
 {
-    public class Task
+    public class Assignment
     {
         [Key]
         public int Id { get; set; }
@@ -22,7 +22,7 @@ namespace LMS.Models
 
         public virtual ICollection<StudentAssignment> StudentAssignments { get; set; }
 
-        public Task()
+        public Assignment()
         {
             StudentAssignments = new List<StudentAssignment>();
         }

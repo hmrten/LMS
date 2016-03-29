@@ -21,7 +21,7 @@ namespace LMS.DataAccess
 		public DbSet<Subject> Subjects { get; set; }
 		public DbSet<ScheduleType> ScheduleTypes { get; set; }
 		public DbSet<Schedule> Schedules { get; set; }
-		public DbSet<Task> Tasks { get; set; }
+		public DbSet<Assignment> Assignments { get; set; }
 		public DbSet<StudentAssignment> StudentAssignments { get; set; }
 		public DbSet<Grading> Gradings { get; set; }
 

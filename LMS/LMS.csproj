@@ -118,8 +118,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\baseModule.js" />
-    <Content Include="App\Teacher\Task\taskModule.js" />
+    <Content Include="App\baseApp.js" />
+    <Content Include="App\Teacher\Task\taskApp.js" />
     <Content Include="App\Teacher\Task\taskIndexCtrl.js" />
     <Content Include="App\Teacher\Task\taskTestCtrl.js" />
     <Content Include="App\Teacher\Task\Views\taskTestView.html" />
@@ -951,9 +951,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603281849188_initial.cs" />
-    <Compile Include="Migrations\201603281849188_initial.Designer.cs">
-      <DependentUpon>201603281849188_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201603290730260_initial.cs" />
+    <Compile Include="Migrations\201603290730260_initial.Designer.cs">
+      <DependentUpon>201603290730260_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppUser.cs" />
@@ -964,7 +964,7 @@
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentAssignment.cs" />
     <Compile Include="Models\Subject.cs" />
-    <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\Assignment.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -1011,8 +1011,8 @@
     <Folder Include="Views\Teacher\Schedule\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603281849188_initial.resx">
-      <DependentUpon>201603281849188_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603290730260_initial.resx">
+      <DependentUpon>201603290730260_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

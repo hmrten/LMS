@@ -14,7 +14,7 @@ namespace LMS.Models
 
         public int Student_Id { get; set; }
 
-        public int Task_Id { get; set; }
+        public int Assignment_Id { get; set; }
 
         public int? Grading_Id { get; set; }
 
@@ -29,8 +29,8 @@ namespace LMS.Models
         [ForeignKey("Student_Id")]
         public virtual Student Student { get; set; }
 
-        [ForeignKey("Task_Id")]
-        public virtual Task Task { get; set; }
+        [ForeignKey("Assignment_Id")]
+        public virtual Assignment Assignment { get; set; }
 
         [ForeignKey("Grading_Id")]
         public virtual Grading Grading { get; set; }

@@ -34,7 +34,7 @@ namespace LMS.Models
         public int Subject_Id { get; set; }
         public int Author_Id { get; set; }
 
-        public int? Task_Id { get; set; }
+        public int? Assignment_Id { get; set; }
 
         [Required]
         public DateTime DateStart { get; set; }
@@ -50,7 +50,7 @@ namespace LMS.Models
         public virtual Subject Subject { get; set; }
         public virtual Teacher Author { get; set; }
 
-        [ForeignKey("Task_Id")]
-        public virtual Task Task { get; set; }
+        [ForeignKey("Assignment_Id")]
+        public virtual Assignment Assignment { get; set; }
     }
 }
