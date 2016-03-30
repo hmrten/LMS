@@ -125,6 +125,11 @@
     <Content Include="App\Teacher\Subject\Views\subjectIndexView.html" />
     <Content Include="App\FileManager\fileManagerIndexCtrl.js" />
     <Content Include="App\FileManager\fileManagerApp.js" />
+    <Content Include="App\Teacher\Group\groupApp.js" />
+    <Content Include="App\Teacher\Group\groupCreateCtrl.js" />
+    <Content Include="App\Teacher\Group\groupIndexCtrl.js" />
+    <Content Include="App\Teacher\Group\Views\groupCreateView.html" />
+    <Content Include="App\Teacher\Group\Views\groupIndexView.html" />
     <Content Include="App\Teacher\Assignment\assignmentApp.js" />
     <Content Include="App\Teacher\Assignment\assignmentIndexCtrl.js" />
     <Content Include="App\Teacher\Assignment\assignmentCreateCtrl.js" />
@@ -1021,6 +1026,7 @@
     <Content Include="Views\Teacher\Schedule\Details.cshtml" />
     <Content Include="Views\Teacher\Subject.cshtml" />
     <Content Include="Views\FileManager\Index.cshtml" />
+    <Content Include="Views\Teacher\Group.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

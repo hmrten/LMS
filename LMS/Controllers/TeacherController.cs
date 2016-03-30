@@ -30,6 +30,11 @@ namespace LMS.Controllers
             return View();
         }
 
+        public ViewResult Group()
+        {
+            return View();
+        }
+
 	    [HttpPost]
 	    public ActionResult Create()
 	    {

@@ -1,0 +1,23 @@
+﻿<h2>Skapa klass</h2>
+<strong>{{ msg }}</strong>
+<form class="form-horizontal" ng-submit="create()" enctype="multipart/form-data">
+    <div class="form-group">
+        <label class="control-label col-md-2" for="name">Namn:</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" name="name" ng-model="name" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="title">Klasslärare:</label>
+        <div class="col-md-7">
+            <select class="form-control" name="teacher" ng-model="teacher">
+                <option ng-repeat="t in teachers" value="{{t.id}}">{{t.fname}} {{t.lname}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-7">
+            <button class="btn btn-primary" type="submit">Skapa</button>
+        </div>
+    </div>
+</form>

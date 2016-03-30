@@ -40,17 +40,20 @@ namespace LMS.Controllers
 				new
 				{
 					id = s.Id,
-					firstname = s.User.FirstName,
-					lastname = s.User.LastName,
-					email = s.User.Email,
-					subjects = s.Subjects.Select(ss =>
-						new
-						{
-							id = ss.Id,
-							name = ss.Name
-						}).ToList()
+					name = s.User.FirstName + " " + s.User.LastName
 				});
 			return Json(q.ToList(), JsonRequestBehavior.AllowGet);
 		}
+
+        public JsonResult Groups()
+        {
+            var q = db.Groups.Select(g =>
+                new
+                {
+                    id = g.Id,
+                    name = g.Name
+                });
+            return Json(q.ToList(), JsonRequestBehavior.AllowGet);
+        }
     }
 }

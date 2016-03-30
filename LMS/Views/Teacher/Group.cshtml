@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Group";
+}
+
+@section scripts {
+    <script src="~/App/Teacher/Group/groupApp.js"></script>
+    <script src="~/App/Teacher/Group/groupIndexCtrl.js"></script>
+    <script src="~/App/Teacher/Group/groupCreateCtrl.js"></script>
+}
+
+<div class="row" ng-app="group" ng-controller="groupIndexCtrl">
+    <div class="col-md-3">
+        <div id="sub-menu">
+            <ul>
+                <li><a href="#/">Lista klasser</a></li>
+                <li><a href="#/Create">Skapa klass</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-9">
+
+        <div ng-view></div>
+    </div>
+</div>
+
