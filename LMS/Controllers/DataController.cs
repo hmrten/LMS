@@ -44,16 +44,5 @@ namespace LMS.Controllers
 				});
 			return Json(q.ToList(), JsonRequestBehavior.AllowGet);
 		}
-
-        public JsonResult Groups()
-        {
-            var q = db.Groups.Select(g =>
-                new
-                {
-                    id = g.Id,
-                    name = g.Name
-                });
-            return Json(q.ToList(), JsonRequestBehavior.AllowGet);
-        }
     }
 }
