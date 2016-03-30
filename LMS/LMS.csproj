@@ -953,6 +953,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlHelpers.cs" />
     <Compile Include="Migrations\201603290740063_initial.cs" />
     <Compile Include="Migrations\201603290740063_initial.Designer.cs">
       <DependentUpon>201603290740063_initial.cs</DependentUpon>
@@ -1022,8 +1023,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Data\" />
-    <Folder Include="Views\Teacher\Schedule\" />
-    <Folder Include="Views\Teacher\Task\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201603290740063_initial.resx">

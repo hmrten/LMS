@@ -1,6 +1,10 @@
-﻿<ul class="level1">
-    <li>@Html.ActionLink("Lista alla ämnen", "Subject", "Teacher", new {section = "List" }, null)</li>
-    <li>@Html.ActionLink("Lägg till ämne", "Subject", "Teacher", new { section = "Create" }, null)</li>
-    <li>@Html.ActionLink("Redigera ämne", "Subject", "Teacher", new { section = "Edit" }, null)</li>
-    <li>@Html.ActionLink("Ta bort ämne", "Subject", "Teacher", new { section = "Delete" }, null)</li>
+﻿@using LMS;
+
+<ul class="level1">
+    <li @Html.IsActive("Teacher/Subject/List", "class=\"active\"")>
+        @Html.ActionLink("Lista alla ämnen", "Subject", "Teacher", new { section = "List" }, null)
+    </li>
+    <li @Html.IsActive("Teacher/Subject/Create", "class=\"active\"")>
+        @Html.ActionLink("Skapa ämne", "Subject", "Teacher", new { section = "Create" }, null)
+    </li>
 </ul>
