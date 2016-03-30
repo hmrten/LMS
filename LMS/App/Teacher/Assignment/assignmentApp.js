@@ -4,10 +4,12 @@
     app.config(function ($routeProvider, $locationProvider) {
     	$routeProvider
             .when('/', {
-            	templateUrl: LMS.rootPath + 'App/Teacher/Assignment/Views/assignmentIndexView.html'
+                templateUrl: LMS.rootPath + 'App/Teacher/Assignment/Views/assignmentIndexView.html',
+                controller: 'assignmentCtrl'
             })
             .when('/Create', {
-                templateUrl: LMS.rootPath + 'App/Teacher/Assignment/Views/assignmentCreateView.html'
+                templateUrl: LMS.rootPath + 'App/Teacher/Assignment/Views/assignmentCreateView.html',
+                controller: 'assignmentCtrl'
             });
 
         //$locationProvider.html5Mode({

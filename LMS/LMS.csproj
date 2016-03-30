@@ -127,6 +127,7 @@
     <Content Include="App\FileManager\fileManagerApp.js" />
     <Content Include="App\Teacher\Group\groupApp.js" />
     <Content Include="App\Teacher\Group\Views\groupCreateView.html" />
+    <Content Include="App\Teacher\Group\Views\groupEditView.html" />
     <Content Include="App\Teacher\Group\Views\groupIndexView.html" />
     <Content Include="App\Teacher\Assignment\assignmentApp.js" />
     <Content Include="App\Teacher\Assignment\Views\assignmentIndexView.html" />
