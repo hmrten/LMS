@@ -33,7 +33,21 @@
         getGroups();
     }]);
 
-    app.controller('editCtrl', ['$scope', '$routeParams', 'dataService', function ($scope, $routeParams, dataService) {
+    app.directive('clearSelect', ['$parse', function($parse) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                var expr = $parse(attrs.clearSelect);
+                element.bind('click', function () {
+                    scope.$apply(function () {
+                        expr(scope, {});
+                    });
+                });
+            }
+        };
+    }]);
+
+    app.controller('editCtrl', ['$scope', '$routeParams', 'dataService', '$compile', function ($scope, $routeParams, dataService, $compile) {
         function getDetails() {
             var id = parseInt($routeParams['id']);
             dataService.getData('Group/Details/' + id, function (data) {
@@ -47,6 +61,21 @@
                 opts[i].selected = false;
             }
             $scope.msg = 'clearing: ' + id;
+        };
+
+        $scope.transfer = function (fromId, toId) {
+            var from = angular.element(fromId)[0];
+            var to = angular.element(toId);
+
+            var fromSel = from.selectedOptions
+            var i;
+            while ((i = fromSel.length) > 0) {
+                var sel = fromSel[i - 1];
+                var opt = angular.element('<option value="' + sel.value + '" ng-click="clearList(\'' + fromId + '\')">' + sel.innerHTML + '</option>');
+                to.append(opt);
+                $compile(opt)($scope);
+                sel.remove();
+            }
         };
 
         $scope.test = 'testing from getDetails';

@@ -4,20 +4,20 @@
 </div>
 <div class="row vert-center">
     <div class="col-md-4">
-        <select id="used" class="group-box center-block" multiple="multiple" ng-model="usedStudents">
+        <select id="used" class="group-box center-block" multiple="multiple" ng-model=" usedstudents">
             <option ng-repeat="s in details.students" value="{{s.id}}" ng-click="clearList('#free')">{{s.fname}} {{s.lname}}</option>
         </select>
     </div>
     <div class="col-md-2">
-        <button class="btn btn-default center-block" type="button" ng-click="removeStudents()">&rArr;</button>
-        <button class="btn btn-default center-block" type="button" ng-click="addStudents()">&lArr;</button>
+        <button class="btn btn-default center-block" type="button" ng-click="transfer('#free', '#used')">&lArr;</button>
+        <button class="btn btn-default center-block" type="button" ng-click="transfer('#used', '#free')">&rArr;</button>
     </div>
     <div class="col-md-4">
-        <select id="free" class="group-box center-block" multiple="multiple" ng-click="clearList('#used')" ng-model="freeStudents">
-            <option>elev 1</option>
-            <option>elev 2</option>
-            <option>elev 3</option>
-            <option>elev 4</option>
+        <select id="free" class="group-box center-block" multiple="multiple" ng-model="freeStudents">
+            <option value="100" data-clear-select="clearList('#used')">elev 101</option>
+            <option value="101" data-clear-select="clearList('#used')">elev 102</option>
+            <option value="102" data-clear-select="clearList('#used')">elev 103</option>
+            <option value="103" data-clear-select="clearList('#used')">elev 104</option>
         </select>
     </div>
 </div>
