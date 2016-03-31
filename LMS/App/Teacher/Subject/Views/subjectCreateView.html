@@ -1,0 +1,25 @@
+﻿<h2>Skapa</h2>
+<strong>{{ message }}</strong>
+<strong>{{ createText }}</strong>
+<form class="form-horizontal" ng-submit="create()">
+    <div class="form-group">
+        <label class="control-label col-md-2" for="name">Namn:</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" name="name" ng-model="name" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="description">Beskrivning:</label>
+        <div class="col-md-7">
+            <textarea class="form-control" rows="5" name="description" ng-model="description"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-7">
+            <button class="btn btn-primary" type="submit">Skapa</button>
+        </div>
+    </div>
+</form>
+
+<strong>{{name}}</strong>

@@ -12,10 +12,6 @@ namespace LMS.Controllers
     {
 	    private LMSContext db = new LMSContext();
 	
-        private ViewResult SectionView(string action, string section)
-        {
-            return View("~/Views/Teacher/" + action + "/" + section + ".cshtml");
-        }
 
         // GET: Teacher
         public ActionResult Index()
@@ -24,9 +20,9 @@ namespace LMS.Controllers
         }
 
 	    //GET: Teacher/Subject
-	    public ViewResult Subject(string section)
+	    public ViewResult Subject()
 	    {
-		    return View("~/Views/Teacher/Subject/" + section + ".cshtml", db.Subjects);
+			return View();
 	    }
 
         public ViewResult Assignment()

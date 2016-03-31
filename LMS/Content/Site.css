@@ -40,6 +40,7 @@ textarea {
     float:right;
 }
 /* MAIN MENU */
+
 .main-menu-holder {
     float:right;
     bottom:-1px;
@@ -48,13 +49,13 @@ textarea {
 .login-link {
     text-align:right;
 }
-#main-menu {}
+#main-menu {margin-bottom:-1px;}
 
 #main-menu li {
     display:block;
     float:left;
     padding-right:1px;
-    border: 1px solid #ccc;
+    border: 1px solid #e7e7e7;
     border-radius: 10px 10px 0 0;
 }
 #main-menu li:last-child {
@@ -91,4 +92,7 @@ textarea {
     background-color:#ccc;
 }
 
-
+/* LIST view */
+.list-table th {
+    font-weight:bold;
+}

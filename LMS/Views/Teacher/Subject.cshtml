@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Ämne";
+}
+
+@section scripts {
+    <script src="~/App/Teacher/Subject/subjectApp.js"></script>
+}
+
+<div class="row" ng-app="subject" ng-controller="subjectCtrl">
+    <div class="col-md-3">
+        <div id="sub-menu">
+            <ul>
+                <li><a href="#/">Lista alla ämnen</a></li>
+                <li><a href="#/Create">Skapa ämne</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div ng-view></div>
+    </div>
+</div>

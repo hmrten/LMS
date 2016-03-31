@@ -33,6 +33,7 @@ namespace LMS.Controllers
             return View();
         }
 
+		[AllowAnonymous]
 		[HttpPost]
         public ActionResult Login(string user, string pass)
         {
@@ -50,6 +51,7 @@ namespace LMS.Controllers
             return RedirectToAction("Index");
         }
 
+		[AllowAnonymous]
 		public ActionResult Login()
 		{
 			return View();

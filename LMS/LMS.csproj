@@ -119,6 +119,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\baseApp.js" />
+    <Content Include="App\Teacher\Subject\Views\subjectEditView.html" />
+    <Content Include="App\Teacher\Subject\subjectApp.js" />
+    <Content Include="App\Teacher\Subject\Views\subjectCreateView.html" />
+    <Content Include="App\Teacher\Subject\Views\subjectIndexView.html" />
     <Content Include="App\Teacher\Assignment\assignmentApp.js" />
     <Content Include="App\Teacher\Assignment\assignmentIndexCtrl.js" />
     <Content Include="App\Teacher\Assignment\assignmentCreateCtrl.js" />
@@ -947,6 +951,7 @@
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="DataAccess\IUserRepository.cs" />
     <Compile Include="DataAccess\LMSContext.cs" />
@@ -1012,6 +1017,7 @@
     <Content Include="Views\Teacher\Schedule\_Nav.cshtml" />
     <Content Include="Views\Teacher\Schedule\List.cshtml" />
     <Content Include="Views\Teacher\Schedule\Details.cshtml" />
+    <Content Include="Views\Teacher\Subject.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

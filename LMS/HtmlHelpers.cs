@@ -14,11 +14,9 @@ namespace LMS
 
 			var routeController = routeData.Values["controller"].ToString();
 			var routeAction = routeData.Values["action"].ToString();
-			var routeSection = routeData.Values["section"].ToString();
-
-			var routePath = string.Format("{0}/{1}/{2}", routeController, routeAction, routeSection);
+			var routePath = string.Format("{0}/{1}", routeController, routeAction);
+			
 			var returnActive = (path == routePath);
-
 			return new MvcHtmlString(returnActive ? activeClass : inActiveClass);
 		}
 

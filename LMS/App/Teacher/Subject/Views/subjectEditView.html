@@ -1,0 +1,29 @@
+﻿<h2>Ändra</h2>
+<strong>{{ message }}</strong>
+<form class="form-horizontal" ng-submit="update()">
+    <div class="form-group">
+        <label class="control-label col-md-2" for="name">Namn:</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" name="name" ng-model="subject.name" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="description">Beskrivning:</label>
+        <div class="col-md-7">
+            <textarea class="form-control" rows="5" name="description" ng-model="subject.description"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-7">
+            <button class="btn btn-primary" type="submit">Uppdatera</button>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <tr>
+        <td>{{subject.name}}</td>
+        <td>{{subject.description}}</td>
+        <td>{{subject.id}}</td>
+    </tr>
+</table>

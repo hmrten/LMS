@@ -1,4 +1,27 @@
-﻿<div id="teacher" class="navbar-collapse collapse">
+﻿@using LMS;
+<div id="teacher" class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li @Html.IsActive("Teacher/Index", "class=\"active\"")>
+            @Html.ActionLink("Lärarportal", "Index", "Teacher")
+        </li>
+        <li @Html.IsActive("Account/Index", "class=\"active\"")>
+            @Html.ActionLink("Användare", "Index", "Account")
+        </li>
+        <li @Html.IsActive("Teacher/Group", "class=\"active\"")>
+            @Html.ActionLink("Klasser", "Group", "Teacher")
+        </li>
+        <li @Html.IsActive("Teacher/Schedule", "class=\"active\"")>
+            @Html.ActionLink("Schema", "Schedule", "Teacher")
+        </li>
+        <li @Html.IsActive("Teacher/Assignment", "class=\"active\"")>
+            @Html.ActionLink("Inlämningar", "Assignment", "Teacher")
+        </li>
+        <li @Html.IsActive("Teacher/Subject", "class=\"active\"")>
+            @Html.ActionLink("Ämne", "Subject", "Teacher")
+        </li>
+    </ul>
+</div>
+@*<div id="teacher" class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
         <li>@Html.ActionLink("Lärarportal", "Index", "Teacher")</li>
         <li>@Html.ActionLink("Användare", "Index", "Account")</li>
@@ -7,4 +30,4 @@
         <li>@Html.ActionLink("Inlämningar", "Assignment", "Teacher")</li>
         <li>@Html.ActionLink("Ämne", "Subject", "Teacher")</li>
     </ul>
-</div>
+</div>*@
