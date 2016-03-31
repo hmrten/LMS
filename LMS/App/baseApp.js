@@ -28,10 +28,18 @@
     }]);
 
     app.service('dataService', ['$http', function ($http) {
-        this.getData = function (url, onSuccess, onError) {
+        this.get = function (url, onSuccess, onError) {
 
             $http.get(LMS.rootPath + url).then(function (resp) {
                 onSuccess(resp.data);
+            }, function (resp) {
+                onError(resp);
+            });
+        };
+        this.post = function (url, data, onSuccess, onError) {
+
+            $http.post(LMS.rootPath + url, data).then(function (resp) {
+                onSuccess(resp);
             }, function (resp) {
                 onError(resp);
             });
