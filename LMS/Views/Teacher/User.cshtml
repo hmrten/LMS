@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Användare";
+}
+
+@section scripts {
+    <script src="~/App/Teacher/User/userApp.js"></script>
+}
+
+<div class="row" ng-app="user" ng-controller="userCtrl">
+    <div class="col-md-3">
+        <div id="sub-menu">
+            <ul>
+                <li><a href="#/">Lista alla användare</a></li>
+                <li><a href="#/Create">Skapa användare</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div ng-view></div>
+    </div>
+</div>

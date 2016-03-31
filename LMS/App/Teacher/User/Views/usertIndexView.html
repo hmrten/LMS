@@ -1,0 +1,21 @@
+﻿    <h2>Lista användare</h2>
+    <h1>{{message}}</h1>
+
+    <
+    <table class="table list-table">
+        <tr>
+            <th>
+                Namn
+            </th>
+            <th>
+                Beskrivning
+            </th>
+            <th>Ändra</th>
+        </tr>
+
+        <tr ng-repeat="s in subjects">
+            <td>{{s.name}}</td>
+            <td>{{s.description}}</td>
+            <td><a href="#/Edit/{{s.id}}">Ändra</a></td>
+        </tr>
+    </table>

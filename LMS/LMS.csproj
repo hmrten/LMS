@@ -120,6 +120,10 @@
   <ItemGroup>
     <Content Include="App\baseApp.js" />
     <Content Include="App\FileManager\fileManagerApp.js" />
+    <Content Include="App\Teacher\User\userApp.js" />
+    <Content Include="App\Teacher\User\Views\userCreateView.html" />
+    <Content Include="App\Teacher\User\Views\userEditView.html" />
+    <Content Include="App\Teacher\User\Views\usertIndexView.html" />
     <Content Include="App\Teacher\Subject\Views\subjectEditView.html" />
     <Content Include="App\Teacher\Subject\Views\subjectCreateView.html" />
     <Content Include="App\Teacher\Subject\Views\subjectIndexView.html" />
@@ -276,6 +280,7 @@
     <Content Include="Views\Teacher\Schedule\Details.cshtml" />
     <Content Include="Views\Teacher\Subject.cshtml" />
     <Content Include="Views\Teacher\Group.cshtml" />
+    <Content Include="Views\Teacher\User.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
