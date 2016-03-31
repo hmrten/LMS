@@ -1,7 +1,31 @@
-﻿<h2>Edit</h2>
+﻿<h2>Edit - {{details.name}}</h2>
+<div class="row">
 
-{{test}}
+</div>
+<div class="row vert-center">
+    <div class="col-md-4">
+        <select id="used" class="group-box center-block" multiple="multiple" ng-model="usedStudents">
+            <option ng-repeat="s in details.students" value="{{s.id}}" ng-click="clearList('#free')">{{s.fname}} {{s.lname}}</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-default center-block" type="button" ng-click="removeStudents()">&rArr;</button>
+        <button class="btn btn-default center-block" type="button" ng-click="addStudents()">&lArr;</button>
+    </div>
+    <div class="col-md-4">
+        <select id="free" class="group-box center-block" multiple="multiple" ng-click="clearList('#used')" ng-model="freeStudents">
+            <option>elev 1</option>
+            <option>elev 2</option>
+            <option>elev 3</option>
+            <option>elev 4</option>
+        </select>
+    </div>
+</div>
 
-<ul>
-    <li ng-repeat="s in details.students">{{s.fname}}</li>
-</ul>
+<div class="row">
+    <p>{{usedStudents}}</p>
+    <hr/>
+    <p>{{freeStudents}}</p>
+    <hr/>
+    <strong>{{msg}}</strong>
+</div>

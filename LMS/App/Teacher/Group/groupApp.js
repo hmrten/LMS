@@ -41,6 +41,14 @@
             });
         }
 
+        $scope.clearList = function (id) {
+            var opts = angular.element(id)[0];
+            for (var i = 0; i < opts.length; ++i) {
+                opts[i].selected = false;
+            }
+            $scope.msg = 'clearing: ' + id;
+        };
+
         $scope.test = 'testing from getDetails';
         getDetails();
     }]);

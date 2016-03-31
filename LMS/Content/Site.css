@@ -155,6 +155,16 @@ background-color: #030033;
     font-weight:bold;
 }
 
+.vert-center {
+    display: flex;
+    align-items: center;
+}
+
+.group-box {
+    width: 100%;
+    min-width: 200px;
+    min-height: 200px
+}
 /* Table */
 .table-header {
     background-color: #7d3f73;
