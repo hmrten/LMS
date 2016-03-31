@@ -126,13 +126,9 @@
     <Content Include="App\FileManager\fileManagerIndexCtrl.js" />
     <Content Include="App\FileManager\fileManagerApp.js" />
     <Content Include="App\Teacher\Group\groupApp.js" />
-    <Content Include="App\Teacher\Group\groupCreateCtrl.js" />
-    <Content Include="App\Teacher\Group\groupIndexCtrl.js" />
     <Content Include="App\Teacher\Group\Views\groupCreateView.html" />
     <Content Include="App\Teacher\Group\Views\groupIndexView.html" />
     <Content Include="App\Teacher\Assignment\assignmentApp.js" />
-    <Content Include="App\Teacher\Assignment\assignmentIndexCtrl.js" />
-    <Content Include="App\Teacher\Assignment\assignmentCreateCtrl.js" />
     <Content Include="App\Teacher\Assignment\Views\assignmentIndexView.html" />
     <Content Include="App\Teacher\Assignment\Views\assignmentCreateView.html" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -1000,7 +996,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Student\_Nav.cshtml" />
-    <Content Include="Views\Teacher\Group\_Nav.cshtml" />
     <Content Include="Views\Teacher\Subject\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Teacher\_MainNav.cshtml" />
@@ -1011,7 +1006,6 @@
     <Content Include="Views\Teacher\Index.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\Schedule.cshtml" />
-    <Content Include="Views\Teacher\Task\Create.cshtml" />
     <Content Include="Views\Teacher\Assignment.cshtml" />
     <Content Include="Views\Student\Group.cshtml" />
     <Content Include="Views\Student\File.cshtml" />
@@ -1019,9 +1013,6 @@
     <Content Include="Views\Teacher\Subject\Edit.cshtml" />
     <Content Include="Views\Teacher\Subject\List.cshtml" />
     <Content Include="Views\Teacher\Subject\Delete.cshtml" />
-    <Content Include="Views\Teacher\Group\List.cshtml" />
-    <Content Include="Views\Teacher\Group\Create.cshtml" />
-    <Content Include="Views\Teacher\Group\Edit.cshtml" />
     <Content Include="Views\Teacher\Schedule\_Nav.cshtml" />
     <Content Include="Views\Teacher\Schedule\List.cshtml" />
     <Content Include="Views\Teacher\Schedule\Details.cshtml" />

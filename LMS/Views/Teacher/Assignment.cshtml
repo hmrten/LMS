@@ -5,21 +5,18 @@
 
 @section scripts {
     <script src="~/App/Teacher/Assignment/assignmentApp.js"></script>
-    <script src="~/App/Teacher/Assignment/assignmentIndexCtrl.js"></script>
-    <script src="~/App/Teacher/Assignment/assignmentCreateCtrl.js"></script>
 }
 
-<div class="row" ng-app="assignment" ng-controller="assignmentIndexCtrl">
+<div class="row" ng-app="assignment" ng-controller="assignmentCtrl">
     <div class="col-md-3">
         <div id="sub-menu">
             <ul>
-                <li><a href="#/">Index</a></li>
-                <li><a href="#/Create">Create</a></li>
+                <li><a href="#/">Lista</a></li>
+                <li><a href="#/Create">Skapa</a></li>
             </ul>
         </div>
     </div>
     <div class="col-md-9">
-        
         <div ng-view></div>
     </div>
 </div>

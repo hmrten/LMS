@@ -11,7 +11,7 @@ namespace LMS.Controllers
     public class DirTree
     {
         public string name;
-        public List<DirTree> children;
+        public List<DirTree> dirs;
     }
 
     public class FileManagerController : Controller
@@ -40,11 +40,11 @@ namespace LMS.Controllers
             var subDirs = root.GetDirectories();
             if (subDirs.Count() > 0)
             {
-                tree.children = new List<DirTree>(subDirs.Count());
+                tree.dirs = new List<DirTree>(subDirs.Count());
                 foreach (var dir in subDirs)
                 {
-                    var newTree = new DirTree { name = dir.Name, children = null };
-                    tree.children.Add(newTree);
+                    var newTree = new DirTree { name = dir.Name, dirs = null };
+                    tree.dirs.Add(newTree);
                     WalkDirTree(dir, ref newTree);
                 }
             }
