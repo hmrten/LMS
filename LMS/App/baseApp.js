@@ -26,4 +26,15 @@
             });
         }
     }]);
+
+    app.service('dataService', ['$http', function ($http) {
+        this.getData = function (url, onSuccess, onError) {
+
+            $http.get(LMS.rootPath + url).then(function (resp) {
+                onSuccess(resp.data);
+            }, function (resp) {
+                onError(resp);
+            });
+        };
+    }]);
 }());
