@@ -22,23 +22,26 @@
         //});
     });
 
-    app.controller('groupCtrl', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
-        $scope.msg = 'hello from angular';
-
-        getGroups();
-
+    app.controller('groupCtrl', ['$scope', 'dataService', function ($scope, dataService) {
         function getGroups() {
-            $http.get(LMS.rootPath + 'Group/List').then(function (resp) {
-                $scope.groups = resp.data;
+            dataService.getData('Group/List', function (data) {
+                $scope.groups = data;
             });
         };
+
+        $scope.msg = 'hello from angular';
+        getGroups();
     }]);
 
-    app.controller('editCtrl', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
-        var id = parseInt($routeParams['id']);
+    app.controller('editCtrl', ['$scope', '$routeParams', 'dataService', function ($scope, $routeParams, dataService) {
+        function getDetails() {
+            var id = parseInt($routeParams['id']);
+            dataService.getData('Group/Details/' + id, function (data) {
+                $scope.details = data;
+            });
+        }
+
         $scope.test = 'testing from getDetails';
-        $http.get(LMS.rootPath + 'Group/Details/' + id).then(function (resp) {
-            $scope.details = resp.data;
-        });
+        getDetails();
     }]);
 }());
