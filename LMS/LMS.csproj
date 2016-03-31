@@ -123,6 +123,8 @@
     <Content Include="App\Teacher\Subject\subjectApp.js" />
     <Content Include="App\Teacher\Subject\Views\subjectCreateView.html" />
     <Content Include="App\Teacher\Subject\Views\subjectIndexView.html" />
+    <Content Include="App\FileManager\fileManagerIndexCtrl.js" />
+    <Content Include="App\FileManager\fileManagerApp.js" />
     <Content Include="App\Teacher\Assignment\assignmentApp.js" />
     <Content Include="App\Teacher\Assignment\assignmentIndexCtrl.js" />
     <Content Include="App\Teacher\Assignment\assignmentCreateCtrl.js" />
@@ -948,7 +950,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DataController.cs" />
-    <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\FileManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
@@ -997,7 +999,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Teacher\_MainNav.cshtml" />
     <Content Include="Views\Student\_MainNav.cshtml" />
-    <Content Include="Views\File\Upload.cshtml" />
+    <Content Include="Views\FileManager\Upload.cshtml" />
     <Content Include="Views\Teacher\Subject\_Nav.cshtml" />
     <Content Include="Views\Teacher\Subject\Create.cshtml" />
     <Content Include="Views\Teacher\Index.cshtml" />
@@ -1018,6 +1020,7 @@
     <Content Include="Views\Teacher\Schedule\List.cshtml" />
     <Content Include="Views\Teacher\Schedule\Details.cshtml" />
     <Content Include="Views\Teacher\Subject.cshtml" />
+    <Content Include="Views\FileManager\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

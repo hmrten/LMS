@@ -11,7 +11,7 @@
                 file: $scope.file
             };
 
-            fileUpload.uploadFile(data, 'File/Upload').then(
+            fileUpload.uploadFile(data, 'FileManager/Upload').then(
                 function (resp) {
                     $scope.msg = 'success: ' + resp.status + ' - ' + resp.statusText;
                 },

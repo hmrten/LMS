@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "FileManager";
+}
+
+@section scripts {
+    <script src="~/App/FileManager/fileManagerApp.js"></script>
+    <script src="~/App/FileManager/fileManagerIndexCtrl.js"></script>
+}
+
+<div class="row" ng-app="fileManager" ng-controller="fileManagerIndexCtrl">
+    <div class="col-md-3">
+        <div id="sub-menu">
+            <ul ng-repeat="dir in dirs">
+                <li><a href="#/">{{ dir }}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div ng-view></div>
+    </div>
+</div>
+
