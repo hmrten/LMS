@@ -3,6 +3,7 @@ using LMS.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -67,6 +68,15 @@ namespace LMS.Controllers
             var group = new Group { Name = name, Teacher_Id = teacherId };
             db.Groups.Add(group);
             db.SaveChanges();
+
+            string[] dirs = { "shared", "private" };
+            var fileRoot = Server.MapPath("~/Files");
+            foreach (var d in dirs)
+            {
+                var path = Path.Combine(fileRoot, group.Name, d);
+                Directory.CreateDirectory(path);
+            }
+
             return new HttpStatusCodeResult(200, String.Format("{0}:{1}", group.Id, group.Name));
         }
 
