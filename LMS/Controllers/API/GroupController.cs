@@ -78,22 +78,28 @@ namespace LMS.Controllers
                 foreach (var i in free)
                     db.Students.Find(i).Group_Id = null;
             }
+            int n = 0;
             if (used != null)
             {
                 foreach (var i in used)
                     db.Students.Find(i).Group_Id = id;
+                n = used.Length;
             }
             var g = db.Groups.Find(id);
             g.Teacher_Id = teacher_id;
             db.SaveChanges();
             return new HttpStatusCodeResult(200, String.Format("{0} elever lades till i klass '{1}' med lärare '{2}'",
-                used.Length, g.Name, g.Teacher.User.FullName));
+                n, g.Name, g.Teacher.User.FullName));
         }
 
         [HttpDelete]
         public HttpStatusCodeResult Delete(int id)
         {
             var group = db.Groups.Find(id);
+            if (group.Students.Count != 0)
+            {
+                return new HttpStatusCodeResult(403, "Kan ej ta bort klass med elever.");
+            }
             db.Groups.Remove(group);
             db.SaveChanges();
             return group == null ?

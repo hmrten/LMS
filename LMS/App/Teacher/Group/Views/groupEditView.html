@@ -1,6 +1,17 @@
-﻿<h2>Ändra klass</h2>
+﻿<div class="row vert-center">
+    <div class="col-md-3">
+        <h2>Ändra klass</h2>
+    </div>
+    <div class="col-md-9">
+        <div class="alert alert-{{msg.type}} alert-dismissible" ng-show="msg">
+            <strong>{{msg.strong}}</strong> {{msg.text}}
+            <button type="button" class="close" aria-label="Close" ng-click="msg = null">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</div>
 <hr />
-<div class="alert alert-{{msg.type}}" ng-show="msg"><strong>{{msg.strong}}</strong> {{msg.text}}</div>
 <form class="form-horizontal">
     <div class="form-group">
         <label class="control-label col-md-2" for="name">Namn:</label>
@@ -11,9 +22,7 @@
     <div class="form-group">
         <label class="control-label col-md-2" for="title">Klasslärare:</label>
         <div class="col-md-7">
-            <select class="form-control" name="teacher" ng-model="details.teacher_id" ng-options="t.id as (t.fname+' '+t.lname) for t in teachers">
-                <!--<option ng-repeat="t in teachers" value="{{t.id}}">{{t.fname}} {{t.lname}}</option>-->
-            </select>
+            <select class="form-control" name="teacher" ng-model="details.teacher_id" ng-options="t.id as (t.fname+' '+t.lname) for t in teachers"></select>
         </div>
     </div>
 </form>
@@ -51,8 +60,6 @@
         </div>
     </div>
 </div>
-
-<hr />
 <div class="row">
     <div class="col-md-9">
         <button class="btn btn-primary" ng-click="save()">Spara</button>

@@ -14,6 +14,9 @@
             .when('/Edit/:id', {
                 templateUrl: LMS.rootPath + 'App/Teacher/Group/Views/groupEditView.html',
                 controller: 'editCtrl'
+            })
+            .otherwise({
+                redirectTo: '/'
             });
 
         //$locationProvider.html5Mode({
@@ -22,10 +25,27 @@
         //});
     });
 
-    app.controller('indexCtrl', ['$scope', 'dataService', function ($scope, dataService) {
+    app.controller('indexCtrl', ['$scope', '$location', '$http', 'dataService', function ($scope, $location, $http, dataService) {
         function getGroups() {
             dataService.get('Group/List', function (data) {
                 $scope.groups = data;
+            });
+        };
+
+        $scope.delete = function (id) {
+            $http.delete(LMS.rootPath + 'Group/Delete/' + id).then(function (resp) {
+                $scope.msg = {
+                    type: 'success',
+                    strong: 'Ta bort lyckades!',
+                    text: resp.statusText
+                };
+                getGroups();
+            }, function (resp) {
+                $scope.msg = {
+                    type: 'danger',
+                    strong: 'Ta bort misslyckades!',
+                    text: resp.status + ': ' + resp.statusText
+                };
             });
         };
 
@@ -44,10 +64,20 @@
                 name: $scope.name,
                 teacherId: $scope.teacherId
             };
-            function onResponse(resp) {
-                $scope.msg = resp.statusText;
-            };
-            dataService.post('Group/Create', data, onResponse, onResponse);
+
+            dataService.post('Group/Create', data, function (resp) {
+                $scope.msg = {
+                    type: 'success',
+                    strong: 'Skapa lyckades!',
+                    text: resp.statusText
+                };
+            }, function (resp) {
+                $scope.msg = {
+                    type: 'danger',
+                    strong: 'Skapa misslyckades!',
+                    text: resp.status + ': ' + resp.statusText
+                };
+            });
         };
 
         getTeachers();
@@ -107,6 +137,8 @@
         };
 
         $scope.save = function () {
+            $scope.msg = null;
+
             var usedStudents = angular.element('#used').children();
             var freeStudents = angular.element('#free').children();
             var used = [];
@@ -132,7 +164,11 @@
                     text: resp.statusText
                 };
             }, function (resp) {
-                $scope.msg = 'failed to update group: ' + resp.status + ' ' + resp.statusText;
+                $scope.msg = {
+                    type: 'danger',
+                    strong: 'Ändring misslyckades!',
+                    text: resp.status + ': ' + resp.statusText
+                };
             });
         };
 

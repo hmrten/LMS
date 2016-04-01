@@ -167,7 +167,7 @@ background-color: #030033;
 .group-box {
     width: 100%;
     padding: 5px;
-    min-height: 20em;
+    min-height: 15em;
     max-width: none;
 }/* Table */
 .table-header {
@@ -182,3 +182,14 @@ tr.table-row:hover {
     color:#000;
 }
 /*tr:nth-child(even) {background-color: #eee8ed}*/
+
+
+.alert {
+  transition: 0.5s ease-in-out all;
+  margin: 0;
+}
+
+.alert.ng-hide {
+    display: block !important;
+    visibility: hidden !important;
+}

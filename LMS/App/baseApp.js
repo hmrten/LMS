@@ -1,5 +1,5 @@
 ﻿(function () {
-    var app = angular.module('base', ['ngRoute']);
+    var app = angular.module('base', ['ngRoute', 'ngAnimate']);
 
     app.directive('fileModel', ['$parse', function ($parse) {
         return {
