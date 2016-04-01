@@ -26,7 +26,7 @@ namespace LMS.Controllers
 	    }
 
 		//GET: Teacher/User
-		public ViewResult User()
+		public new ViewResult User()
 		{
 			return View();
 		}

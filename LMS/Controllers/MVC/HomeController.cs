@@ -9,19 +9,24 @@ namespace LMS.Controllers
 	[AllowAnonymous]
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ViewResult Index()
         {
             return View();
         }
 
-		public ActionResult About()
+		public ViewResult About()
 		{
 			return View();
 		}
 
-		public ActionResult Contact()
+		public ViewResult Contact()
 		{
 			return View();
 		}
+
+        public ViewResult Login()
+        {
+            return View();
+        }
     }
 }

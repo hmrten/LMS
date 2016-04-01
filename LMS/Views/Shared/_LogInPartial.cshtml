@@ -4,14 +4,14 @@
 {
     <div class="login-holder">
         <div class="login-name">Inloggad som: @User.Identity.Name</div>
-        <div class="login-link">@Html.ActionLink("Logga ut", "Logout", "Account")</div>
+        <div class="login-link">@Html.ActionLink("Logga ut", "Logout", "User")</div>
         <div class="clear">&nbsp;</div>
     </div>
 }
 else
 {
     <div class="login-holder">
-        <div class="login-link">@Html.ActionLink("Logga in", "Login", "Account")</div>
+        <div class="login-link">@Html.ActionLink("Logga in", "Login", "Home")</div>
     </div>
 }
 

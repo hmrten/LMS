@@ -5,7 +5,7 @@
         $routeProvider
             .when('/', {
                 templateUrl: LMS.rootPath + 'App/Teacher/Group/Views/groupIndexView.html',
-                controller: 'groupCtrl'
+                controller: 'indexCtrl'
             })
             .when('/Create', {
                 templateUrl: LMS.rootPath + 'App/Teacher/Group/Views/groupCreateView.html',
@@ -22,7 +22,7 @@
         //});
     });
 
-    app.controller('groupCtrl', ['$scope', 'dataService', function ($scope, dataService) {
+    app.controller('indexCtrl', ['$scope', 'dataService', function ($scope, dataService) {
         function getGroups() {
             dataService.get('Group/List', function (data) {
                 $scope.groups = data;
@@ -71,11 +71,16 @@
         function getDetails() {
             var id = parseInt($routeParams['id']);
             dataService.get('Group/Details/' + id, function (data) {
-                $scope.details = data;
-                $scope.groupId = id;
-            });
-            dataService.get('Group/FreeStudents', function (data) {
-                $scope.freeStudents = data;
+                var details = data;
+                dataService.get('Group/FreeStudents', function (data) {
+                    var freeStudents = data;
+                    dataService.get('Data/Teachers', function (data) {
+                        $scope.freeStudents = freeStudents;
+                        $scope.teachers = data;
+                        $scope.details = details;
+                        $scope.groupId = id;
+                    });
+                });
             });
         }
 
@@ -84,7 +89,6 @@
             for (var i = 0; i < opts.length; ++i) {
                 opts[i].selected = false;
             }
-            $scope.msg = 'clearing: ' + id;
         };
 
         $scope.transfer = function (fromId, toId) {
@@ -115,14 +119,20 @@
             }
 
             var data = {
+                id: $scope.details.id,
+                teacher_id: $scope.details.teacher_id,
                 used: used,
                 free: free
             };
 
             $http.put(LMS.rootPath + 'Group/Update/' + $scope.groupId, data).then(function (resp) {
-                $scope.msg = 'success';
+                $scope.msg = {
+                    type: 'success',
+                    strong: 'Ändring lyckades!',
+                    text: resp.statusText
+                };
             }, function (resp) {
-                $scope.msg = 'failed to update group: ' +resp.status + ' ' + resp.statusText;
+                $scope.msg = 'failed to update group: ' + resp.status + ' ' + resp.statusText;
             });
         };
 

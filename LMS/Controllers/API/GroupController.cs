@@ -46,6 +46,8 @@ namespace LMS.Controllers
                     {
                         id = id,
                         name = g.Name,
+                        teacher_id = g.Teacher_Id,
+                        teacher_name = g.Teacher.User.FirstName + " " + g.Teacher.User.FirstName,
                         students = g.Students.Select(s =>
                         new
                         {
@@ -69,7 +71,7 @@ namespace LMS.Controllers
         }
 
         [HttpPut]
-        public HttpStatusCodeResult Update(int id, int[] used, int[] free)
+        public HttpStatusCodeResult Update(int id, int teacher_id, int[] used, int[] free)
         {
             if (free != null)
             {
@@ -81,8 +83,11 @@ namespace LMS.Controllers
                 foreach (var i in used)
                     db.Students.Find(i).Group_Id = id;
             }
+            var g = db.Groups.Find(id);
+            g.Teacher_Id = teacher_id;
             db.SaveChanges();
-            return new HttpStatusCodeResult(200, String.Format("{0} elever lades till i klass-id: {1}", used.Length, id));
+            return new HttpStatusCodeResult(200, String.Format("{0} elever lades till i klass '{1}' med lärare '{2}'",
+                used.Length, g.Name, g.Teacher.User.FullName));
         }
 
         [HttpDelete]
