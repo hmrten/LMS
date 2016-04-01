@@ -1,7 +1,35 @@
-﻿<h2>Edit</h2>
+﻿<h2>{{details.name}}</h2>
+<div class="row vert-center">
+    <div class="col-md-4">
+        <h4>Klassuppsättning</h4>
+        <select id="used" class="group-box center-block" multiple="multiple">
+            <option ng-repeat="s in details.students" value="{{s.id}}" ng-click="clearList('#free')">{{s.fname}} {{s.lname}}</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-default center-block" type="button" ng-click="transfer('#free', '#used')">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </button>
+        <button class="btn btn-default center-block" type="button" ng-click="transfer('#used', '#free')">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </button>
+    </div>
+    <div class="col-md-4">
+        <h4>Elever utan klass</h4>
+        <select id="free" class="group-box center-block" multiple="multiple">
+            <option ng-repeat="s in freeStudents" value="{{s.id}}" ng-click="clearList('#used')">{{s.fname}} {{s.lname}}</option>
+        </select>
+    </div>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-md-9">
+        <button class="btn btn-primary" ng-click="save()">Spara</button>
+    </div>
+</div>
 
-{{test}}
-
-<ul>
-    <li ng-repeat="s in details.students">{{s.fname}}</li>
-</ul>
+<div class="row">
+    <div class="col-md-9">
+        <strong>{{msg}}</strong>
+    </div>
+</div>

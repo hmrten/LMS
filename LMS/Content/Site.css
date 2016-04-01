@@ -159,7 +159,16 @@ background-color: #030033;
     font-weight:bold;
 }
 
-/* Table */
+.vert-center {
+    display: flex;
+    align-items: center;
+}
+
+.group-box {
+    width: 100%;
+    min-width: 200px;
+    min-height: 20em;
+}/* Table */
 .table-header {
     background-color: #7d3f73;
     color:#fff;

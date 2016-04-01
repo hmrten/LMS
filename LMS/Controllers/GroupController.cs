@@ -2,6 +2,7 @@
 using LMS.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,7 +20,20 @@ namespace LMS.Controllers
                 {
                     id = g.Id,
                     name = g.Name,
+                    teacher_name = g.Teacher.User.FirstName + " " + g.Teacher.User.LastName,
                     students = g.Students.Count()
+                });
+            return Json(q.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult FreeStudents()
+        {
+            var q = db.Students.Where(s => s.Group_Id == null).Select(s =>
+                new
+                {
+                    id = s.Id,
+                    fname = s.User.FirstName,
+                    lname = s.User.LastName
                 });
             return Json(q.ToList(), JsonRequestBehavior.AllowGet);
         }
@@ -33,25 +47,42 @@ namespace LMS.Controllers
                         id = id,
                         name = g.Name,
                         students = g.Students.Select(s =>
-                            new
-                            {
-                                id = s.Id,
-                                uname = s.User.UserName,
-                                fname = s.User.FirstName,
-                                lname = s.User.LastName,
-                                email = s.User.Email,
-                            })
+                        new
+                        {
+                            id = s.Id,
+                            uname = s.User.UserName,
+                            fname = s.User.FirstName,
+                            lname = s.User.LastName,
+                            email = s.User.Email,
+                        })
                     };
             return Json(q.SingleOrDefault(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public HttpStatusCodeResult Create(string name)
+        public HttpStatusCodeResult Create(string name, int teacherId)
         {
-            var group = new Group { Name = name };
+            var group = new Group { Name = name, Teacher_Id = teacherId };
             db.Groups.Add(group);
             db.SaveChanges();
             return new HttpStatusCodeResult(200, String.Format("{0}:{1}", group.Id, group.Name));
+        }
+
+        [HttpPut]
+        public HttpStatusCodeResult Update(int id, int[] used, int[] free)
+        {
+            if (free != null)
+            {
+                foreach (var i in free)
+                    db.Students.Find(i).Group_Id = null;
+            }
+            if (used != null)
+            {
+                foreach (var i in used)
+                    db.Students.Find(i).Group_Id = id;
+            }
+            db.SaveChanges();
+            return new HttpStatusCodeResult(200, String.Format("{0} elever lades till i klass-id: {1}", used.Length, id));
         }
 
         [HttpDelete]

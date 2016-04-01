@@ -40,7 +40,8 @@ namespace LMS.Controllers
 				new
 				{
 					id = s.Id,
-					name = s.User.FirstName + " " + s.User.LastName
+					fname = s.User.FirstName,
+                    lname = s.User.LastName
 				});
 			return Json(q.ToList(), JsonRequestBehavior.AllowGet);
 		}
