@@ -1,10 +1,8 @@
-﻿<h2>Edit - {{details.name}}</h2>
-<div class="row">
-
-</div>
+﻿<h2>{{details.name}}</h2>
 <div class="row vert-center">
     <div class="col-md-4">
-        <select id="used" class="group-box center-block" multiple="multiple" ng-model=" usedstudents">
+        <h4>Klassuppsättning</h4>
+        <select id="used" class="group-box center-block" multiple="multiple">
             <option ng-repeat="s in details.students" value="{{s.id}}" ng-click="clearList('#free')">{{s.fname}} {{s.lname}}</option>
         </select>
     </div>
@@ -13,19 +11,26 @@
         <button class="btn btn-default center-block" type="button" ng-click="transfer('#used', '#free')">&rArr;</button>
     </div>
     <div class="col-md-4">
-        <select id="free" class="group-box center-block" multiple="multiple" ng-model="freeStudents">
-            <option value="100" data-clear-select="clearList('#used')">elev 101</option>
-            <option value="101" data-clear-select="clearList('#used')">elev 102</option>
-            <option value="102" data-clear-select="clearList('#used')">elev 103</option>
-            <option value="103" data-clear-select="clearList('#used')">elev 104</option>
+        <h4>Elever utan klass</h4>
+        <select id="free" class="group-box center-block" multiple="multiple">
+            <option value="100" ng-click="clearList('#used')">elev 101</option>
+            <option value="101" ng-click="clearList('#used')">elev 102</option>
+            <option value="102" ng-click="clearList('#used')">elev 103</option>
+            <option value="103" ng-click="clearList('#used')">elev 104</option>
         </select>
+    </div>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-md-9">
+        <button class="btn btn-primary" ng-click="save()">Spara</button>
     </div>
 </div>
 
 <div class="row">
-    <p>{{usedStudents}}</p>
-    <hr/>
-    <p>{{freeStudents}}</p>
-    <hr/>
-    <strong>{{msg}}</strong>
+    <div class="col-md-9">
+        <ul>
+            <li ng-repeat="s in test">{{s.innerHTML}}</li>
+        </ul>
+    </div>
 </div>

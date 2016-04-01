@@ -24,33 +24,32 @@
 
     app.controller('groupCtrl', ['$scope', 'dataService', function ($scope, dataService) {
         function getGroups() {
-            dataService.getData('Group/List', function (data) {
+            dataService.get('Group/List', function (data) {
                 $scope.groups = data;
             });
         };
 
-        $scope.msg = 'hello from angular';
         getGroups();
     }]);
 
-    app.directive('clearSelect', ['$parse', function($parse) {
-        return {
-            restrict: 'A',
-            link: function (scope, element, attrs) {
-                var expr = $parse(attrs.clearSelect);
-                element.bind('click', function () {
-                    scope.$apply(function () {
-                        expr(scope, {});
-                    });
-                });
-            }
-        };
-    }]);
+    //app.directive('clearSelect', ['$parse', function($parse) {
+    //    return {
+    //        restrict: 'A',
+    //        link: function (scope, element, attrs) {
+    //            var expr = $parse(attrs.clearSelect);
+    //            element.bind('click', function () {
+    //                scope.$apply(function () {
+    //                    expr(scope, {});
+    //                });
+    //            });
+    //        }
+    //    };
+    //}]);
 
-    app.controller('editCtrl', ['$scope', '$routeParams', 'dataService', '$compile', function ($scope, $routeParams, dataService, $compile) {
+    app.controller('editCtrl', ['$scope', '$routeParams', 'dataService', '$compile', '$http', function ($scope, $routeParams, dataService, $compile, $http) {
         function getDetails() {
             var id = parseInt($routeParams['id']);
-            dataService.getData('Group/Details/' + id, function (data) {
+            dataService.get('Group/Details/' + id, function (data) {
                 $scope.details = data;
             });
         }
@@ -78,7 +77,11 @@
             }
         };
 
-        $scope.test = 'testing from getDetails';
+        $scope.save = function () {
+            var usedStudents = angular.element('#used').children();
+            var freeStudents = angular.element('#free').children();
+        };
+
         getDetails();
     }]);
 }());

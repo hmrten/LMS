@@ -163,9 +163,8 @@ background-color: #030033;
 .group-box {
     width: 100%;
     min-width: 200px;
-    min-height: 200px
-}
-/* Table */
+    min-height: 20em;
+}/* Table */
 .table-header {
     background-color: #7d3f73;
     color:#fff;
