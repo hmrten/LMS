@@ -13,10 +13,7 @@
     <div class="col-md-4">
         <h4>Elever utan klass</h4>
         <select id="free" class="group-box center-block" multiple="multiple">
-            <option value="100" ng-click="clearList('#used')">elev 101</option>
-            <option value="101" ng-click="clearList('#used')">elev 102</option>
-            <option value="102" ng-click="clearList('#used')">elev 103</option>
-            <option value="103" ng-click="clearList('#used')">elev 104</option>
+            <option ng-repeat="s in freeStudents" value="{{s.id}}" ng-click="clearList('#used')">{{s.fname}} {{s.lname}}</option>
         </select>
     </div>
 </div>
@@ -29,8 +26,6 @@
 
 <div class="row">
     <div class="col-md-9">
-        <ul>
-            <li ng-repeat="s in test">{{s.innerHTML}}</li>
-        </ul>
+        <strong>{{msg}}</strong>
     </div>
 </div>

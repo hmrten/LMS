@@ -51,6 +51,10 @@
             var id = parseInt($routeParams['id']);
             dataService.get('Group/Details/' + id, function (data) {
                 $scope.details = data;
+                $scope.groupId = id;
+            });
+            dataService.get('Group/FreeStudents', function (data) {
+                $scope.freeStudents = data;
             });
         }
 
@@ -80,6 +84,25 @@
         $scope.save = function () {
             var usedStudents = angular.element('#used').children();
             var freeStudents = angular.element('#free').children();
+            var used = [];
+            var free = [];
+            for (var i = 0; i < usedStudents.length; ++i) {
+                used.push(parseInt(usedStudents[i].value));
+            }
+            for (var i = 0; i < freeStudents.length; ++i) {
+                free.push(parseInt(freeStudents[i].value));
+            }
+
+            var data = {
+                used: used,
+                free: free
+            };
+
+            $http.put(LMS.rootPath + 'Group/Update/' + $scope.groupId, data).then(function (resp) {
+                $scope.msg = 'success';
+            }, function (resp) {
+                $scope.msg = 'failed to update group: ' +resp.status + ' ' + resp.statusText;
+            });
         };
 
         getDetails();
