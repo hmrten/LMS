@@ -176,7 +176,7 @@ background-color: #030033;
 .table-role {
     text-transform:uppercase;
 }
-tr.table-users:hover {
+tr.table-row:hover {
     background-color: #eee8ed;
     color:#000;
 }
