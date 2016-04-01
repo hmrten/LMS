@@ -20,6 +20,7 @@ namespace LMS.Controllers
                 {
                     id = g.Id,
                     name = g.Name,
+                    teacher_name = g.Teacher.User.FirstName + " " + g.Teacher.User.LastName,
                     students = g.Students.Count()
                 });
             return Json(q.ToList(), JsonRequestBehavior.AllowGet);
@@ -59,9 +60,9 @@ namespace LMS.Controllers
         }
 
         [HttpPost]
-        public HttpStatusCodeResult Create(string name)
+        public HttpStatusCodeResult Create(string name, int teacherId)
         {
-            var group = new Group { Name = name };
+            var group = new Group { Name = name, Teacher_Id = teacherId };
             db.Groups.Add(group);
             db.SaveChanges();
             return new HttpStatusCodeResult(200, String.Format("{0}:{1}", group.Id, group.Name));

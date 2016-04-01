@@ -9,7 +9,7 @@
             })
             .when('/Create', {
                 templateUrl: LMS.rootPath + 'App/Teacher/Group/Views/groupCreateView.html',
-                controller: 'groupCtrl'
+                controller: 'createCtrl'
             })
             .when('/Edit/:id', {
                 templateUrl: LMS.rootPath + 'App/Teacher/Group/Views/groupEditView.html',
@@ -30,6 +30,27 @@
         };
 
         getGroups();
+    }]);
+
+    app.controller('createCtrl', ['$scope', 'dataService', function ($scope, dataService) {
+        function getTeachers() {
+            dataService.get('Data/Teachers', function (data) {
+                $scope.teachers = data;
+            });
+        };
+
+        $scope.create = function () {
+            var data = {
+                name: $scope.name,
+                teacherId: $scope.teacherId
+            };
+            function onResponse(resp) {
+                $scope.msg = resp.statusText;
+            };
+            dataService.post('Group/Create', data, onResponse, onResponse);
+        };
+
+        getTeachers();
     }]);
 
     //app.directive('clearSelect', ['$parse', function($parse) {

@@ -7,8 +7,12 @@
         </select>
     </div>
     <div class="col-md-2">
-        <button class="btn btn-default center-block" type="button" ng-click="transfer('#free', '#used')">&lArr;</button>
-        <button class="btn btn-default center-block" type="button" ng-click="transfer('#used', '#free')">&rArr;</button>
+        <button class="btn btn-default center-block" type="button" ng-click="transfer('#free', '#used')">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </button>
+        <button class="btn btn-default center-block" type="button" ng-click="transfer('#used', '#free')">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </button>
     </div>
     <div class="col-md-4">
         <h4>Elever utan klass</h4>
