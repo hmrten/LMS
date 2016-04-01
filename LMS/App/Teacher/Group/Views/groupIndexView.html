@@ -1,20 +1,24 @@
 ﻿<h2>Klasser</h2>
 
-<table class="table-condensed table-striped">
+<table class="table">
     <thead>
-        <tr>
+        <tr class="table-header">
             <th>Namn</th>
+            <th>Klassföreståndare</th>
             <th>Elever</th>
             <th></th>
         </tr>
     </thead>
 
     <tbody>
-        <tr ng-repeat="g in groups">
+        <tr class="table-row" ng-repeat="g in groups">
             <td>{{g.name}}</td>
+            <td>{{g.teacher_name}}</td>
             <td>{{g.students}}</td>
-            <td><a class="btn btn-xs btn-info" href="#/Edit/{{g.id}}">Ändra</a></td>
-            <td><a class="btn btn-xs btn-danger" href="#/Delete/{{g.id}}">Ta bort</a></td>
+            <td>
+                <a class="btn btn-xs btn-info" href="#/Edit/{{g.id}}">Ändra</a>
+                <a class="btn btn-xs btn-danger" href="#/Delete/{{g.id}}">Ta bort</a>
+            </td>
         </tr>
     </tbody>
 </table>
