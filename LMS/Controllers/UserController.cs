@@ -1,5 +1,6 @@
 ﻿using LMS.DataAccess;
 using LMS.Models;
+using LMS.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -19,6 +20,34 @@ namespace LMS.Controllers
         {
             userManager = AppUserManager.Create(new IntUserStore(db));
         }
+
+		[HttpPost]
+		public HttpStatusCodeResult Update(UserViewModel user)
+		{
+			var userEnt = db.Users.Where(u => u.Id == user.id).SingleOrDefault();
+
+			userEnt.FirstName = user.fname;
+			userEnt.LastName = user.lname;
+			userEnt.Email = user.email;
+			userEnt.PhoneNumber = user.phone;
+
+			if(user.oldpassword != null){
+				if (user.password1 != user.password2)
+				{
+					return new HttpStatusCodeResult(417, "Lösenorden matchar inte");
+				}
+
+				var result = userManager.ChangePassword(user.id, user.oldpassword, user.password1);
+
+				if (result != IdentityResult.Success)
+				{
+					return new HttpStatusCodeResult(403, "Nuvarande lösenordet är fel");
+				}
+			}
+
+			db.SaveChanges();
+			return new HttpStatusCodeResult(200, "En användare med id: " + userEnt.Id.ToString() + "uppdaterades");
+		}
 
         public JsonResult GetRoles()
         {
@@ -43,6 +72,7 @@ namespace LMS.Controllers
                     lname = s.LastName,
                     email = s.Email,
                     phone = s.PhoneNumber,
+					uname = s.UserName,
                     role_id = s.Roles.FirstOrDefault().RoleId,
                     role_name = role
                 }).SingleOrDefault();
@@ -59,6 +89,9 @@ namespace LMS.Controllers
                          id = u.Id,
                          fname = u.FirstName,
                          lname = u.LastName,
+						 email = u.Email,
+						 phone = u.PhoneNumber,
+						 uname = u.UserName,
                          role_id = r.Id,
                          role_name = r.Name
                      }).GroupBy(g => g.role_name).Select(x => new
@@ -68,6 +101,7 @@ namespace LMS.Controllers
                      });
             return Json(q, JsonRequestBehavior.AllowGet);
         }
+
 
     }
 }

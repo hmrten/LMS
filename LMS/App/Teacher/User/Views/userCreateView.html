@@ -3,25 +3,55 @@
 <strong>{{ createText }}</strong>
 <form class="form-horizontal" ng-submit="create()">
     <div class="form-group">
+        <label class="control-label col-md-3" for="name">Välj roll:</label>
         <div class="col-md-7">
-            <select class="form-control" name="role" ng-model="roles">
-                <option ng-repeat="r in roles" value="{{r.id}}">{{r.name}}}</option>
+            <select class="form-control" form="rolesSelect" name="rolesSelect" ng-model="rolesSelect">
+                <option ng-repeat="r in roles" value="{{r.id}}">{{r.name}}</option>
             </select>
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-md-2" for="name">Namn:</label>
+        <label class="control-label col-md-3" for="fname">Förnamn:</label>
         <div class="col-md-7">
-            <input class="form-control" type="text" name="name" ng-model="name" />
+            <input class="form-control" type="text" name="fname" ng-model="user.fname" />
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-md-2" for="description">Beskrivning:</label>
+        <label class="control-label col-md-3" for="lname">Efternamn:</label>
         <div class="col-md-7">
-            <textarea class="form-control" rows="5" name="description" ng-model="description"></textarea>
+            <input class="form-control" type="text" name="lname" ng-model="user.lname" />
         </div>
     </div>
-
+    <div class="form-group">
+        <label class="control-label col-md-3" for="email">Epost:</label>
+        <div class="col-md-7">
+            <input class="form-control" type="email" name="email" ng-model="user.email" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3" for="phone">Telefon:</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" name="phone" ng-model="user.phone" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3" for="uname">Användarnamn:</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" name="uname" ng-model="user.uname" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3" for="password1">Lösenord:</label>
+        <div class="col-md-7">
+            <input class="form-control" type="password" name="password1" ng-model="user.password1" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3" for="password2">Upprepa lösenord:</label>
+        <div class="col-md-7">
+            <input class="form-control" type="password" name="password2" ng-model="user.password2" />
+        </div>
+    </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-7">
             <button class="btn btn-primary" type="submit">Skapa</button>

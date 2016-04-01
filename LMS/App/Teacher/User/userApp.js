@@ -23,8 +23,7 @@
 
         function getAllUsers() {
             dataService.get("User/List", function (data) {
- 
-                $scope.users = data;
+                $scope.groups = data;
             }, function (resp) { // Om det blir fel
                 $scope.message = resp.statusText;
             });
@@ -64,10 +63,18 @@
         };
 
         $scope.update = function () {
-            var data = {
-                id: $scope.user.id,
-                name: $scope.user.name,
-            };
+            //var data = {
+            //    id: $scope.user.id,
+            //    role_id: $scope.rolesSelect,
+            //    fname: $scope.user.fname,
+            //    lname: $scope.user.lname,
+            //    email: $scope.user.email,
+            //    phone: $scope.user.phone,
+            //    uname: $scope.user.uname,
+            //    password1: $scope.password1,
+            //    password2: $scope.password2
+            //};
+            var data = angular.toJson($scope.user);
             function onResponse(resp) {
                 $scope.message = resp.statusText;
             };

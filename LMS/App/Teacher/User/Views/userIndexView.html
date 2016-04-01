@@ -1,37 +1,41 @@
-﻿    <h1>Lista användare</h1>
+﻿<h1>Lista användare</h1>
 <hr />
     <h1>{{message}}</h1>
-<div class="row">
+<h3>Filtrera</h3>
+<p>Filtrera fram alla användare beroende på roll</p>
+<!--<div class="row">
     <div class="form-group">
         <div class="col-md-7">
-            <select class="form-control" name="roles" ng-model="roles">
+            <select class="form-control" form="rolesSelect" name="rolesSelect" ng-model="rolesSelect">
                 <option ng-repeat="r in roles" value="{{r.id}}">{{r.name}}</option>
             </select>
         </div>
     </div>
-</div>
-<div class="row">
-    <h2>Användare</h2>
-    <table class="table list-table">
-        <tr>
-            <th>
-                Roll
-            </th>
-            <th>
-                Förnamn
-            </th>
-            <th>
-                Efternamn
-            </th>
-            <th>Ändra</th>
-        </tr>
+</div>-->
 
-        <tr ng-repeat="u in users">
-            <td>{{u.id}}</td>
-            <td>{{u.fname}}</td>
-            <td>{{u.lname}}</td>
-            <td><a href="#/Edit/{{u.id}}">Ändra</a></td>
-        </tr>
-    </table>
-
-</div>
+<h2>Användare</h2>
+<table class="table list-table" ng-repeat="group in groups">
+    <tr class="table-role">
+        <td><h3>{{group.role}}</h3></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr class="table-header">
+        <td>Förnamn</td>
+        <td>Efternamn</td>
+        <td>E-post</td>
+        <td>Telefon</td>
+        <td>Ändra</td>
+    </tr>
+    <tr class="table-users" ng-repeat="user in group.users | orderBy:'fname'">
+        <td>{{user.fname}}</td>
+        <td>{{user.lname}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.phone}}</td>
+        <td><a class="btn btn-xs btn-info" href="#/Edit/{{user.id}}">Ändra</a>
+            <a class="btn btn-xs btn-danger" href="#/Delete/{{user.id}}">Ta bort</a>
+        </td>
+    </tr>
+</table>

@@ -61,6 +61,7 @@ background-color: #030033;
    color: white; /*Change active text color here*/
     }
 
+
 /* BUTTON */
 
 .btn-primary,
@@ -68,10 +69,13 @@ background-color: #030033;
     background: #462040;
     color: #ffffff;
 }
- 
+.btn-info {
+    border-color:#462040;
+}
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary,
 .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open > .dropdown-toggle.btn-info {
     background: #7d3f73;
+    border-color:#462040;
 }
  
 .btn-primary:active, .btn-primary.active {
