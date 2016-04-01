@@ -40,7 +40,7 @@ namespace LMS.Controllers
 			db.SaveChanges();
 			return new HttpStatusCodeResult(200, "Ett ämne med id: " + subject.Id.ToString() + "uppdaterades");
 		}
-		public JsonResult GetSubject(int? id)
+		public JsonResult GetSubject(int id)
 		{
 			var subject = db.Subjects.Where(s => s.Id == id).Select(s =>
 				new
@@ -53,7 +53,7 @@ namespace LMS.Controllers
 			return Json(subject, JsonRequestBehavior.AllowGet);
 		}
 
-		public JsonResult List(int? id)
+		public JsonResult List()
 		{
 			var q = db.Subjects.Select(s =>
 				new

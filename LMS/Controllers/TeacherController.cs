@@ -12,7 +12,7 @@ namespace LMS.Controllers
     {
 	    private LMSContext db = new LMSContext();
 	
-
+		//Här läggs laddningen av alla sidor till huvudmenyn (via razor)
         // GET: Teacher
         public ActionResult Index()
         {
@@ -24,6 +24,12 @@ namespace LMS.Controllers
 	    {
 			return View();
 	    }
+
+		//GET: Teacher/User
+		public ViewResult User()
+		{
+			return View();
+		}
 
         public ViewResult Assignment()
         {

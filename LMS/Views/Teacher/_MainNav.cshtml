@@ -4,8 +4,8 @@
         <li @Html.IsActive("Teacher/Index", "class=\"active\"")>
             @Html.ActionLink("Lärarportal", "Index", "Teacher")
         </li>
-        <li @Html.IsActive("Account/Index", "class=\"active\"")>
-            @Html.ActionLink("Användare", "Index", "Account")
+        <li @Html.IsActive("Teacher/User", "class=\"active\"")>
+            @Html.ActionLink("Användare", "User", "Teacher")
         </li>
         <li @Html.IsActive("Teacher/Group", "class=\"active\"")>
             @Html.ActionLink("Klasser", "Group", "Teacher")

@@ -123,7 +123,7 @@
     <Content Include="App\Teacher\User\userApp.js" />
     <Content Include="App\Teacher\User\Views\userCreateView.html" />
     <Content Include="App\Teacher\User\Views\userEditView.html" />
-    <Content Include="App\Teacher\User\Views\usertIndexView.html" />
+    <Content Include="App\Teacher\User\Views\userIndexView.html" />
     <Content Include="App\Teacher\Subject\Views\subjectEditView.html" />
     <Content Include="App\Teacher\Subject\Views\subjectCreateView.html" />
     <Content Include="App\Teacher\Subject\Views\subjectIndexView.html" />
@@ -218,6 +218,7 @@
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataAccess\IUserRepository.cs" />
     <Compile Include="DataAccess\LMSContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -292,6 +293,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Data\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201603290740063_initial.resx">

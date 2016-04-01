@@ -13,45 +13,52 @@
             })
             .when('/Edit/:id', {
                 templateUrl: LMS.rootPath + 'App/Teacher/User/Views/userEditView.html',
-                controller: "userCtrl"
+                controller: "editCtrl"
         });
 
-        //$locationProvider.html5Mode({
-        //    enabled: true,
-        //    requireBase: false
-        //});
     });
 
-    app.controller('userCtrl', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+    app.controller('userCtrl', ['$scope', '$routeParams', 'dataService', function ($scope, $routeParams, dataService) {
+        getAllUsers();
 
-        getAllusers();
-
-        function getAllusers() {
-            $http.get(LMS.rootPath + "user/List").then(function (resp) {
-                $scope.users = resp.data;
-            }, function (resp) {
-                $scope.message = resp.status + resp.statusText;
+        function getAllUsers() {
+            dataService.get("User/List", function (data) {
+ 
+                $scope.users = data;
+            }, function (resp) { // Om det blir fel
+                $scope.message = resp.statusText;
             });
         };
 
-        getOneuser();
-
-        function getOneuser() {
-            var id = $routeParams["id"];
-     
-            $http.get(LMS.rootPath + "user/Getuser/" + id).then(function(resp) {
-                $scope.user = resp.data;
-            }, function (resp) {
-                $scope.message = resp.status + resp.statusText;
+        getAllRoles();
+        function getAllRoles() {
+            dataService.get("User/GetRoles", function (data) {
+                $scope.roles = data;
+            }, function (resp) { // Om det blir fel
+                $scope.message = resp.statusText;
             });
         };
 
         $scope.create = function () {
             var data = {
-                name: $scope.name,
-                description: $scope.description
+                id: $scope.id,
+                name: $scope.name
             };
-            $http.post(LMS.rootPath + "user/Create", data).then(function (resp) {
+            function onResponse(resp) {
+                $scope.message = resp.statusText;
+            };
+            dataService.post("User/Create", data, onResponse, onResponse);
+        };
+
+    }]);
+    app.controller('editCtrl', ['$scope', '$routeParams', 'dataService', function ($scope, $routeParams, dataService) {
+        getOneUser();
+
+        function getOneUser() {
+            var id = $routeParams["id"];
+            dataService.get("User/GetUser/" + id, function (data) {
+                $scope.user = data;
+            }, function (resp) { // Om det blir fel
                 $scope.message = resp.statusText;
             });
         };
@@ -60,13 +67,11 @@
             var data = {
                 id: $scope.user.id,
                 name: $scope.user.name,
-                description: $scope.user.description
             };
-            
-            $http.post(LMS.rootPath + "user/Update", data).then(function (resp) {
+            function onResponse(resp) {
                 $scope.message = resp.statusText;
-                console.log(resp);
-            });
+            };
+            dataService.post("User/Update", data, onResponse, onResponse);
         };
     }]);
 

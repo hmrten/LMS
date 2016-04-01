@@ -3,6 +3,13 @@
 <strong>{{ createText }}</strong>
 <form class="form-horizontal" ng-submit="create()">
     <div class="form-group">
+        <div class="col-md-7">
+            <select class="form-control" name="role" ng-model="roles">
+                <option ng-repeat="r in roles" value="{{r.id}}">{{r.name}}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="control-label col-md-2" for="name">Namn:</label>
         <div class="col-md-7">
             <input class="form-control" type="text" name="name" ng-model="name" />
