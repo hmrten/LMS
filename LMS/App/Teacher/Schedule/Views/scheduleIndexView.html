@@ -8,9 +8,13 @@
         border: 1px solid #ddd;
     }
 
-        tbody td:hover {
-            background-color: #eee8ed;
-        }
+    tbody td:hover {
+        background-color: #eee8ed;
+    }
+
+    .foo {
+        background-color: yellow;
+    }
 </style>
 
 <div class="row vert-center">
@@ -56,7 +60,7 @@
             </thead>
             <tbody id="cal">
                 <tr ng-repeat="w in [0,1,2,3,4,5]">
-                    <td class="col-md-1" ng-repeat="d in [0,1,2,3,4,5,6]">{{foo(w, d)}}</td>
+                    <td class="col-md-1 {{sched.css(wd)}}" ng-repeat="d in [0,1,2,3,4,5,6]" ng-init="wd = w*7+d" ng-class="">{{sched.html(wd)}}</td>
                 </tr>
             </tbody>
         </table>

@@ -33,26 +33,34 @@
     ];
 
     app.controller('indexCtrl', ['$scope', '$http', function ($scope, $http) {
-        boxes = [];
-        for (var i = 1; i <= 35; ++i)
-            boxes.push(i);
-        $scope.boxes = boxes;
-
-        $scope.curMonth = new Date().getMonth();
+        function init() {
+            $scope.curMonth = new Date().getMonth();
+            genCal($scope.curMonth);
+        };
 
         function genCal(month) {
             var now = new Date(2016, month, 1);
-            var firstday = new Date(now.getFullYear(), now.getMonth(), 1);
-            $scope.numdays = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-            $scope.firstday = firstday.getDay();
+            var firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
+            $scope.numDays = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+            $scope.firstDay = firstDay.getDay();
             $scope.monthName = monthNames[now.getMonth()];
         }
 
-        $scope.foo = function (w, d) {
-            var i = (w * 7) + d - $scope.firstday;
-            if (i < 0 || i >= $scope.numdays)
-                return '-';
-            return i+1;
+        $scope.sched = {
+            css: function (i) {
+                var d = i - $scope.firstDay;
+                if (d < 0 || d >= $scope.numDays)
+                    return '';
+                ++d;
+                if (d == 10)
+                    return 'foo';
+            },
+            html: function (i) {
+                var d = i - $scope.firstDay;
+                if (d < 0 || d >= $scope.numDays)
+                    return '-';
+                return d + 1;
+            }
         };
 
         $scope.addMonth = function (delta) {
@@ -60,6 +68,6 @@
             genCal($scope.curMonth);
         };
 
-        genCal($scope.curMonth);
+        init();
     }]);
 }());

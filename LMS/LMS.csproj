@@ -120,6 +120,8 @@
   <ItemGroup>
     <Content Include="App\baseApp.js" />
     <Content Include="App\FileManager\fileManagerApp.js" />
+    <Content Include="App\Teacher\Schedule\scheduleApp.js" />
+    <Content Include="App\Teacher\Schedule\Views\scheduleIndexView.html" />
     <Content Include="App\Teacher\User\userApp.js" />
     <Content Include="App\Teacher\User\Views\userCreateView.html" />
     <Content Include="App\Teacher\User\Views\userEditView.html" />
