@@ -40,14 +40,13 @@
 
         $scope.curMonth = new Date().getMonth();
 
-        var now = new Date();
-        var firstday = new Date(now.getFullYear(), now.getMonth(), 1);
-        $scope.numdays = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
-        $scope.firstday = firstday.getDay();
-        $scope.monthName = monthNames[now.getMonth()];
-
-        var cal = angular.element('#cal').children();
-        $scope.cal = cal.html();
+        function genCal(month) {
+            var now = new Date(2016, month, 1);
+            var firstday = new Date(now.getFullYear(), now.getMonth(), 1);
+            $scope.numdays = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+            $scope.firstday = firstday.getDay();
+            $scope.monthName = monthNames[now.getMonth()];
+        }
 
         $scope.foo = function (w, d) {
             var i = (w * 7) + d - $scope.firstday;
@@ -57,6 +56,10 @@
         };
 
         $scope.addMonth = function (delta) {
+            $scope.curMonth += delta;
+            genCal($scope.curMonth);
         };
+
+        genCal($scope.curMonth);
     }]);
 }());
