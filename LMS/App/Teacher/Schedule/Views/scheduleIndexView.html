@@ -59,11 +59,7 @@
                     <th class="col-md-1">Lördag</th>
                 </tr>
             </thead>
-            <tbody id="cal">
-                <tr ng-repeat="w in [0,1,2,3,4,5]" data-schedule="">
-                    <td class="col-md-1 {{sched.css(wd)}}" ng-repeat="d in [0,1,2,3,4,5,6]" ng-init="wd = w*7+d" ng-click="sched.click(wd)">{{sched.html(wd)}}</td>
-                </tr>
-            </tbody>
+            <tbody id="schedule" data-schedule="curMonth" data-first="firstDay" data-limit="numDays" data-click="foo" data-refresh="refresh"></tbody>
         </table>
     </div>
 </div>

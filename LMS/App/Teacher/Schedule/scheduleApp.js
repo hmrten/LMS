@@ -37,17 +37,62 @@
         return new Date(parseInt(s.substr(6)));
     };
 
-    app.directive('schedule', function () {
-        return function (scope, el, attr) {
-            if (scope.$last) {
-                //alert('im the last: ', el.html());
+    app.directive('schedule', function ($parse) {
+        return {
+            restrict: 'A',
+            scope: {
+                month: '=schedule',
+                first: '=',
+                limit: '=',
+                click: '&',
+                refresh: '&'
+            },
+            link: function (scope, el, attr) {
+                function inMonth(d) { return d > 0 && d <= scope.limit };
+                function calcDay(i) { return i - scope.first + 1 };
+
+                function generate(m) {
+                    for (var y = 0; y < 6; ++y) {
+                        var tr = angular.element('<tr></tr>');
+                        var w = y * 7;
+                        for (var x = 0; x < 7; ++x) {
+                            var day = calcDay(w + x);
+                            var text = inMonth(day) ? day : '-';
+                            var td = angular.element('<td class="col-md-1">' + text + '</td>');
+                            //if (day == 10) {
+                            //    td.addClass('foo');
+                            //}
+
+                            var onClick = function (d) {
+                                return function () {
+                                    scope.click()(d);
+                                };
+                            };
+
+                            td.bind('click', onClick(day));
+                            tr.append(td);
+                        }
+                        el.append(tr);
+                    }
+                    scope.$parent.tbody = el;
+                    scope.refresh()(el);
+                }
+
+                scope.$watch('month', function (val) {
+                    el.empty();
+                    generate(val);
+                });
             }
         };
     });
 
     app.controller('indexCtrl', ['$scope', '$http', function ($scope, $http) {
         function init() {
+            $scope.json = [];
             $scope.curMonth = new Date().getMonth();
+
+            //  data-first="firstDay" data-limit="numDays" data-click="foo" data-refresh="refresh"
+
             genCal($scope.curMonth);
             getData();
         };
@@ -60,57 +105,44 @@
             $scope.monthName = monthNames[now.getMonth()];
         };
 
-        function getData() {
-            $http.get(LMS.rootPath + 'Data/Schedule').then(function (resp) {
-                var schedules = resp.data;
+        function refresh(tbody) {
+            var json = $scope.json;
+            //var tbody = angular.element(tbody2);
+            var trs = tbody.children();
+            for (var j = 0; j < json.length; ++j) {
+                var o = json[j];
+                var odate = parseMSDate(o.date_end);
+                var day = odate.getDate();
 
-                var cal = angular.element('#cal');
-                var trs = cal.children();
-
-                for (var si = 0; si < schedules.length; ++si) {
-                    var sdate = parseMSDate(schedules[si].date_end);
-                    for (var i = 0; i < trs.length; ++i) {
-                        var tds = trs[i];
-                        for (var j = 0; j < tds.length; ++j) {
-                            var str = tds[j].innerHTML;
-
-                        }
-                    }
-                }
-
-                //genCal($scope.curMonth);
-            });
+                var idx = day + $scope.firstDay - 1;
+                var y = Math.floor(idx / 7);
+                var x = idx % 7;
+                var tr = trs[y];
+                var tds = tr.children;
+                tds[x].innerHTML = 'FOO';
+                //console.log('idx: ' + idx + ', day: ' + day + ', y: ' + y + ', x: ' + x);
+            }
+            console.log('refresh() called');
         };
 
-        function inMonth(d) { return d > 0 && d <= $scope.numDays };
-        function calcDay(i) { return i - $scope.firstDay + 1 };
+        $scope.refresh = refresh;
 
-        $scope.sched = {
-            css: function (i) {
-                var d = calcDay(i);
-                if (!inMonth(d))
-                    return '';
-                if (d == 10)
-                    return 'foo';
-            },
-            html: function (i) {
-                var d = calcDay(i);
-                if (!inMonth(d))
-                    return '-';
+        function getData() {
+            $http.get(LMS.rootPath + 'Data/Schedule').then(function (resp) {
+                $scope.json = resp.data;
 
-                return d;
-            },
-            click: function (i) {
-                var d = calcDay(i);
-                if (inMonth(d)) {
-                    alert('you clicked on day: ' + d);
-                }
-            }
+                refresh($scope.tbody);
+                //genCal($scope.curMonth);
+            });
         };
 
         $scope.addMonth = function (delta) {
             $scope.curMonth += delta;
             genCal($scope.curMonth);
+        };
+
+        $scope.foo = function (s) {
+            alert('hello from foo(): ' + s);
         };
 
         init();
