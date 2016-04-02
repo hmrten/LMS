@@ -97,6 +97,48 @@ namespace LMS.DataAccess
 			return student;
 		}
 
+        private void SeedSchedule()
+        {
+            Schedules.AddOrUpdate(s => s.Id,
+                new Schedule
+                {
+                    Id = 1,
+                    ScheduleType_Id = 1,
+                    Group_Id = 1,
+                    Subject_Id = 1,
+                    Author_Id = 1,
+                    Assignment_Id = null,
+                    DateStart = DateTime.Now,
+                    DateEnd = new DateTime(2016, 4, 4),
+                    Description = "Study hard"
+                },
+                new Schedule
+                {
+                    Id = 2,
+                    ScheduleType_Id = 1,
+                    Group_Id = 1,
+                    Subject_Id = 2,
+                    Author_Id = 2,
+                    Assignment_Id = null,
+                    DateStart = DateTime.Now,
+                    DateEnd = new DateTime(2016, 4, 5),
+                    Description = "Study hard again"
+                },
+                new Schedule
+                {
+                    Id = 3,
+                    ScheduleType_Id = 3,
+                    Group_Id = 1,
+                    Subject_Id = 2,
+                    Author_Id = 3,
+                    Assignment_Id = null,
+                    DateStart = DateTime.Now,
+                    DateEnd = new DateTime(2016, 4, 8),
+                    Description = "Time for a meeting"
+                });
+            SaveChanges();
+        }
+
 		public void Seed()
 		{
 			var roleManager = new RoleManager<IntRole, int>(new IntRoleStore(this));
@@ -194,6 +236,8 @@ namespace LMS.DataAccess
 			Teachers.Find(3).Subjects.Add(Subjects.Find(4));
 			Teachers.Find(4).Subjects.Add(Subjects.Find(5));
 			SaveChanges();
+
+            SeedSchedule();
 		}
 
 		public static LMSContext Create()
