@@ -107,14 +107,15 @@
             for (var j = 0; j < json.length; ++j) {
                 var o = json[j];
                 var odate = parseMSDate(o.date_end);
-                var day = odate.getDate();
-
-                var idx = day + $scope.firstDay - 1;
-                var y = Math.floor(idx / 7);
-                var x = idx % 7;
-                var tr = trs[y];
-                var td = angular.element(tr.children[x]);
-                td.addClass('sched_' + o.type_id);
+                if (odate.getMonth() == $scope.curMonth) {
+                    var day = odate.getDate();
+                    var idx = day + $scope.firstDay - 1;
+                    var y = Math.floor(idx / 7);
+                    var x = idx % 7;
+                    var tr = trs[y];
+                    var td = angular.element(tr.children[x]);
+                    td.addClass('sched_' + o.type_id);
+                }
             }
             console.log('refresh() called');
         };
