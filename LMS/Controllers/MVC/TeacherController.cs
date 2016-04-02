@@ -41,10 +41,9 @@ namespace LMS.Controllers
             return View();
         }
 
-	    [HttpPost]
-	    public ActionResult Create()
-	    {
-		    return View();
-	    }
+        public ViewResult Schedule()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,64 @@
+﻿<style>
+    thead th {
+        text-align: center;
+    }
+
+    tbody td {
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+        tbody td:hover {
+            background-color: #eee8ed;
+        }
+</style>
+
+<div class="row vert-center">
+    <div class="col-md-3">
+        <h2>Schema</h2>
+    </div>
+    <div class="col-md-9">
+        <div class="alert alert-{{msg.type}} alert-dismissible" ng-show="msg">
+            <strong>{{msg.strong}}</strong> {{msg.text}}
+            <button type="button" class="close" aria-label="Close" ng-click="msg = null">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</div>
+<hr />
+<p>{{numdays}}</p>
+<p>{{firstday}}</p>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="7">
+                        <button class="btn btn-xs btn-default" type="button" ng-click="addMonth(-1)">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </button>
+                        <strong>{{monthName}} 2016</strong>
+                        <button class="btn btn-xs btn-default" type="button" ng-click="addMonth(1)">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </button>
+                    </th>
+                </tr>
+                <tr class="table-header">
+                    <th class="col-md-1">Söndag</th>
+                    <th class="col-md-1">Måndag</th>
+                    <th class="col-md-1">Tisdag</th>
+                    <th class="col-md-1">Onsdag</th>
+                    <th class="col-md-1">Torsdag</th>
+                    <th class="col-md-1">Fredag</th>
+                    <th class="col-md-1">Lördag</th>
+                </tr>
+            </thead>
+            <tbody id="cal">
+                <tr ng-repeat="w in [0,1,2,3,4,5]">
+                    <td class="col-md-1" ng-repeat="d in [0,1,2,3,4,5,6]">{{foo(w, d)}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

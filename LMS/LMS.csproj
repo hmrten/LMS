@@ -269,6 +269,7 @@
     <Content Include="Views\Teacher\Subject.cshtml" />
     <Content Include="Views\Teacher\Group.cshtml" />
     <Content Include="Views\Teacher\User.cshtml" />
+    <Content Include="Views\Teacher\Schedule.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

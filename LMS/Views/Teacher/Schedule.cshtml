@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Schedule";
+}
+
+@section scripts {
+    <script src="~/App/Teacher/Schedule/scheduleApp.js"></script>
+}
+
+<div class="row" ng-app="schedule" ng-controller="indexCtrl">
+    <div class="col-md-3">
+        <div id="sub-menu">
+            <ul>
+                <li><a href="#/">Meny 1</a></li>
+                <li><a href="#/">Meny 2</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div ng-view></div>
+    </div>
+</div>
