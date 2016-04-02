@@ -44,22 +44,30 @@
             $scope.numDays = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
             $scope.firstDay = firstDay.getDay();
             $scope.monthName = monthNames[now.getMonth()];
-        }
+        };
+
+        function inMonth(d) { return d > 0 && d <= $scope.numDays };
+        function calcDay(i) { return i - $scope.firstDay + 1 };
 
         $scope.sched = {
             css: function (i) {
-                var d = i - $scope.firstDay;
-                if (d < 0 || d >= $scope.numDays)
+                var d = calcDay(i);
+                if (!inMonth(d))
                     return '';
-                ++d;
                 if (d == 10)
                     return 'foo';
             },
             html: function (i) {
-                var d = i - $scope.firstDay;
-                if (d < 0 || d >= $scope.numDays)
+                var d = calcDay(i);
+                if (!inMonth(d))
                     return '-';
-                return d + 1;
+                return d;
+            },
+            click: function (i) {
+                var d = calcDay(i);
+                if (inMonth(d)) {
+                    alert('you clicked on day: ' + d);
+                }
             }
         };
 

@@ -10,6 +10,7 @@
 
     tbody td:hover {
         background-color: #eee8ed;
+        cursor: pointer;
     }
 
     .foo {
@@ -60,7 +61,7 @@
             </thead>
             <tbody id="cal">
                 <tr ng-repeat="w in [0,1,2,3,4,5]">
-                    <td class="col-md-1 {{sched.css(wd)}}" ng-repeat="d in [0,1,2,3,4,5,6]" ng-init="wd = w*7+d" ng-class="">{{sched.html(wd)}}</td>
+                    <td class="col-md-1 {{sched.css(wd)}}" ng-repeat="d in [0,1,2,3,4,5,6]" ng-init="wd = w*7+d" ng-click="sched.click(wd)">{{sched.html(wd)}}</td>
                 </tr>
             </tbody>
         </table>
