@@ -37,7 +37,7 @@
         return new Date(parseInt(s.substr(6)));
     };
 
-    app.directive('schedule', function ($parse) {
+    app.directive('schedule', function ($parse, $animate) {
         return {
             restrict: 'A',
             scope: {
@@ -71,11 +71,13 @@
                         }
                         el.append(tr);
                     }
+                    $animate.addClass(el, 'added');
                     scope.$parent.tbody = el;
                     scope.refresh()(el);
                 }
 
                 scope.$watch('month', function (val) {
+                    el.removeClass('added');
                     el.empty();
                     generate(val);
                 });
