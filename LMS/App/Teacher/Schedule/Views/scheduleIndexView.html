@@ -22,12 +22,25 @@
         opacity: 1;
     }
 
+    table {
+        transition: 0.3s ease all;
+        transform: translateX(0) scale(1.0, 1.0);
+    }
+
+    table.go-left {
+        transform-origin: top;
+        position: absolute;
+        transform: translate(25%, -25%) scale(0.3, 0.5);
+    }
+
     .sched_1 {
         background-color: lightgreen;
     }
+
     .sched_2 {
         background-color: lightpink;
     }
+
     .sched_3 {
         background-color: lightblue;
     }
@@ -49,7 +62,7 @@
 <hr />
 <div class="row">
     <div class="col-md-12">
-        <table class="table">
+        <table class="table" ng-class="{'go-left': clickedDay}">
             <thead>
                 <tr>
                     <th colspan="7">
@@ -76,5 +89,8 @@
             </thead>
             <tbody id="schedule" data-schedule="curMonth" data-first="firstDay" data-limit="numDays" data-click="foo" data-refresh="refresh"></tbody>
         </table>
+        <div class="col-md-12" ng-show="clickedDay">
+            <h4>{{clickedDay.type_name}} <span class="small">{{clickedDay.subject_name}}</span></h4>
+        </div>
     </div>
 </div>

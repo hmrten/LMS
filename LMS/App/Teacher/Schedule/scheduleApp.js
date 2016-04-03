@@ -61,12 +61,13 @@
                             var td = angular.element('<td class="col-md-1">' + text + '</td>');
 
                             var onClick = function (d) {
+                                var fn = scope.click();
                                 return function () {
-                                    scope.click()(d);
+                                    fn(d);
                                 };
                             };
 
-                            td.bind('click', onClick(day));
+                            td.on('click', onClick(day));
                             tr.append(td);
                         }
                         el.append(tr);
@@ -88,6 +89,7 @@
     app.controller('indexCtrl', ['$scope', '$http', function ($scope, $http) {
         function init() {
             $scope.json = [];
+            $scope.usedDays = [];
             $scope.curMonth = new Date().getMonth();
             genCal($scope.curMonth);
             getData();
@@ -114,6 +116,7 @@
                     var x = idx % 7;
                     var tr = trs[y];
                     var td = angular.element(tr.children[x]);
+                    $scope.usedDays[day] = o;
                     td.addClass('sched_' + o.type_id);
                 }
             }
@@ -135,7 +138,9 @@
         };
 
         $scope.foo = function (s) {
-            alert('hello from foo(): ' + s);
+            //alert('hello from foo(): ' + s);
+            $scope.clickedDay = $scope.usedDays[s];
+            $scope.$apply();
         };
 
         init();
