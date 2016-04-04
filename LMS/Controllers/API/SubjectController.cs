@@ -12,11 +12,6 @@ namespace LMS.Controllers
     public class SubjectController : Controller
     {
 		private LMSContext db = new LMSContext();
-        // GET: Subject
-        public ActionResult Index()
-        {
-            return View();
-        }
 
 		[HttpPost]
 		public HttpStatusCodeResult Create(string name, string description)
