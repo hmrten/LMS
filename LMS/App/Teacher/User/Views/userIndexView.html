@@ -1,4 +1,4 @@
-﻿<h1>Lista användare</h1>
+﻿<h2>Lista användare</h2>
 <hr />
     <h1>{{message}}</h1>
 <h3>Filtrera</h3>
@@ -13,7 +13,6 @@
     </div>
 </div>-->
 
-<h2>Användare</h2>
 <table class="table list-table" ng-repeat="group in groups">
     <tr class="table-role">
         <td><h3>{{group.role}}</h3></td>
@@ -27,7 +26,7 @@
         <td>Efternamn</td>
         <td>E-post</td>
         <td>Telefon</td>
-        <td>Ändra</td>
+        <td></td>
     </tr>
     <tr class="table-row" ng-repeat="user in group.users | orderBy:'fname'">
         <td>{{user.fname}}</td>

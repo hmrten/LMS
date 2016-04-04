@@ -1,19 +1,21 @@
 ﻿    <h2>Alla ämnen</h2>
     <h1>{{message}}</h1>
     <table class="table list-table">
-        <tr>
+        <tr class="table-header">
             <th>
                 Namn
             </th>
             <th>
                 Beskrivning
             </th>
-            <th>Ändra</th>
+            <th></th>
         </tr>
 
-        <tr ng-repeat="s in subjects">
+        <tr class="table-row" ng-repeat="s in subjects">
             <td>{{s.name}}</td>
             <td>{{s.description}}</td>
-            <td><a href="#/Edit/{{s.id}}">Ändra</a></td>
+            <td><a class="btn btn-xs btn-info" href="#/Edit/{{s.id}}">Ändra</a>
+                <a class="btn btn-xs btn-danger" href="#/Edit/{{s.id}}">Ta bort</a>
+            </td>
         </tr>
     </table>

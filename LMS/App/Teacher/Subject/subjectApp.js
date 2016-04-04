@@ -28,18 +28,30 @@
             });
         };
 
-        $scope.create = function () {
+        $scope.create = function () { 
+            $scope.msg = null;
             var data = {
                 name: $scope.name,
                 description: $scope.description
             };
-            function onResponse(resp) {
-                $scope.message = resp.statusText;
+            function onSuccess(resp){
+                $scope.msg = {
+                    type: 'success',
+                    strong: 'Skapa lyckades!',
+                    text: resp.statusText
+                };
             };
-            dataService.post("Subject/Create", data, onResponse, onResponse);
+            function onError(resp) {
+                $scope.msg = {
+                    type: 'danger',
+                    strong: 'Skapa misslyckades!',
+                    text: resp.status + ': ' + resp.statusText
+                };
+            };
+            dataService.post("Subject/Create", data, onSuccess, onError);
         };
-
     }]);
+
     app.controller('editCtrl', ['$scope', '$routeParams', 'dataService', function ($scope, $routeParams, dataService) {
         getOneSubject();
 
@@ -58,10 +70,21 @@
                 name: $scope.subject.name,
                 description: $scope.subject.description
             };
-            function onResponse(resp) {
-                $scope.message = resp.statusText;
+            function onSuccess(resp){
+                $scope.msg = {
+                    type: 'success',
+                    strong: 'Uppdatera lyckades!',
+                    text: resp.statusText
+                };
             };
-            dataService.post("Subject/Update", data, onResponse, onResponse);
+            function onError(resp) {
+                $scope.msg = {
+                    type: 'danger',
+                    strong: 'Uppdatera misslyckades!',
+                    text: resp.status + ': ' + resp.statusText
+                };
+            };
+            dataService.post("Subject/Update", data, onSuccess, onError);
         };
     }]);
 

@@ -1,6 +1,7 @@
 ﻿@import url('bootstrap.css');
 body {
-    padding-top: 10px;
+    font-family: 'Arimo', sans-serif;
+    font-size:1.5em;
     padding-bottom: 20px;
 }
 
@@ -83,18 +84,26 @@ background-color: #030033;
     box-shadow: none;
 }
 
+
 /* HEADER */
 .header {position:relative;}
-.header-container {}
+.header-background-color {
+    background-color:#eee8ed;
+    margin:0;
+    padding-top:10px;
+}
 .header-logo-holder {
     padding-right:15px;
 }
 .header-logo {
+    font-family: 'Cinzel Decorative', cursive;
+    font-weight:700; /* 700 or 900*/
+    color:#462040;
     position:relative;
     float:left;
     height:50px;
     width:300px;
-    font-size:40px;
+    font-size:60px;
     margin-right:0px;
     padding:0;
 }
@@ -107,10 +116,24 @@ background-color: #030033;
     float:right;
     bottom:-1px;
 }
+.login-name {
+    margin-bottom:5px;
+}
 .login-name,
 .login-link {
     text-align:right;
 }
+.login-link a {
+    color:#7d3f73;
+    text-decoration:none;
+    padding:5px;
+}
+.login-link a:hover {
+    color:#ccc;
+    background-color:#462040;
+    border-radius:4px;
+}
+
 #main-menu {margin-bottom:-1px;}
 
 #main-menu li {
@@ -132,7 +155,7 @@ background-color: #030033;
     color:#fff;
 }
 
-.nav > li > a:hover {
+#main-menu.nav > li > a:hover {
     border-radius:10px 10px 0 0;
 }
 /* SUB MENU */
