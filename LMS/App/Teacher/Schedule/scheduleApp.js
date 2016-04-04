@@ -106,11 +106,13 @@
         function refresh(tbody) {
             var json = $scope.json;
             var trs = tbody.children();
+            var sched = [];
             for (var j = 0; j < json.length; ++j) {
                 var o = json[j];
                 //var odate = parseMSDate(o.date_end);
                 //o.date_end = parseMSDate(o.date_end);
                 //o.date_start = parseMSDate(o.date_start);
+                //$scope.usedDays[day] = [];
                 if (o.date_end.getMonth() == $scope.curMonth) {
                     var day = o.date_end.getDate();
                     var idx = day + $scope.firstDay - 1;
@@ -118,10 +120,21 @@
                     var x = idx % 7;
                     var tr = trs[y];
                     var td = angular.element(tr.children[x]);
-                    $scope.usedDays[day] = o;
+                    //$scope.usedDays[day].push(o);
+                    sched.push({day: day, obj: o });
                     td.addClass('sched_' + o.type_id);
                 }
             }
+
+            $scope.sched = sched;
+
+            //var usedDays = {};
+            //for (var i = 0; i < sched.length; ++i) {
+            //    var s = sched[i];
+            //    usedDays[s.day] = s.obj;
+            //}
+            //$scope.usedDays = usedDays;
+
             console.log('refresh() called');
         };
 
@@ -147,8 +160,9 @@
 
         $scope.foo = function (s) {
             //alert('hello from foo(): ' + s);
-            $scope.clickedDay = null;
-            $scope.clickedDay = $scope.usedDays[s];
+            $scope.details = null;
+            $scope.selectedDay = s;
+            $scope.details = $scope.sched;
             $scope.$apply();
         };
 

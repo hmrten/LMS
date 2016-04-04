@@ -147,6 +147,42 @@ namespace LMS.DataAccess
                     DateStart = DateTime.Now,
                     DateEnd = new DateTime(2016, 4, 18),
                     Description = "Uppgift"
+                },
+                new Schedule
+                {
+                    Id = 5,
+                    ScheduleType_Id = 2,
+                    Group_Id = 1,
+                    Subject_Id = 4,
+                    Author_Id = 1,
+                    Assignment_Id = null,
+                    DateStart = DateTime.Now,
+                    DateEnd = new DateTime(2016, 4, 11),
+                    Description = "Uppgift A"
+                },
+                new Schedule
+                {
+                    Id = 6,
+                    ScheduleType_Id = 2,
+                    Group_Id = 1,
+                    Subject_Id = 1,
+                    Author_Id = 1,
+                    Assignment_Id = null,
+                    DateStart = DateTime.Now,
+                    DateEnd = new DateTime(2016, 4, 11),
+                    Description = "Uppgift B"
+                },
+                new Schedule
+                {
+                    Id = 7,
+                    ScheduleType_Id = 2,
+                    Group_Id = 1,
+                    Subject_Id = 2,
+                    Author_Id = 1,
+                    Assignment_Id = null,
+                    DateStart = DateTime.Now,
+                    DateEnd = new DateTime(2016, 4, 11),
+                    Description = "Uppgift C"
                 }
                 );
             SaveChanges();
