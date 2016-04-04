@@ -108,9 +108,11 @@
             var trs = tbody.children();
             for (var j = 0; j < json.length; ++j) {
                 var o = json[j];
-                var odate = parseMSDate(o.date_end);
-                if (odate.getMonth() == $scope.curMonth) {
-                    var day = odate.getDate();
+                //var odate = parseMSDate(o.date_end);
+                //o.date_end = parseMSDate(o.date_end);
+                //o.date_start = parseMSDate(o.date_start);
+                if (o.date_end.getMonth() == $scope.curMonth) {
+                    var day = o.date_end.getDate();
                     var idx = day + $scope.firstDay - 1;
                     var y = Math.floor(idx / 7);
                     var x = idx % 7;
@@ -127,7 +129,13 @@
 
         function getData() {
             $http.get(LMS.rootPath + 'Data/Schedule').then(function (resp) {
-                $scope.json = resp.data;
+                var json = resp.data;
+                for (var i = 0; i < json.length; ++i) {
+                    var o = json[i];
+                    o.date_start = parseMSDate(o.date_start);
+                    o.date_end = parseMSDate(o.date_end);
+                }
+                $scope.json = json;
                 refresh($scope.tbody);
             });
         };
@@ -139,6 +147,7 @@
 
         $scope.foo = function (s) {
             //alert('hello from foo(): ' + s);
+            $scope.clickedDay = null;
             $scope.clickedDay = $scope.usedDays[s];
             $scope.$apply();
         };

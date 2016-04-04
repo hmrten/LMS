@@ -1,33 +1,41 @@
 ﻿<style>
-    thead th {
+    #cal thead th {
         text-align: center;
     }
 
-    tbody td {
+    #cal tbody td {
         text-align: center;
         border: 1px solid #ddd;
     }
 
-    tbody td:hover {
+    #cal tbody td:hover {
         background-color: #eee8ed;
         cursor: pointer;
     }
 
-    tbody {
+    #cal tbody {
         transition: 0.5s ease-in-out all;
         opacity: 0;
     }
 
-    tbody.added {
+    #details tbody {
+        transition: 0.5s ease-in-out all;
+    }
+
+    #details tbody.ng-hide {
+        opacity: 0;
+    }
+
+    #cal tbody.added {
         opacity: 1;
     }
 
-    table {
+    #cal table {
         transition: 0.3s ease all;
         transform: translateX(0) scale(1.0, 1.0);
     }
 
-    table.go-right {
+    #cal table.go-right {
         transform-origin: top;
         position: absolute;
         transform: translate(25%, -25%) scale(0.3, 0.5);
@@ -70,12 +78,8 @@
 </div>
 <hr />
 <div class="row">
-    <div class="col-md-3 info-box" ng-class="{'view-info': clickedDay}">
-        <h4>{{clickedDay.subject_name}} <span class="small">{{clickedDay.type_name}}</span></h4>
-        <p>{{clickedDay.description}}</p>
-    </div>
-    <div class="col-md-9">
-        <table class="table" ng-class="{'go-rightx': clickedDay}">
+    <div class="col-md-12">
+        <table id="cal" class="table" ng-class="{'go-rightx': clickedDay}">
             <thead>
                 <tr>
                     <th colspan="7">
@@ -100,7 +104,34 @@
                     <th class="col-md-1">Lördag</th>
                 </tr>
             </thead>
-            <tbody id="schedule" data-schedule="curMonth" data-first="firstDay" data-limit="numDays" data-click="foo" data-refresh="refresh"></tbody>
+            <tbody data-schedule="curMonth" data-first="firstDay" data-limit="numDays" data-click="foo" data-refresh="refresh"></tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table id="details" class="table">
+            <thead>
+                <tr class="table-header">
+                    <th class="col-md-1">Startdatum</th>
+                    <th class="col-md-1">Slutdatum</th>
+                    <th class="col-md-1">Typ</th>
+                    <th class="col-md-1">Ämne</th>
+                    <th class="col-md-1"></th>
+                </tr>
+            </thead>
+            <tbody ng-show="clickedDay">
+                <tr class="table-row">
+                    <td class="col-md-1">{{clickedDay.date_start | date : 'short'}}</td>
+                    <td class="col-md-1">{{clickedDay.date_end | date : 'short'}}</td>
+                    <td class="col-md-1">{{clickedDay.type_name}}</td>
+                    <td class="col-md-1">{{clickedDay.subject_name}}</td>
+                    <td class="col-md-1">
+                        <a class="btn btn-xs btn-info" href="#/Edit/">Ändra</a>
+                        <a class="btn btn-xs btn-danger" href="#/" ng-click="delete(g.id)">Ta bort</a>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>
