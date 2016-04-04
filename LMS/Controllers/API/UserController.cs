@@ -29,23 +29,50 @@ namespace LMS.Controllers
 		[HttpPost]
 		public HttpStatusCodeResult Create(UserViewModel user)
 		{
-			var userEnt = db.Users.Where(u => u.Id == user.id).SingleOrDefault();
+			if (db.Users.Any(u => u.UserName == user.uname))
+			{
+				return new HttpStatusCodeResult(417, "Användarnamnet finns redan, välj ett nytt");
+			}
+			
+			if (user.password1 != user.password2)
+			{
+				return new HttpStatusCodeResult(417, "Lösenorden matchar inte");
+			}
+			
+			if (!ModelState.IsValid)
+			{
+				return new HttpStatusCodeResult(417, "Du glömde fylla i obligatoriska fält markerade med *");
+			}
 
-			//userEnt. = user.role_id;
-			userEnt.FirstName = user.fname;
-			userEnt.LastName = user.lname;
-			userEnt.Email = user.email;
-			userEnt.PhoneNumber = user.phone;
+			var userEnt = new User { FirstName = user.fname, LastName = user.lname, Email = user.email, UserName = user.uname };
 
 
-				if (user.password1 != user.password2)
-				{
-					return new HttpStatusCodeResult(417, "Lösenorden matchar inte");
-				}
+			var res = UserManager.Create(userEnt, user.password1);
+			if (!res.Succeeded)
+			{
+				throw new Exception(res.Errors.Aggregate("", (a, b) => a + b + "\n"));
+			}
+
+			UserManager.AddToRole(userEnt.Id, user.role_name);
+
+			switch (user.role_name)
+			{
+				case "teacher":
+					db.Teachers.Add(new Teacher { User_Id = userEnt.Id });
+					break;
+				case "student":
+					db.Students.Add(new Student { User_Id = userEnt.Id });
+					break;
+				default:
+					break;
+			}
 
 			db.SaveChanges();
-			return new HttpStatusCodeResult(200, "En användare med id: " + userEnt.Id.ToString() + "skapades");
+
+			var message = string.Format("En {0} med användarnamn: {1} skapades", user.role_name, userEnt.UserName);
+			return new HttpStatusCodeResult(200, message);
 		}
+
 		[HttpPost]
 		public HttpStatusCodeResult Update(UserViewModel user)
 		{
