@@ -195,3 +195,19 @@ tr.table-row:hover {
     display: block !important;
     visibility: hidden !important;
 }
+
+.panel-primary {
+    border-color: #462040;
+}
+
+.panel-primary > .panel-heading {
+    color: #fff;
+    background-color: #462040;
+    border-color: #462040;
+}
+
+.panel-info > .panel-heading {
+    color: #fff;
+    background-color: #7d3f73;
+    border-color: #7d3f73;
+}

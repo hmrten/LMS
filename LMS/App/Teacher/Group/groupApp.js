@@ -33,6 +33,8 @@
         };
 
         $scope.delete = function (id) {
+            $scope.msg = null;
+
             $http.delete(LMS.rootPath + 'Group/Delete/' + id).then(function (resp) {
                 $scope.msg = {
                     type: 'success',
@@ -71,6 +73,8 @@
                     strong: 'Skapa lyckades!',
                     text: resp.statusText
                 };
+                $scope.name = null;
+                $scope.teacherId = null;
             }, function (resp) {
                 $scope.msg = {
                     type: 'danger',

@@ -70,12 +70,12 @@
 </div>
 <hr />
 <div class="row">
-    <div class="col-md-3 info-box" ng-click="clickedDay = null" ng-class="{'view-info': clickedDay}">
-        <h4>{{clickedDay.type_name}} <span class="small">{{clickedDay.subject_name}}</span></h4>
+    <div class="col-md-3 info-box" ng-class="{'view-info': clickedDay}">
+        <h4>{{clickedDay.subject_name}} <span class="small">{{clickedDay.type_name}}</span></h4>
         <p>{{clickedDay.description}}</p>
     </div>
     <div class="col-md-9">
-        <table class="table" ng-class="{'go-right': clickedDay}">
+        <table class="table" ng-class="{'go-rightx': clickedDay}">
             <thead>
                 <tr>
                     <th colspan="7">

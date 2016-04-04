@@ -4,9 +4,9 @@
 
 @section scripts {
     <script src="~/App/Teacher/Schedule/scheduleApp.js"></script>
-    <script>
+    @*<script>
         $('#dateStart').datepicker();
-    </script>
+    </script>*@
 }
 
 <div class="row" ng-app="schedule">
@@ -19,10 +19,9 @@
         </div>
     </div>
     <div class="col-md-9">
-        @*<div ng-view></div>*@
-
-        <form>
+        <div ng-view></div>
+        @*<form>
             Datum: <input type="date" id="dateStart" />
-        </form>
+        </form>*@
     </div>
 </div>

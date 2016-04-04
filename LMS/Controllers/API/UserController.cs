@@ -107,23 +107,32 @@ namespace LMS.Controllers
 
         public JsonResult List()
         {
-            var q = (from u in db.Users
-                     join r in db.Roles on u.Roles.FirstOrDefault().RoleId equals r.Id
-                     select new
-                     {
-                         id = u.Id,
-                         fname = u.FirstName,
-                         lname = u.LastName,
-						 email = u.Email,
-						 phone = u.PhoneNumber,
-						 uname = u.UserName,
-                         role_id = r.Id,
-                         role_name = r.Name
-                     }).GroupBy(g => g.role_name).Select(x => new
-                     {
-                         role = x.Key,
-                         users = x.ToList()
-                     });
+            var q = from u in db.Users
+                    join r in db.Roles on u.Roles.FirstOrDefault().RoleId equals r.Id
+                    select new
+                    {
+                        id = u.Id,
+                        fname = u.FirstName,
+                        lname = u.LastName,
+                        email = u.Email,
+                        phone = u.PhoneNumber,
+                        uname = u.UserName,
+                        role_id = r.Id,
+                        role_name = r.Name
+                    }
+                        into usr
+                        group usr by new
+                        {
+                            id = usr.role_id,
+                            name = usr.role_name
+                        }
+                            into g
+                            orderby g.Key.id
+                            select new
+                            {
+                                role = g.Key.name,
+                                users = g.ToList()
+                            };
             return Json(q, JsonRequestBehavior.AllowGet);
         }
 		
