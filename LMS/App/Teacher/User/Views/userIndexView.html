@@ -29,12 +29,13 @@
         <td>Telefon</td>
         <td>Ändra</td>
     </tr>
-    <tr class="table-users" ng-repeat="user in group.users | orderBy:'fname'">
+    <tr class="table-row" ng-repeat="user in group.users | orderBy:'fname'">
         <td>{{user.fname}}</td>
         <td>{{user.lname}}</td>
         <td>{{user.email}}</td>
         <td>{{user.phone}}</td>
-        <td><a class="btn btn-xs btn-info" href="#/Edit/{{user.id}}">Ändra</a>
+        <td>
+            <a class="btn btn-xs btn-info" href="#/Edit/{{user.id}}">Ändra</a>
             <a class="btn btn-xs btn-danger" href="#/Delete/{{user.id}}">Ta bort</a>
         </td>
     </tr>

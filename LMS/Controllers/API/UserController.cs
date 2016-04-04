@@ -15,7 +15,7 @@ namespace LMS.Controllers
     public class UserController : Controller
     {
         private LMSContext db = new LMSContext();
-
+		
         public AppUserManager UserManager
         {
             get { return HttpContext.GetOwinContext().GetUserManager<AppUserManager>(); }
@@ -26,34 +26,53 @@ namespace LMS.Controllers
             get { return HttpContext.GetOwinContext().Get<AppSignInManager>(); }
         }
 
-        [HttpPost]
-        public HttpStatusCodeResult Update(UserViewModel user)
-        {
-            var userEnt = db.Users.Where(u => u.Id == user.id).SingleOrDefault();
+		[HttpPost]
+		public HttpStatusCodeResult Create(UserViewModel user)
+		{
+			var userEnt = db.Users.Where(u => u.Id == user.id).SingleOrDefault();
 
-            userEnt.FirstName = user.fname;
-            userEnt.LastName = user.lname;
-            userEnt.Email = user.email;
-            userEnt.PhoneNumber = user.phone;
+			//userEnt. = user.role_id;
+			userEnt.FirstName = user.fname;
+			userEnt.LastName = user.lname;
+			userEnt.Email = user.email;
+			userEnt.PhoneNumber = user.phone;
 
-            if (user.oldpassword != null)
-            {
-                if (user.password1 != user.password2)
-                {
-                    return new HttpStatusCodeResult(417, "Lösenorden matchar inte");
-                }
 
-                var result = UserManager.ChangePassword(user.id, user.oldpassword, user.password1);
+				if (user.password1 != user.password2)
+				{
+					return new HttpStatusCodeResult(417, "Lösenorden matchar inte");
+				}
 
-                if (result != IdentityResult.Success)
-                {
-                    return new HttpStatusCodeResult(403, "Nuvarande lösenordet är fel");
-                }
-            }
+			db.SaveChanges();
+			return new HttpStatusCodeResult(200, "En användare med id: " + userEnt.Id.ToString() + "skapades");
+		}
+		[HttpPost]
+		public HttpStatusCodeResult Update(UserViewModel user)
+		{
+			var userEnt = db.Users.Where(u => u.Id == user.id).SingleOrDefault();
 
-            db.SaveChanges();
-            return new HttpStatusCodeResult(200, "En användare med id: " + userEnt.Id.ToString() + "uppdaterades");
-        }
+			userEnt.FirstName = user.fname;
+			userEnt.LastName = user.lname;
+			userEnt.Email = user.email;
+			userEnt.PhoneNumber = user.phone;
+
+			if(user.oldpassword != null){
+				if (user.password1 != user.password2)
+				{
+					return new HttpStatusCodeResult(417, "Lösenorden matchar inte");
+				}
+
+				var result = UserManager.ChangePassword(user.id, user.oldpassword, user.password1);
+
+				if (result != IdentityResult.Success)
+				{
+					return new HttpStatusCodeResult(403, "Nuvarande lösenordet är fel");
+				}
+			}
+
+			db.SaveChanges();
+			return new HttpStatusCodeResult(200, "En användare med id: " + userEnt.Id.ToString() + "uppdaterades");
+		}
 
         public JsonResult GetRoles()
         {
@@ -78,7 +97,7 @@ namespace LMS.Controllers
                     lname = s.LastName,
                     email = s.Email,
                     phone = s.PhoneNumber,
-                    uname = s.UserName,
+					uname = s.UserName,
                     role_id = s.Roles.FirstOrDefault().RoleId,
                     role_name = role
                 }).SingleOrDefault();
@@ -88,35 +107,26 @@ namespace LMS.Controllers
 
         public JsonResult List()
         {
-            var q = from u in db.Users
-                    join r in db.Roles on u.Roles.FirstOrDefault().RoleId equals r.Id
-                    select new
-                    {
-                        id = u.Id,
-                        fname = u.FirstName,
-                        lname = u.LastName,
-                        email = u.Email,
-                        phone = u.PhoneNumber,
-                        uname = u.UserName,
-                        role_id = r.Id,
-                        role_name = r.Name
-                    }
-                    into usr
-                    group usr by new
-                    {
-                        id = usr.role_id,
-                        name = usr.role_name
-                    }
-                    into g
-                    orderby g.Key.id
-                    select new
-                    {
-                        role = g.Key.name,
-                        users = g.ToList()
-                    };
+            var q = (from u in db.Users
+                     join r in db.Roles on u.Roles.FirstOrDefault().RoleId equals r.Id
+                     select new
+                     {
+                         id = u.Id,
+                         fname = u.FirstName,
+                         lname = u.LastName,
+						 email = u.Email,
+						 phone = u.PhoneNumber,
+						 uname = u.UserName,
+                         role_id = r.Id,
+                         role_name = r.Name
+                     }).GroupBy(g => g.role_name).Select(x => new
+                     {
+                         role = x.Key,
+                         users = x.ToList()
+                     });
             return Json(q, JsonRequestBehavior.AllowGet);
         }
-
+		
         [AllowAnonymous]
         [HttpPost]
         public RedirectToRouteResult Login(string user, string pass)

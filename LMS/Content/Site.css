@@ -118,6 +118,7 @@ background-color: #030033;
     float:left;
     padding-right:1px;
     border: 1px solid #e7e7e7;
+    background-color:#7d3f73;
     border-radius: 10px 10px 0 0;
 }
 #main-menu li:last-child {
@@ -126,9 +127,10 @@ background-color: #030033;
 #main-menu.nav>li>a {
     padding:8px 15px 2px 15px;
 }
-    #main-menu.nav > li > a:hover {
-        background-color:none;
-    }
+#main-menu.nav > li > a:hover {
+    background-color:#462040;
+    color:#fff;
+}
 
 .nav > li > a:hover {
     border-radius:10px 10px 0 0;

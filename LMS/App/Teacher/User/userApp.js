@@ -39,10 +39,11 @@
         };
 
         $scope.create = function () {
-            var data = {
-                id: $scope.id,
-                name: $scope.name
-            };
+            //var data = {
+            //    id: $scope.id,
+            //    name: $scope.name
+            //};
+            var data = angular.toJson($scope.user);
             function onResponse(resp) {
                 $scope.message = resp.statusText;
             };
@@ -63,17 +64,6 @@
         };
 
         $scope.update = function () {
-            //var data = {
-            //    id: $scope.user.id,
-            //    role_id: $scope.rolesSelect,
-            //    fname: $scope.user.fname,
-            //    lname: $scope.user.lname,
-            //    email: $scope.user.email,
-            //    phone: $scope.user.phone,
-            //    uname: $scope.user.uname,
-            //    password1: $scope.password1,
-            //    password2: $scope.password2
-            //};
             var data = angular.toJson($scope.user);
             function onResponse(resp) {
                 $scope.message = resp.statusText;
