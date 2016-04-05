@@ -18,9 +18,12 @@ namespace LMS.Models
         public string Description { get; set; }
 
         public int Upload_Id { get; set; }
+        public int Subject_Id { get; set; }
 
         [ForeignKey("Upload_Id")]
         public virtual Upload Upload { get; set; }
+        [ForeignKey("Subject_Id")]
+        public virtual Subject Subject { get; set; }
 
         public virtual ICollection<Submission> Submissions { get; set; }
         public virtual ICollection<Schedule> Schedules { get; set; }
