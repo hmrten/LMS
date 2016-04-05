@@ -89,16 +89,9 @@
             genCal($scope.curMonth);
             getData();
 
-            $rootScope.$on('$includeContentLoaded', function (ev) {
-                var cfg = {
-                    placement: 'bottom',
-                    align: 'top',
-                    donetext: 'Done',
-                    autoclose: true
-                };
-                $('#startDate').clockpicker(cfg);
-                $('#endDate').clockpicker(cfg);
-            });
+            //$rootScope.$on('$includeContentLoaded', function (ev) {
+
+            //});
         };
 
         function genCal(month) {
@@ -156,13 +149,31 @@
             genCal($scope.curMonth);
         };
 
-        $scope.foo = function (s) {
+        $scope.select = function (s) {
             $scope.details = null;
             $scope.selectedDay = s;
             $scope.details = $scope.sched;
             $scope.clickedDate = new Date(2016, $scope.curMonth, s);
             $('#details').modal('show');
             $scope.$apply();
+        };
+
+        $scope.create = function () {
+            var json = angular.toJson(this.form);
+            $http.post(LMS.rootPath + 'Schedule/Create').then(function (resp) {
+                $scope.msg = {
+                    type: 'success',
+                    strong: 'Skapa lyckades!',
+                    text: resp.statusText
+                };
+            }, function (resp) {
+                $scope.msg = {
+                    type: 'danger',
+                    strong: 'Skapa misslyckades!',
+                    text: resp.status + ': ' + resp.statusText
+                };
+                $scope.$apply();
+            });
         };
 
         init();
