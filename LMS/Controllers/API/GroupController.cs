@@ -24,7 +24,7 @@ namespace LMS.Controllers
                     teacher_name = g.Teacher.User.FirstName + " " + g.Teacher.User.LastName,
                     students = g.Students.Count()
                 });
-            return Json(q.ToList(), JsonRequestBehavior.AllowGet);
+            return Json(q, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult FreeStudents()
@@ -36,7 +36,7 @@ namespace LMS.Controllers
                     fname = s.User.FirstName,
                     lname = s.User.LastName
                 });
-            return Json(q.ToList(), JsonRequestBehavior.AllowGet);
+            return Json(q, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Details(int id)

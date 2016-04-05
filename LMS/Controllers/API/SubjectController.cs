@@ -58,7 +58,7 @@ namespace LMS.Controllers
 					description = s.Description
 				});
 
-			return Json(q.ToList(), JsonRequestBehavior.AllowGet);
+			return Json(q, JsonRequestBehavior.AllowGet);
 		}
 
     }

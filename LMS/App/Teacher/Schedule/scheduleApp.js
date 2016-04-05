@@ -10,11 +10,6 @@
             .otherwise({
                 redirectTo: '/'
             });
-
-        //$locationProvider.html5Mode({
-        //    enabled: true,
-        //    requireBase: false
-        //});
     });
 
     var monthNames = [
@@ -86,13 +81,24 @@
         };
     });
 
-    app.controller('indexCtrl', ['$scope', '$http', function ($scope, $http) {
+    app.controller('indexCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
         function init() {
             $scope.json = [];
             $scope.usedDays = [];
             $scope.curMonth = new Date().getMonth();
             genCal($scope.curMonth);
             getData();
+
+            $rootScope.$on('$includeContentLoaded', function (ev) {
+                var cfg = {
+                    placement: 'bottom',
+                    align: 'top',
+                    donetext: 'Done',
+                    autoclose: true
+                };
+                $('#startDate').clockpicker(cfg);
+                $('#endDate').clockpicker(cfg);
+            });
         };
 
         function genCal(month) {
@@ -109,10 +115,6 @@
             var sched = [];
             for (var j = 0; j < json.length; ++j) {
                 var o = json[j];
-                //var odate = parseMSDate(o.date_end);
-                //o.date_end = parseMSDate(o.date_end);
-                //o.date_start = parseMSDate(o.date_start);
-                //$scope.usedDays[day] = [];
                 if (o.date_end.getMonth() == $scope.curMonth) {
                     var day = o.date_end.getDate();
                     var idx = day + $scope.firstDay - 1;
@@ -120,28 +122,17 @@
                     var x = idx % 7;
                     var tr = trs[y];
                     var td = angular.element(tr.children[x]);
-                    //$scope.usedDays[day].push(o);
                     sched.push({day: day, obj: o });
                     td.addClass('sched_' + o.type_id);
                 }
             }
-
             $scope.sched = sched;
-
-            //var usedDays = {};
-            //for (var i = 0; i < sched.length; ++i) {
-            //    var s = sched[i];
-            //    usedDays[s.day] = s.obj;
-            //}
-            //$scope.usedDays = usedDays;
-
-            console.log('refresh() called');
         };
 
         $scope.refresh = refresh;
 
         function getData() {
-            $http.get(LMS.rootPath + 'Data/Schedule').then(function (resp) {
+            $http.get(LMS.rootPath + 'Data/Schedule/1').then(function (resp) {
                 var json = resp.data;
                 for (var i = 0; i < json.length; ++i) {
                     var o = json[i];
@@ -151,6 +142,13 @@
                 $scope.json = json;
                 refresh($scope.tbody);
             });
+
+            $http.get(LMS.rootPath + 'Data/ScheduleTypes').then(function (resp) {
+                $scope.scheduleTypes = resp.data;
+            });
+            $http.get(LMS.rootPath + 'Data/Subjects').then(function (resp) {
+                $scope.subjects = resp.data;
+            });
         };
 
         $scope.addMonth = function (delta) {
@@ -159,13 +157,15 @@
         };
 
         $scope.foo = function (s) {
-            //alert('hello from foo(): ' + s);
             $scope.details = null;
             $scope.selectedDay = s;
             $scope.details = $scope.sched;
+            $scope.clickedDate = new Date(2016, $scope.curMonth, s);
+            $('#details').modal('show');
             $scope.$apply();
         };
 
         init();
     }]);
+
 }());

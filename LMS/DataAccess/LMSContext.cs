@@ -108,7 +108,7 @@ namespace LMS.DataAccess
                     Subject_Id = 1,
                     Author_Id = 1,
                     Assignment_Id = null,
-                    DateStart = DateTime.Now,
+                    DateStart = new DateTime(2016, 4, 4),
                     DateEnd = new DateTime(2016, 4, 4),
                     Description = "Study hard"
                 },
@@ -120,7 +120,7 @@ namespace LMS.DataAccess
                     Subject_Id = 2,
                     Author_Id = 2,
                     Assignment_Id = null,
-                    DateStart = DateTime.Now,
+                    DateStart = new DateTime(2016, 4, 5),
                     DateEnd = new DateTime(2016, 4, 5),
                     Description = "Study hard again"
                 },
@@ -132,7 +132,7 @@ namespace LMS.DataAccess
                     Subject_Id = 2,
                     Author_Id = 3,
                     Assignment_Id = null,
-                    DateStart = DateTime.Now,
+                    DateStart = new DateTime(2016, 4, 8),
                     DateEnd = new DateTime(2016, 4, 8),
                     Description = "Time for a meeting"
                 },
@@ -144,7 +144,7 @@ namespace LMS.DataAccess
                     Subject_Id = 3,
                     Author_Id = 1,
                     Assignment_Id = null,
-                    DateStart = DateTime.Now,
+                    DateStart = new DateTime(2016, 4, 18),
                     DateEnd = new DateTime(2016, 4, 18),
                     Description = "Uppgift"
                 },
@@ -156,7 +156,7 @@ namespace LMS.DataAccess
                     Subject_Id = 4,
                     Author_Id = 1,
                     Assignment_Id = null,
-                    DateStart = DateTime.Now,
+                    DateStart = new DateTime(2016, 4, 11),
                     DateEnd = new DateTime(2016, 4, 11),
                     Description = "Uppgift A"
                 },
@@ -168,7 +168,7 @@ namespace LMS.DataAccess
                     Subject_Id = 1,
                     Author_Id = 1,
                     Assignment_Id = null,
-                    DateStart = DateTime.Now,
+                    DateStart = new DateTime(2016, 4, 11),
                     DateEnd = new DateTime(2016, 4, 11),
                     Description = "Uppgift B"
                 },
@@ -180,7 +180,7 @@ namespace LMS.DataAccess
                     Subject_Id = 2,
                     Author_Id = 1,
                     Assignment_Id = null,
-                    DateStart = DateTime.Now,
+                    DateStart = new DateTime(2016, 4, 11),
                     DateEnd = new DateTime(2016, 4, 11),
                     Description = "Uppgift C"
                 }

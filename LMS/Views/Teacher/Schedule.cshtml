@@ -3,10 +3,8 @@
 }
 
 @section scripts {
+    <script src="~/Scripts/bootstrap-clockpicker.min.js"></script>
     <script src="~/App/Teacher/Schedule/scheduleApp.js"></script>
-    @*<script>
-        $('#dateStart').datepicker();
-    </script>*@
 }
 
 <div class="row" ng-app="schedule">
@@ -20,8 +18,5 @@
     </div>
     <div class="col-md-9">
         <div ng-view></div>
-        @*<form>
-            Datum: <input type="date" id="dateStart" />
-        </form>*@
     </div>
 </div>

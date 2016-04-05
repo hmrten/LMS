@@ -111,7 +111,7 @@ namespace LMS.Controllers
                     name = r.Name
                 });
 
-            return Json(q.ToList(), JsonRequestBehavior.AllowGet);
+            return Json(q, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetUser(int id)
@@ -148,19 +148,19 @@ namespace LMS.Controllers
                         role_id = r.Id,
                         role_name = r.Name
                     }
-                        into usr
-                        group usr by new
-                        {
-                            id = usr.role_id,
-                            name = usr.role_name
-                        }
-                            into g
-                            orderby g.Key.id
-                            select new
-                            {
-                                role = g.Key.name,
-                                users = g.ToList()
-                            };
+                    into usr
+                    group usr by new
+                    {
+                        id = usr.role_id,
+                        name = usr.role_name
+                    }
+                    into g
+                    orderby g.Key.id
+                    select new
+                    {
+                        role = g.Key.name,
+                        users = g.ToList()
+                    };
             return Json(q, JsonRequestBehavior.AllowGet);
         }
 		

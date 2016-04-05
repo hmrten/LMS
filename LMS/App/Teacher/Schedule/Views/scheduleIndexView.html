@@ -8,38 +8,30 @@
         border: 1px solid #ddd;
     }
 
-    #cal tbody td:hover {
-        background-color: #eee8ed;
-        cursor: pointer;
-    }
+        #cal tbody td:hover {
+            background-color: #eee8ed;
+            cursor: pointer;
+        }
 
     #cal tbody {
         transition: 0.5s ease-in-out all;
         opacity: 0;
     }
 
-    #details tbody {
-        transition: 0.5s ease-in-out all;
-    }
+        #cal tbody.added {
+            opacity: 1;
+        }
 
-    #details tbody.ng-hide {
-        opacity: 0;
-    }
-
-    #cal tbody.added {
-        opacity: 1;
-    }
-
-    #cal table {
+    #cal {
         transition: 0.3s ease all;
         transform: translateX(0) scale(1.0, 1.0);
     }
 
-    #cal table.go-right {
-        transform-origin: top;
-        position: absolute;
-        transform: translate(25%, -25%) scale(0.3, 0.5);
-    }
+        #cal.go-right {
+            transform-origin: top;
+            position: absolute;
+            transform: translate(-100px, -25%) scale(0.3, 0.5);
+        }
 
     .sched_1 {
         background-color: lightgreen;
@@ -61,8 +53,25 @@
         opacity: 1;
         background-color: #eee;
     }
-</style>
 
+    .view-slide.ng-enter,
+    .view-slide.ng-leave {
+        transition: 0.5s ease all;
+        opacity: 0;
+    }
+
+    .view-slide.ng-enter-active,
+    .view-slide.ng-leave {
+        opacity: 1;
+    }
+
+    .view-slide.ng-leave-active {
+        opacity: 0;
+    }
+</style>
+<script>
+
+</script>
 <div class="row vert-center">
     <div class="col-md-3">
         <h2>Schema</h2>
@@ -79,7 +88,7 @@
 <hr />
 <div class="row">
     <div class="col-md-12">
-        <table id="cal" class="table" ng-class="{'go-rightx': clickedDay}">
+        <table id="cal" class="table" ng-class="{'go-rightx': selectedDay}">
             <thead>
                 <tr>
                     <th colspan="7">
@@ -108,30 +117,25 @@
         </table>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <table id="details" class="table">
-            <thead>
-                <tr class="table-header">
-                    <th class="col-md-1">Startdatum</th>
-                    <th class="col-md-1">Slutdatum</th>
-                    <th class="col-md-1">Typ</th>
-                    <th class="col-md-1">Ämne</th>
-                    <th class="col-md-1"></th>
-                </tr>
-            </thead>
-            <tbody ng-show="details">
-                <tr class="table-row" ng-repeat="d in details | filter : {day: selectedDay}">
-                    <td class="col-md-1">{{d.obj.date_start | date : 'short'}}</td>
-                    <td class="col-md-1">{{d.obj.date_end | date : 'short'}}</td>
-                    <td class="col-md-1">{{d.obj.type_name}}</td>
-                    <td class="col-md-1">{{d.obj.subject_name}}</td>
-                    <td class="col-md-1">
-                        <a class="btn btn-xs btn-info" href="#/Edit/">Ändra</a>
-                        <a class="btn btn-xs btn-danger" href="#/" ng-click="delete(g.id)">Ta bort</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+<div class="modal fade" id="details" tabindex="-1" ng-init="view = '/App/Teacher/Schedule/Views/_Details.html'">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">Händelser för: {{selectedDay}} {{monthName}}</h4>
+            </div>
+            <div class="modal-body view-slide" ng-include="view"></div>
+            <div class="modal-footer">
+                <div class="pull-left">
+                    <button type="button" class="btn btn-default" ng-click="view = '/App/Teacher/Schedule/Views/_Details.html'">
+                        <span class="glyphicon glyphicon-chevron-left"></span> Lista
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="view = '/App/Teacher/Schedule/Views/_Form.html'">
+                        <span class="glyphicon glyphicon-plus"></span> Lägg till
+                    </button>
+                </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>

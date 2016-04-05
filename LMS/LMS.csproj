@@ -128,6 +128,8 @@
     <Content Include="App\Teacher\Schedule\scheduleApp.js" />
     <Content Include="App\Teacher\Schedule\Views\scheduleIndexView.html" />
     <Content Include="App\Student\studentApp.js" />
+    <Content Include="App\Teacher\Schedule\Views\_Details.html" />
+    <Content Include="App\Teacher\Schedule\Views\_Form.html" />
     <Content Include="App\Teacher\User\userApp.js" />
     <Content Include="App\Teacher\User\Views\userCreateView.html" />
     <Content Include="App\Teacher\User\Views\userEditView.html" />
@@ -143,10 +145,12 @@
     <Content Include="App\Teacher\Assignment\assignmentApp.js" />
     <Content Include="App\Teacher\Assignment\Views\assignmentIndexView.html" />
     <Content Include="App\Teacher\Assignment\Views\assignmentCreateView.html" />
+    <Content Include="Content\bootstrap-clockpicker.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery-clockpicker.min.css" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\Site.css" />
@@ -186,6 +190,7 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\bootstrap-clockpicker.min.js" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular-touch.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
@@ -204,6 +209,7 @@
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-clockpicker.min.js" />
     <Content Include="Scripts\jquery-ui-i18n.min.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.ui.datepicker-sv.min.js" />

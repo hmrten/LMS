@@ -1,0 +1,23 @@
+﻿<table class="table">
+    <thead>
+        <tr class="table-header">
+            <th class="col-md-1">Startdatum</th>
+            <th class="col-md-1">Slutdatum</th>
+            <th class="col-md-1">Typ</th>
+            <th class="col-md-1">Ämne</th>
+            <th class="col-md-1"></th>
+        </tr>
+    </thead>
+    <tbody ng-show="details">
+        <tr class="table-row" ng-repeat="d in details | filter : {day: selectedDay}">
+            <td class="col-md-1">{{d.obj.date_start | date : 'short'}}</td>
+            <td class="col-md-1">{{d.obj.date_end | date : 'short'}}</td>
+            <td class="col-md-1">{{d.obj.type_name}}</td>
+            <td class="col-md-1">{{d.obj.subject_name}}</td>
+            <td class="col-md-1">
+                <a class="btn btn-xs btn-info" href="#/Edit/">Ändra</a>
+                <a class="btn btn-xs btn-danger" href="#/" ng-click="delete(g.id)">Ta bort</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
