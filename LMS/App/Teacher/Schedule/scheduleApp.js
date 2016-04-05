@@ -160,7 +160,7 @@
 
         $scope.create = function () {
             var json = angular.toJson(this.form);
-            $http.post(LMS.rootPath + 'Schedule/Create').then(function (resp) {
+            $http.post(LMS.rootPath + 'Schedule/Create', json).then(function (resp) {
                 $scope.msg = {
                     type: 'success',
                     strong: 'Skapa lyckades!',

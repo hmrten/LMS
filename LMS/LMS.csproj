@@ -128,8 +128,6 @@
     <Content Include="App\Teacher\Schedule\scheduleApp.js" />
     <Content Include="App\Teacher\Schedule\Views\scheduleIndexView.html" />
     <Content Include="App\Student\studentApp.js" />
-    <Content Include="App\Teacher\Schedule\Views\_Details.html" />
-    <Content Include="App\Teacher\Schedule\Views\_Form.html" />
     <Content Include="App\Teacher\User\userApp.js" />
     <Content Include="App\Teacher\User\Views\userCreateView.html" />
     <Content Include="App\Teacher\User\Views\userEditView.html" />
@@ -229,6 +227,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\API\DataController.cs" />
+    <Compile Include="Controllers\API\ScheduleController.cs" />
     <Compile Include="Controllers\MVC\FileManagerController.cs" />
     <Compile Include="Controllers\API\GroupController.cs" />
     <Compile Include="Controllers\MVC\HomeController.cs" />
@@ -260,6 +259,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UserHelpers.cs" />
+    <Compile Include="ViewModels\ScheduleViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
