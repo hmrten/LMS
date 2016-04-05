@@ -9,7 +9,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <strong>{{ message }}</strong>
+        <strong>{{message}}</strong>
     </div>
 </div>
 <hr />
@@ -18,3 +18,19 @@
         <p>Klasslista.....</p>
     </div>
 </div>
+<table class="table list-table">
+    <tr class="table-header">
+        <td>Förnamn</td>
+        <td>Efternamn</td>
+        <td>E-post</td>
+        <td>Telefon</td>
+        <td>Klass</td>
+    </tr>
+    <tr class="table-row" ng-repeat="student in students">
+        <td>{{student.fname}}</td>
+        <td>{{student.lname}}</td>
+        <td>{{student.email}}</td>
+        <td>{{student.phone}}</td>
+        <td>{{student.group}}</td>
+    </tr>
+</table>

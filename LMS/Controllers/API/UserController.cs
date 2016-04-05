@@ -230,5 +230,28 @@ namespace LMS.Controllers
 			db.SaveChanges();
 			return new HttpStatusCodeResult(200, "En användare med id: " + user.id.ToString() + "uppdaterades");
 		}
+		public JsonResult ListStudents()
+		{
+			var user = UserManager.FindByName(User.Identity.Name);
+			var group = db.Students.Where(s => s.User_Id == user.Id)
+				.Select(t =>
+					new
+					{
+						group_id = t.Group_Id
+					}).SingleOrDefault();
+
+			var groupmates = db.Students.Where(s => s.Group_Id == group.group_id)
+				.Select(a =>
+					new
+					{
+						fname = a.User.FirstName,
+						lname = a.User.LastName,
+						phone = a.User.PhoneNumber,
+						email = a.User.Email,
+						group = a.Group.Name
+					});
+
+			return Json(groupmates.ToList(), JsonRequestBehavior.AllowGet);
+		}
     }
 }

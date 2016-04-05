@@ -13,7 +13,7 @@
             })
             .when('/Group', {
                 templateUrl: LMS.rootPath + 'App/Student/Views/studentGroupView.html',
-                controller: 'profileCtrl'
+                controller: 'groupCtrl'
             })
             .when('/Shared', {
                 templateUrl: LMS.rootPath + 'App/Student/Views/studentSharedView.html',
@@ -31,26 +31,25 @@
     });
 
     app.controller('studentCtrl', ['$scope', function ($scope) {
-        $scope.message = 'hello from angular';
+        $scope.message = 'hello from angular student';
+        function toDo () {}; //TO DO
+    }]);
 
-        $scope.create = function () {
-            var data = {
-                title: $scope.title,
-                description: $scope.description,
-                file: $scope.file
-            };
+    app.controller('groupCtrl', ['$scope', 'dataService', function ($scope, dataService) {
+        $scope.message = 'hello from angular group';
+        GetAllStudents();
 
-            fileUpload.uploadFile(data, 'FileManager/Upload').then(
-                function (resp) {
-                    $scope.msg = 'success: ' + resp.status + ' - ' + resp.statusText;
-                },
-                function (resp) {
-                    $scope.msg = 'error: ' + resp.status + ' - ' + resp.statusText;
-                });
+        function GetAllStudents() {
+            dataService.get("User/ListStudents", function (data) {
+                //$scope.student.id = data.id;
+                $scope.students = data;
+            }, function (resp) { // Om det blir fel
+                $scope.message = resp.statusText;
+            });
         };
     }]);
+
     app.controller('profileCtrl', ['$scope', '$routeParams', 'dataService', function ($scope, $routeParams, dataService) {
-        $scope.message = 'hello from angular profile';
         $scope.user = {};
         $scope.formReady = false;
 
