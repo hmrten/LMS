@@ -1,0 +1,40 @@
+﻿<div class="row vert-center">
+    <div class="col-md-4">
+        <h2>Ändra lösenord</h2>
+    </div>
+    <div class="col-md-8">
+        <div class="alert alert-{{msg.type}} alert-dismissible" ng-show="msg">
+            <strong>{{msg.strong}}</strong> {{msg.text}}
+            <button type="button" class="close" aria-label="Close" ng-click="msg = null">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <strong>{{ message }}</strong>
+    </div>
+</div>
+<hr />
+<form ng-show="formReady" class="form-horizontal" ng-submit="update()">
+    <div class="form-group">
+        <label class="control-label col-md-3" for="oldpassword">Nuvarande lösenord:</label>
+        <div class="col-md-7">
+            <input class="form-control" type="password" name="oldpassword" ng-model="user.oldpassword" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3" for="password1">Nytt lösenord:</label>
+        <div class="col-md-7">
+            <input class="form-control" type="password" name="password1" ng-model="user.password1" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3" for="password2">Upprepa lösenord:</label>
+        <div class="col-md-7">
+            <input class="form-control" type="password" name="password2" ng-model="user.password2" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-7">
+            <button class="btn btn-primary" type="submit">Uppdatera</button>
+        </div>
+    </div>
+</form>

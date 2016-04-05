@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Security.Claims;
 
 namespace LMS.Controllers
 {
@@ -184,5 +185,50 @@ namespace LMS.Controllers
             Session["role"] = "guest";
             return RedirectToAction("Index", "Home");
         }
+
+		public JsonResult StudentIdentity()
+		{
+			var user = UserManager.FindByName(User.Identity.Name);
+			var student = db.Students.Where(s => s.User_Id == user.Id)
+				.Select(t => new
+                {
+                    id = t.User_Id
+                }).SingleOrDefault();
+
+			return Json(student, JsonRequestBehavior.AllowGet);
+		}
+
+		public JsonResult TeacherIdentity()
+		{
+			var user = UserManager.FindByName(User.Identity.Name);
+			var teacher = db.Teachers.Where(s => s.User_Id == user.Id)
+				.Select(t => new
+					{
+						id = t.User_Id
+					}).SingleOrDefault();
+			return Json(teacher, JsonRequestBehavior.AllowGet);
+		}
+
+		[HttpPost]
+		public HttpStatusCodeResult UpdatePassword(UserViewModel user)
+		{
+			if (user.oldpassword != null)
+			{
+				if (user.password1 != user.password2)
+				{
+					return new HttpStatusCodeResult(417, "Lösenorden matchar inte");
+				}
+
+				var result = UserManager.ChangePassword(user.id, user.oldpassword, user.password1);
+
+				if (result != IdentityResult.Success)
+				{
+					return new HttpStatusCodeResult(403, "Nuvarande lösenordet är fel");
+				}
+			}
+
+			db.SaveChanges();
+			return new HttpStatusCodeResult(200, "En användare med id: " + user.id.ToString() + "uppdaterades");
+		}
     }
 }

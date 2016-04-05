@@ -1,5 +1,8 @@
-﻿<div id="student" class="navbar-collapse collapse">
+﻿@using LMS;
+<div id="student" class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
-        <li>@Html.ActionLink("Studentportal", "Index", "Student")</li>
+        <li @Html.IsActive("Student/Index", "class=\"active\"")>
+            @Html.ActionLink("Studentportal", "Index", "Student")
+        </li>
     </ul>
 </div>

@@ -120,9 +120,14 @@
   <ItemGroup>
     <Content Include="App\baseApp.js" />
     <Content Include="App\FileManager\fileManagerApp.js" />
+    <Content Include="App\Student\Views\studentIndexView.html" />
+    <Content Include="App\Student\Views\studentSharedView.html" />
+    <Content Include="App\Student\Views\studentGroupView.html" />
+    <Content Include="App\Student\Views\studentTaskView.html" />
+    <Content Include="App\Student\Views\studentProfileView.html" />
     <Content Include="App\Teacher\Schedule\scheduleApp.js" />
     <Content Include="App\Teacher\Schedule\Views\scheduleIndexView.html" />
-    <Content Include="App\Student\studentsApp.js" />
+    <Content Include="App\Student\studentApp.js" />
     <Content Include="App\Teacher\User\userApp.js" />
     <Content Include="App\Teacher\User\Views\userCreateView.html" />
     <Content Include="App\Teacher\User\Views\userEditView.html" />
@@ -285,7 +290,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\Student\Views\" />
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
   </ItemGroup>

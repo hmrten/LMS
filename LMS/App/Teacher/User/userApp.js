@@ -44,10 +44,21 @@
             //    name: $scope.name
             //};
             var data = angular.toJson($scope.user);
-            function onResponse(resp) {
-                $scope.message = resp.statusText;
+            function onSuccess(resp) {
+                $scope.msg = {
+                    type: 'success',
+                    strong: 'Skapa lyckades!',
+                    text: resp.statusText
+                };
             };
-            dataService.post("User/Create", data, onResponse, onResponse);
+            function onError(resp) {
+                $scope.msg = {
+                    type: 'danger',
+                    strong: 'Skapa misslyckades!',
+                    text: resp.status + ': ' + resp.statusText
+                };
+            };
+            dataService.post("User/Create", data, onSuccess, onError);
         };
 
     }]);
