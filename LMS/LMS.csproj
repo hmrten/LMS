@@ -226,8 +226,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\API\AssignmentController.cs" />
     <Compile Include="Controllers\API\DataController.cs" />
     <Compile Include="Controllers\API\ScheduleController.cs" />
+    <Compile Include="Controllers\API\UploadController.cs" />
     <Compile Include="Controllers\MVC\FileManagerController.cs" />
     <Compile Include="Controllers\API\GroupController.cs" />
     <Compile Include="Controllers\MVC\HomeController.cs" />
@@ -241,10 +243,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HtmlHelpers.cs" />
-    <Compile Include="Migrations\201603290740063_initial.cs" />
-    <Compile Include="Migrations\201603290740063_initial.Designer.cs">
-      <DependentUpon>201603290740063_initial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Submission.cs" />
     <Compile Include="Models\Upload.cs" />
@@ -260,6 +258,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="UserHelpers.cs" />
     <Compile Include="ViewModels\ScheduleViewModel.cs" />
+    <Compile Include="ViewModels\AssignmentViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -298,11 +297,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603290740063_initial.resx">
-      <DependentUpon>201603290740063_initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

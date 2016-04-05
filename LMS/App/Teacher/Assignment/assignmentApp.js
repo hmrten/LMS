@@ -5,30 +5,28 @@
     	$routeProvider
             .when('/', {
                 templateUrl: LMS.rootPath + 'App/Teacher/Assignment/Views/assignmentIndexView.html',
-                controller: 'assignmentCtrl'
+                controller: 'indexCtrl'
             })
             .when('/Create', {
                 templateUrl: LMS.rootPath + 'App/Teacher/Assignment/Views/assignmentCreateView.html',
-                controller: 'assignmentCtrl'
+                controller: 'createCtrl'
             });
-
-        //$locationProvider.html5Mode({
-        //    enabled: true,
-        //    requireBase: false
-        //});
     });
 
-    app.controller('assignmentCtrl', ['$scope', function ($scope) {
-        $scope.message = 'hello from angular';
+    app.controller('createCtrl', ['$scope',  '$http', 'fileUpload', function ($scope, $http, fileUpload) {
+        function init() {
+            $http.get(LMS.rootPath + 'Data/Subjects').then(function (resp) {
+                $scope.subjects = resp.data;
+            });
+        };
 
         $scope.create = function () {
             var data = {
-                title: $scope.title,
-                description: $scope.description,
+                model: angular.toJson($scope.model),
                 file: $scope.file
             };
 
-            fileUpload.uploadFile(data, 'FileManager/Upload').then(
+            fileUpload.uploadFile(data, 'Assignment/Create').then(
                 function (resp) {
                     $scope.msg = 'success: ' + resp.status + ' - ' + resp.statusText;
                 },
@@ -36,5 +34,7 @@
                     $scope.msg = 'error: ' + resp.status + ' - ' + resp.statusText;
                 });
         };
+
+        init();
     }]);
 }());

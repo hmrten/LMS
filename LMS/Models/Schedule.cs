@@ -7,20 +7,26 @@ using System.Web;
 
 namespace LMS.Models
 {
-    public class ScheduleType
+    //public class ScheduleType
+    //{
+    //    [Key]
+    //    public int Id { get; set; }
+
+    //    [Required, StringLength(64), Index(IsUnique = true)]
+    //    public string Name { get; set; }
+
+    //    public virtual ICollection<Schedule> Schedules { get; set; }
+
+    //    public ScheduleType()
+    //    {
+    //        Schedules = new List<Schedule>();
+    //    }
+    //}
+
+    public enum ScheduleType
     {
-        [Key]
-        public int Id { get; set; }
-
-        [Required, StringLength(64), Index(IsUnique = true)]
-        public string Name { get; set; }
-
-        public virtual ICollection<Schedule> Schedules { get; set; }
-
-        public ScheduleType()
-        {
-            Schedules = new List<Schedule>();
-        }
+        Studies,
+        Meeting
     }
 
     public class Schedule
@@ -28,10 +34,12 @@ namespace LMS.Models
         [Key]
         public int Id { get; set; }
 
+        public ScheduleType Type { get; set; }
+
         // Uses Fluent API configuration
-        public int ScheduleType_Id { get; set; }
+        //public int ScheduleType_Id { get; set; }
         public int Group_Id { get; set; }
-        public int Subject_Id { get; set; }
+        //public int Subject_Id { get; set; }
         //public int Author_Id { get; set; }
 
         //public int? Assignment_Id { get; set; }
@@ -45,12 +53,21 @@ namespace LMS.Models
         public string Description { get; set; }
 
         // Uses Fluent API configuration
-        public virtual ScheduleType Type { get; set; }
+        //public virtual ScheduleType Type { get; set; }
         public virtual Group Group { get; set; }
-        public virtual Subject Subject { get; set; }
+        //public virtual Subject Subject { get; set; }
         //public virtual Teacher Author { get; set; }
 
         //[ForeignKey("Assignment_Id")]
         //public virtual Assignment Assignment { get; set; }
+
+        public virtual ICollection<Subject> Subjects { get; set; }
+        public virtual ICollection<Assignment> Assignments { get; set; }
+
+        public Schedule()
+        {
+            Subjects = new List<Subject>();
+            Assignments = new List<Assignment>();
+        }
     }
 }

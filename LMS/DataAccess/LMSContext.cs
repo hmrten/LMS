@@ -18,7 +18,7 @@ namespace LMS.DataAccess
 		public DbSet<Teacher> Teachers { get; set; }
 		public DbSet<Group> Groups { get; set; }
 		public DbSet<Subject> Subjects { get; set; }
-		public DbSet<ScheduleType> ScheduleTypes { get; set; }
+		//public DbSet<ScheduleType> ScheduleTypes { get; set; }
 		public DbSet<Schedule> Schedules { get; set; }
 		public DbSet<Assignment> Assignments { get; set; }
 		public DbSet<Submission> Submissions { get; set; }
@@ -45,9 +45,9 @@ namespace LMS.DataAccess
 		{
 			base.OnModelCreating(mb);
 
-			OneToManyRelation<Schedule, ScheduleType>(mb, r => r.Type, m => m.Schedules, k => k.ScheduleType_Id);
+			//OneToManyRelation<Schedule, ScheduleType>(mb, r => r.Type, m => m.Schedules, k => k.ScheduleType_Id);
 			OneToManyRelation<Schedule, Group>(mb, r => r.Group, m => m.Schedules, k => k.Group_Id);
-			OneToManyRelation<Schedule, Subject>(mb, r => r.Subject, m => m.Schedules, k => k.Subject_Id);
+			//OneToManyRelation<Schedule, Subject>(mb, r => r.Subject, m => m.Schedules, k => k.Subject_Id);
 			//OneToManyRelation<Schedule, Teacher>(mb, r => r.Author, m => m.Schedules, k => k.Author_Id);
 
             mb.Entity<Upload>()
@@ -114,9 +114,9 @@ namespace LMS.DataAccess
                 new Schedule
                 {
                     Id = 1,
-                    ScheduleType_Id = 1,
+                    Type = ScheduleType.Studies,
                     Group_Id = 1,
-                    Subject_Id = 1,
+                    //Subject_Id = 1,
                     //Author_Id = 1,
                     //Assignment_Id = null,
                     DateStart = new DateTime(2016, 4, 4),
@@ -126,9 +126,9 @@ namespace LMS.DataAccess
                 new Schedule
                 {
                     Id = 2,
-                    ScheduleType_Id = 1,
+                    Type = ScheduleType.Studies,
                     Group_Id = 1,
-                    Subject_Id = 2,
+                    //Subject_Id = 2,
                     //Author_Id = 2,
                     //Assignment_Id = null,
                     DateStart = new DateTime(2016, 4, 5),
@@ -138,9 +138,9 @@ namespace LMS.DataAccess
                 new Schedule
                 {
                     Id = 3,
-                    ScheduleType_Id = 3,
+                    Type = ScheduleType.Meeting,
                     Group_Id = 1,
-                    Subject_Id = 2,
+                    //Subject_Id = 2,
                     //Author_Id = 3,
                     //Assignment_Id = null,
                     DateStart = new DateTime(2016, 4, 8),
@@ -150,9 +150,9 @@ namespace LMS.DataAccess
                 new Schedule
                 {
                     Id = 4,
-                    ScheduleType_Id = 2,
+                    Type = ScheduleType.Studies,
                     Group_Id = 1,
-                    Subject_Id = 3,
+                    //Subject_Id = 3,
                     //Author_Id = 1,
                     //Assignment_Id = null,
                     DateStart = new DateTime(2016, 4, 18),
@@ -162,9 +162,9 @@ namespace LMS.DataAccess
                 new Schedule
                 {
                     Id = 5,
-                    ScheduleType_Id = 2,
+                    Type = ScheduleType.Studies,
                     Group_Id = 1,
-                    Subject_Id = 4,
+                    //Subject_Id = 4,
                     //Author_Id = 1,
                     //Assignment_Id = null,
                     DateStart = new DateTime(2016, 4, 11),
@@ -174,9 +174,9 @@ namespace LMS.DataAccess
                 new Schedule
                 {
                     Id = 6,
-                    ScheduleType_Id = 2,
+                    Type = ScheduleType.Studies,
                     Group_Id = 1,
-                    Subject_Id = 1,
+                    //Subject_Id = 1,
                     //Author_Id = 1,
                     //Assignment_Id = null,
                     DateStart = new DateTime(2016, 4, 11),
@@ -186,9 +186,9 @@ namespace LMS.DataAccess
                 new Schedule
                 {
                     Id = 7,
-                    ScheduleType_Id = 2,
+                    Type = ScheduleType.Studies,
                     Group_Id = 1,
-                    Subject_Id = 2,
+                    //Subject_Id = 2,
                     //Author_Id = 1,
                     //Assignment_Id = null,
                     DateStart = new DateTime(2016, 4, 11),
@@ -283,11 +283,11 @@ namespace LMS.DataAccess
 				new Subject { Id = 4, Name = "Fysik 1", Description = "Info om Fysik 1" },
 				new Subject { Id = 5, Name = "Fysik 2", Description = "Info om Fysik 2" }
 				);
-			ScheduleTypes.AddOrUpdate(s => s.Id,
-				new ScheduleType { Id = 1, Name = "Studier" },
-				new ScheduleType { Id = 2, Name = "Uppgift" },
-				new ScheduleType { Id = 3, Name = "Möte" }
-				);
+            //ScheduleTypes.AddOrUpdate(s => s.Id,
+            //    new ScheduleType { Id = 1, Name = "Studier" },
+            //    new ScheduleType { Id = 2, Name = "Uppgift" },
+            //    new ScheduleType { Id = 3, Name = "Möte" }
+            //    );
 			SaveChanges();
 
 			Teachers.Find(1).Subjects.Add(Subjects.Find(1));

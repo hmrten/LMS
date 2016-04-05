@@ -23,10 +23,12 @@ namespace LMS.Models
         public virtual Upload Upload { get; set; }
 
         public virtual ICollection<Submission> Submissions { get; set; }
+        public virtual ICollection<Schedule> Schedules { get; set; }
 
         public Assignment()
         {
             Submissions = new List<Submission>();
+            Schedules = new List<Schedule>();
         }
     }
 }

@@ -116,7 +116,7 @@
                     var tr = trs[y];
                     var td = angular.element(tr.children[x]);
                     sched.push({day: day, obj: o });
-                    td.addClass('sched_' + o.type_id);
+                    td.addClass('has-events');
                 }
             }
             $scope.sched = sched;

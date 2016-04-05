@@ -33,16 +33,8 @@
             transform: translate(-100px, -25%) scale(0.3, 0.5);
         }
 
-    .sched_1 {
+    .has-events {
         background-color: lightgreen;
-    }
-
-    .sched_2 {
-        background-color: lightpink;
-    }
-
-    .sched_3 {
-        background-color: lightblue;
     }
 
     .info-box {
@@ -139,7 +131,7 @@
                         <tr class="table-row" ng-repeat="d in details | filter : {day: selectedDay}">
                             <td class="col-md-1">{{d.obj.date_start | date : 'short'}}</td>
                             <td class="col-md-1">{{d.obj.date_end | date : 'short'}}</td>
-                            <td class="col-md-1">{{d.obj.type_name}}</td>
+                            <td class="col-md-1">{{d.obj.type}}</td>
                             <td class="col-md-1">{{d.obj.subject_name}}</td>
                             <td class="col-md-1">
                                 <a class="btn btn-xs btn-info" href="#/Edit/">Ändra</a>
@@ -153,8 +145,12 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label col-md-3">Typ:</label>
-                                <div class="col-md-9">
+                                <!--<div class="col-md-9">
                                     <select class="form-control" required ng-options="st.id as st.name for st in scheduleTypes" ng-model="form.type_id"></select>
+                                </div>-->
+                                <div class="col-md-9">
+                                    <label class="radio-inline"><input type="radio" name="optradio">Studier</label>
+                                    <label class="radio-inline"><input type="radio" name="optradio">Träff</label>
                                 </div>
                             </div>
                             <div class="form-group">

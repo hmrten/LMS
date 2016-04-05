@@ -69,13 +69,13 @@ namespace LMS.Controllers
             db.Groups.Add(group);
             db.SaveChanges();
 
-            string[] dirs = { "shared", "private" };
-            var fileRoot = Server.MapPath("~/Files");
-            foreach (var d in dirs)
-            {
-                var path = Path.Combine(fileRoot, group.Name, d);
-                Directory.CreateDirectory(path);
-            }
+            //string[] dirs = { "shared", "private" };
+            //var fileRoot = Server.MapPath("~/Files");
+            //foreach (var d in dirs)
+            //{
+            //    var path = Path.Combine(fileRoot, group.Name, d);
+            //    Directory.CreateDirectory(path);
+            //}
 
             return new HttpStatusCodeResult(200, String.Format("{0}:{1}", group.Id, group.Name));
         }

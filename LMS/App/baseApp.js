@@ -17,8 +17,7 @@
     app.service('fileUpload', ['$http', function ($http) {
         this.uploadFile = function (data, url) {
             var fd = new FormData();
-            fd.append('title', data.title);
-            fd.append('description', data.description);
+            fd.append('model', data.model);
             fd.append('file', data.file);
             return $http.post(LMS.rootPath + url, fd, {
                 transformRequest: angular.identity,

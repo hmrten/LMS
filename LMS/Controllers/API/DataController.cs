@@ -26,12 +26,7 @@ namespace LMS.Controllers
 
         public JsonResult ScheduleTypes()
         {
-            var q = db.ScheduleTypes.Select(s =>
-                new
-                {
-                    id = s.Id,
-                    name = s.Name
-                });
+            var q = Enum.GetNames(typeof(ScheduleType));
             return Json(q, JsonRequestBehavior.AllowGet);
         }
 
@@ -64,12 +59,13 @@ namespace LMS.Controllers
                     select new
                     {
                         id = s.Id,
-                        type_id = s.ScheduleType_Id,
-                        type_name = s.Type.Name,
+                        //type_id = s.ScheduleType_Id,
+                        //type_name = s.Type.Name,
+                        type = s.Type.ToString(),
                         group_id = s.Group_Id,
                         group_name = s.Group.Name,
-                        subject_id = s.Subject_Id,
-                        subject_name = s.Subject.Name,
+                        //subject_id = s.Subject_Id,
+                        //subject_name = s.Subject.Name,
                         date_start = s.DateStart,
                         date_end = s.DateEnd,
                         description = s.Description
