@@ -246,13 +246,13 @@
       <DependentUpon>201603290740063_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Submission.cs" />
+    <Compile Include="Models\Upload.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\File.cs" />
     <Compile Include="Models\Grading.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Student.cs" />
-    <Compile Include="Models\StudentAssignment.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\Assignment.cs" />
     <Compile Include="Models\Teacher.cs" />

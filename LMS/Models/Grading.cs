@@ -12,15 +12,14 @@ namespace LMS.Models
         [Key]
         public int Id { get; set; }
 
-        public int Teacher_Id { get; set; }
-
-        // NOTE: For now, this is a boolean, 0 means failed, 1 means approved
         public int Grade { get; set; }
 
         [Required]
         public DateTime Date { get; set; }
 
         public string Feedback { get; set; }
+
+        public int Teacher_Id { get; set; }
 
         [ForeignKey("Teacher_Id")]
         public virtual Teacher Teacher { get; set; }

@@ -7,25 +7,25 @@ using System.Web;
 
 namespace LMS.Models
 {
-    public class Student
+    public class Upload
     {
         [Key]
         public int Id { get; set; }
 
-        public int User_Id { get; set; }
+        [Required, StringLength(256)]
+        public string FilePath { get; set; }
 
-        public int? Group_Id { get; set; }
+        public int User_Id { get; set; }
 
         [ForeignKey("User_Id")]
         public virtual User User { get; set; }
 
-        [ForeignKey("Group_Id")]
-        public virtual Group Group { get; set; }
+        public ICollection<Assignment> Assignments { get; set; }
+        public ICollection<Submission> Submissions { get; set; }
 
-        public virtual ICollection<Submission> Submissions { get; set; }
-
-        public Student()
+        public Upload()
         {
+            Assignments = new List<Assignment>();
             Submissions = new List<Submission>();
         }
     }

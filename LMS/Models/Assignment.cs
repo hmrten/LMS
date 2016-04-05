@@ -15,16 +15,18 @@ namespace LMS.Models
         [Required, StringLength(128)]
         public string Title { get; set; }
 
-        [StringLength(256)]
-        public string FileName { get; set; }
-
         public string Description { get; set; }
 
-        public virtual ICollection<StudentAssignment> StudentAssignments { get; set; }
+        public int Upload_Id { get; set; }
+
+        [ForeignKey("Upload_Id")]
+        public virtual Upload Upload { get; set; }
+
+        public virtual ICollection<Submission> Submissions { get; set; }
 
         public Assignment()
         {
-            StudentAssignments = new List<StudentAssignment>();
+            Submissions = new List<Submission>();
         }
     }
 }

@@ -32,9 +32,9 @@ namespace LMS.Models
         public int ScheduleType_Id { get; set; }
         public int Group_Id { get; set; }
         public int Subject_Id { get; set; }
-        public int Author_Id { get; set; }
+        //public int Author_Id { get; set; }
 
-        public int? Assignment_Id { get; set; }
+        //public int? Assignment_Id { get; set; }
 
         [Required]
         public DateTime DateStart { get; set; }
@@ -48,9 +48,9 @@ namespace LMS.Models
         public virtual ScheduleType Type { get; set; }
         public virtual Group Group { get; set; }
         public virtual Subject Subject { get; set; }
-        public virtual Teacher Author { get; set; }
+        //public virtual Teacher Author { get; set; }
 
-        [ForeignKey("Assignment_Id")]
-        public virtual Assignment Assignment { get; set; }
+        //[ForeignKey("Assignment_Id")]
+        //public virtual Assignment Assignment { get; set; }
     }
 }

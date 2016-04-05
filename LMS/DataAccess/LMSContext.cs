@@ -21,7 +21,7 @@ namespace LMS.DataAccess
 		public DbSet<ScheduleType> ScheduleTypes { get; set; }
 		public DbSet<Schedule> Schedules { get; set; }
 		public DbSet<Assignment> Assignments { get; set; }
-		public DbSet<StudentAssignment> StudentAssignments { get; set; }
+		public DbSet<Submission> Submissions { get; set; }
 		public DbSet<Grading> Gradings { get; set; }
 
 		public LMSContext() : base("LMS") { }
@@ -48,7 +48,18 @@ namespace LMS.DataAccess
 			OneToManyRelation<Schedule, ScheduleType>(mb, r => r.Type, m => m.Schedules, k => k.ScheduleType_Id);
 			OneToManyRelation<Schedule, Group>(mb, r => r.Group, m => m.Schedules, k => k.Group_Id);
 			OneToManyRelation<Schedule, Subject>(mb, r => r.Subject, m => m.Schedules, k => k.Subject_Id);
-			OneToManyRelation<Schedule, Teacher>(mb, r => r.Author, m => m.Schedules, k => k.Author_Id);
+			//OneToManyRelation<Schedule, Teacher>(mb, r => r.Author, m => m.Schedules, k => k.Author_Id);
+
+            mb.Entity<Upload>()
+                .HasMany(u => u.Assignments)
+                .WithRequired(a => a.Upload)
+                .HasForeignKey(a => a.Upload_Id)
+                .WillCascadeOnDelete(false);
+            mb.Entity<Upload>()
+                .HasMany(u => u.Submissions)
+                .WithRequired(a => a.Upload)
+                .HasForeignKey(a => a.Upload_Id)
+                .WillCascadeOnDelete(false);
 		}
 
 		private void TryAddToRole(AppUserManager manager, int userId, string role)
@@ -106,8 +117,8 @@ namespace LMS.DataAccess
                     ScheduleType_Id = 1,
                     Group_Id = 1,
                     Subject_Id = 1,
-                    Author_Id = 1,
-                    Assignment_Id = null,
+                    //Author_Id = 1,
+                    //Assignment_Id = null,
                     DateStart = new DateTime(2016, 4, 4),
                     DateEnd = new DateTime(2016, 4, 4),
                     Description = "Study hard"
@@ -118,8 +129,8 @@ namespace LMS.DataAccess
                     ScheduleType_Id = 1,
                     Group_Id = 1,
                     Subject_Id = 2,
-                    Author_Id = 2,
-                    Assignment_Id = null,
+                    //Author_Id = 2,
+                    //Assignment_Id = null,
                     DateStart = new DateTime(2016, 4, 5),
                     DateEnd = new DateTime(2016, 4, 5),
                     Description = "Study hard again"
@@ -130,8 +141,8 @@ namespace LMS.DataAccess
                     ScheduleType_Id = 3,
                     Group_Id = 1,
                     Subject_Id = 2,
-                    Author_Id = 3,
-                    Assignment_Id = null,
+                    //Author_Id = 3,
+                    //Assignment_Id = null,
                     DateStart = new DateTime(2016, 4, 8),
                     DateEnd = new DateTime(2016, 4, 8),
                     Description = "Time for a meeting"
@@ -142,8 +153,8 @@ namespace LMS.DataAccess
                     ScheduleType_Id = 2,
                     Group_Id = 1,
                     Subject_Id = 3,
-                    Author_Id = 1,
-                    Assignment_Id = null,
+                    //Author_Id = 1,
+                    //Assignment_Id = null,
                     DateStart = new DateTime(2016, 4, 18),
                     DateEnd = new DateTime(2016, 4, 18),
                     Description = "Uppgift"
@@ -154,8 +165,8 @@ namespace LMS.DataAccess
                     ScheduleType_Id = 2,
                     Group_Id = 1,
                     Subject_Id = 4,
-                    Author_Id = 1,
-                    Assignment_Id = null,
+                    //Author_Id = 1,
+                    //Assignment_Id = null,
                     DateStart = new DateTime(2016, 4, 11),
                     DateEnd = new DateTime(2016, 4, 11),
                     Description = "Uppgift A"
@@ -166,8 +177,8 @@ namespace LMS.DataAccess
                     ScheduleType_Id = 2,
                     Group_Id = 1,
                     Subject_Id = 1,
-                    Author_Id = 1,
-                    Assignment_Id = null,
+                    //Author_Id = 1,
+                    //Assignment_Id = null,
                     DateStart = new DateTime(2016, 4, 11),
                     DateEnd = new DateTime(2016, 4, 11),
                     Description = "Uppgift B"
@@ -178,8 +189,8 @@ namespace LMS.DataAccess
                     ScheduleType_Id = 2,
                     Group_Id = 1,
                     Subject_Id = 2,
-                    Author_Id = 1,
-                    Assignment_Id = null,
+                    //Author_Id = 1,
+                    //Assignment_Id = null,
                     DateStart = new DateTime(2016, 4, 11),
                     DateEnd = new DateTime(2016, 4, 11),
                     Description = "Uppgift C"
