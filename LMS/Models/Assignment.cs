@@ -17,8 +17,14 @@ namespace LMS.Models
 
         public string Description { get; set; }
 
-        public int Upload_Id { get; set; }
+        [Required]
+        public DateTime DateStart { get; set; }
+
+        [Required]
+        public DateTime DateEnd { get; set; }
+
         public int Subject_Id { get; set; }
+        public int Upload_Id { get; set; }
 
         [ForeignKey("Upload_Id")]
         public virtual Upload Upload { get; set; }
@@ -26,12 +32,10 @@ namespace LMS.Models
         public virtual Subject Subject { get; set; }
 
         public virtual ICollection<Submission> Submissions { get; set; }
-        public virtual ICollection<Schedule> Schedules { get; set; }
 
         public Assignment()
         {
             Submissions = new List<Submission>();
-            Schedules = new List<Schedule>();
         }
     }
 }

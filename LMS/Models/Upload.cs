@@ -12,7 +12,7 @@ namespace LMS.Models
         [Key]
         public int Id { get; set; }
 
-        [Required, StringLength(256)]
+        [Required]
         public string FilePath { get; set; }
 
         public int User_Id { get; set; }

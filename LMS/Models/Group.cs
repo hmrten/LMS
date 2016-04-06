@@ -22,11 +22,13 @@ namespace LMS.Models
 
         public virtual ICollection<Student> Students { get; set; }
         public virtual ICollection<Schedule> Schedules { get; set; }
+        public virtual ICollection<Subject> Subjects { get; set; }
 
         public Group()
         {
             Students = new List<Student>();
             Schedules = new List<Schedule>();
+            Subjects = new List<Subject>();
         }
     }
 }

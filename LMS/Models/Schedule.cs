@@ -36,38 +36,23 @@ namespace LMS.Models
 
         public ScheduleType Type { get; set; }
 
-        // Uses Fluent API configuration
-        //public int ScheduleType_Id { get; set; }
-        public int Group_Id { get; set; }
-        //public int Subject_Id { get; set; }
-        //public int Author_Id { get; set; }
-
-        //public int? Assignment_Id { get; set; }
-
         [Required]
         public DateTime DateStart { get; set; }
-
         [Required]
         public DateTime DateEnd { get; set; }
 
         public string Description { get; set; }
 
-        // Uses Fluent API configuration
-        //public virtual ScheduleType Type { get; set; }
-        public virtual Group Group { get; set; }
-        //public virtual Subject Subject { get; set; }
-        //public virtual Teacher Author { get; set; }
+        public int Group_Id { get; set; }
 
-        //[ForeignKey("Assignment_Id")]
-        //public virtual Assignment Assignment { get; set; }
+        [ForeignKey("Group_Id")]
+        public virtual Group Group { get; set; }
 
         public virtual ICollection<Subject> Subjects { get; set; }
-        public virtual ICollection<Assignment> Assignments { get; set; }
 
         public Schedule()
         {
             Subjects = new List<Subject>();
-            Assignments = new List<Assignment>();
         }
     }
 }
