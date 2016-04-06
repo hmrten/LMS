@@ -17,14 +17,14 @@
             })
             .when('/Shared', {
                 templateUrl: LMS.rootPath + 'App/Student/Views/studentSharedView.html',
-                controller: 'profileCtrl'
+                controller: 'studentCtrl'
             })
             .when('/Task', {
                 templateUrl: LMS.rootPath + 'App/Student/Views/studentTaskView.html',
-                controller: 'profileCtrl'
+                controller: 'studentCtrl'
             })
             .when('/Schedule', {
-                templateUrl: LMS.rootPath + 'App/Teacher/Views/assignmentCreateView.html',
+                templateUrl: LMS.rootPath + 'App/Student/Views/studentIndexView.html',
                 controller: 'studentCtrl'
             });
 
@@ -36,7 +36,6 @@
     }]);
 
     app.controller('groupCtrl', ['$scope', 'dataService', function ($scope, dataService) {
-        $scope.message = 'hello from angular group';
         GetAllStudents();
 
         function GetAllStudents() {

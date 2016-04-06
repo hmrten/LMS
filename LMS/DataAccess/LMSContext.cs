@@ -23,6 +23,7 @@ namespace LMS.DataAccess
 		public DbSet<Assignment> Assignments { get; set; }
 		public DbSet<Submission> Submissions { get; set; }
 		public DbSet<Grading> Gradings { get; set; }
+		public DbSet<Upload> Uploads { get; set; }
 
 		public LMSContext() : base("LMS") { }
 
@@ -298,6 +299,32 @@ namespace LMS.DataAccess
 			SaveChanges();
 
             SeedSchedule();
+
+			Uploads.AddOrUpdate(u => u.Id,
+				new Upload {Id = 1, User_Id = 2, FilePath = "fil1.pdf" },
+				new Upload {Id = 2, User_Id = 2, FilePath = "fil2.pdf" },
+				new Upload {Id = 3, User_Id = 2, FilePath = "fil3.pdf" },
+				new Upload {Id = 4, User_Id = 2, FilePath = "fil4.pdf" },
+				new Upload {Id = 5, User_Id = 2, FilePath = "fil5.pdf" }
+				);
+
+			Assignments.AddOrUpdate(a => a.Id,
+				new Assignment {Id = 1, Subject_Id = 1, Title = "Uppgift med id 1", Description = "Beskrivning", DateStart = new DateTime(2016,3,13), DateEnd = new DateTime(2016,5,15), Upload_Id = 1},
+				new Assignment {Id = 2, Subject_Id = 2, Title = "Uppgift med id 2", Description = "Beskrivning", DateStart = new DateTime(2016,4,20), DateEnd = new DateTime(2016,6,10), Upload_Id = 1},
+				new Assignment {Id = 3, Subject_Id = 1, Title = "Uppgift med id 3", Description = "Beskrivning", DateStart = new DateTime(2016,3,13), DateEnd = new DateTime(2016,5,15), Upload_Id = 1},
+				new Assignment {Id = 4, Subject_Id = 3, Title = "Uppgift med id 4", Description = "Beskrivning", DateStart = new DateTime(2016,3,13), DateEnd = new DateTime(2016,5,15), Upload_Id = 1}
+				);
+
+			Gradings.AddOrUpdate(g => g.Id,
+				new Grading {Id= 1, Teacher_Id = 1, Date = new DateTime(2016,6,15), Feedback = "Bra jobbat!!", Grade = 1}
+				);
+
+			Submissions.AddOrUpdate(s => s.Id,
+				new Submission {Id = 1, Assignment_Id = 1, Student_Id = 1, Upload_Id = 3, SubmitDate = new DateTime(2016,5,14), Grading_Id = 1 },
+				new Submission {Id = 2, Assignment_Id = 1, Student_Id = 2, Upload_Id = 4, SubmitDate = new DateTime(2016,5,13) },
+				new Submission {Id = 3, Assignment_Id = 2, Student_Id = 3, Upload_Id = 5, SubmitDate = new DateTime(2016,5,29) }
+				);
+			SaveChanges();
 		}
 
 		public static LMSContext Create()

@@ -230,6 +230,7 @@
     <Compile Include="Controllers\API\DataController.cs" />
     <Compile Include="Controllers\API\ScheduleController.cs" />
     <Compile Include="Controllers\API\UploadController.cs" />
+    <Compile Include="Controllers\API\SubmissionController.cs" />
     <Compile Include="Controllers\MVC\FileManagerController.cs" />
     <Compile Include="Controllers\API\GroupController.cs" />
     <Compile Include="Controllers\MVC\HomeController.cs" />
@@ -297,6 +298,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
+    <Folder Include="Views\Submission\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
