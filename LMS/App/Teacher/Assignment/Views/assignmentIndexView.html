@@ -58,7 +58,40 @@
                 <h3 class="panel-title">{{details.title}}</h3>
             </div>
             <div class="panel-body">
-                <strong>Startdatum: </strong> {{details.date_start | msDate | date: 'short'}}
+                <strong class="col-md-4 text-right">Startdatum: </strong> <span class="col-md-8">{{details.date_start | msDate | date: 'shortDate'}}</span>
+                <strong class="col-md-4 text-right">Slutdatum: </strong> <span class="col-md-8">{{details.date_end | msDate | date: 'shortDate'}}</span>
+                <strong class="col-md-4 text-right">Dagar kvar: </strong> <span class="col-md-8">{{details | dayDiff}}</span>
+                <strong class="col-md-4 text-right">Beskrivning: </strong> <p class="col-md-8">{{details.desc}}</p>
+                <div class="col-md-offset-4 col-md-8">
+                    <a href="#/" class="btn btn-primary" ng-class="{disabled: !details.submissions.length}" ng-click="showSubmissions()">
+                        <span class="badge">{{details.submissions.length}}</span>
+                        Inlämningar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="submissions" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">Inlämningar för: {{details.title}}</h4>
+            </div>
+            <div class="modal-body">
+                body
+            </div>
+            <div class="modal-footer">
+                <div class="pull-left">
+                    <button type="button" class="btn btn-default" ng-click="showForm = false">
+                        <span class="glyphicon glyphicon-chevron-left"></span> Lista
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="showForm = true">
+                        <span class="glyphicon glyphicon-plus"></span> Lägg till
+                    </button>
+                </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
             </div>
         </div>
     </div>

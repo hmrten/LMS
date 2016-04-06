@@ -13,9 +13,22 @@
             });
     });
 
+    function parseMSDate(s) {
+        if (!s) return null;
+        return new Date(parseInt(s.substr(6)));
+    };
+
     app.filter('msDate', function () {
         return function (s) {
             return new Date(parseInt(s.substr(6)));
+        };
+    });
+    app.filter('dayDiff', function () {
+        return function (detail) {
+            var date_start = parseMSDate(detail.date_start);
+            var date_end = parseMSDate(detail.date_end);
+            var dt = date_end - date_start;
+            return Math.floor(dt / (1000 * 3600 * 24));
         };
     });
 
@@ -30,11 +43,15 @@
             subject.expanded = !subject.expanded;
         };
 
-        $scope.showDetails = function (assignment) {
+        $scope.showDetails = function (a) {
             var el = angular.element('.details');
             $animate.removeClass(el, 'show');
-            $scope.details = assignment;
-            $timeout(function () { $animate.addClass(el, 'show') }, 200);
+            $scope.details = a;
+            $timeout(function () { $animate.addClass(el, 'show') }, 150);
+        };
+
+        $scope.showSubmissions = function () {
+            $('#submissions').modal('show');
         };
 
         getData();
