@@ -53,12 +53,12 @@ namespace LMS.DataAccess
 
             mb.Entity<Upload>()
                 .HasMany(u => u.Assignments)
-                .WithRequired(a => a.Upload)
+                .WithOptional(a => a.Upload)
                 .HasForeignKey(a => a.Upload_Id)
                 .WillCascadeOnDelete(false);
             mb.Entity<Upload>()
                 .HasMany(u => u.Submissions)
-                .WithRequired(a => a.Upload)
+                .WithOptional(a => a.Upload)
                 .HasForeignKey(a => a.Upload_Id)
                 .WillCascadeOnDelete(false);
 		}

@@ -24,7 +24,7 @@ namespace LMS.Models
         public DateTime DateEnd { get; set; }
 
         public int Subject_Id { get; set; }
-        public int Upload_Id { get; set; }
+        public int? Upload_Id { get; set; }
 
         [ForeignKey("Upload_Id")]
         public virtual Upload Upload { get; set; }

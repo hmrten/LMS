@@ -18,7 +18,7 @@ namespace LMS.Models
         public string Comment { get; set; }
 
         public int Student_Id { get; set; }
-        public int Upload_Id { get; set; }
+        public int? Upload_Id { get; set; }
         public int Assignment_Id { get; set; }
         public int? Grading_Id { get; set; }
 

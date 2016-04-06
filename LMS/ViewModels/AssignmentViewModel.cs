@@ -7,6 +7,7 @@ namespace LMS.ViewModels
 {
     public class AssignmentViewModel
     {
+        public int subject_id { get; set; }
         public string title { get; set; }
         public string description { get; set; }
         public DateTime date_start { get; set; }

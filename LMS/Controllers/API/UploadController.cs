@@ -1,6 +1,8 @@
-﻿using LMS.ViewModels;
+﻿using LMS.DataAccess;
+using LMS.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,10 +11,13 @@ namespace LMS.Controllers.API
 {
     public class UploadController : Controller
     {
-        [HttpPost]
-        public HttpStatusCodeResult Upload()
+        private LMSContext db = new LMSContext();
+
+        [HttpGet]
+        public FileResult Get(int id)
         {
-            return new HttpStatusCodeResult(500, "not implemented");
+            var upload = db.Uploads.Find(id);
+            return File(upload.FilePath, "application/octet-stream", Path.GetFileName(upload.FilePath));
         }
     }
 }

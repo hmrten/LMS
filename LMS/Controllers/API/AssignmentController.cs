@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Security.Claims;
+using System.IO;
 
 namespace LMS.Controllers.API
 {
@@ -49,7 +50,7 @@ namespace LMS.Controllers.API
                                            id = x.Id,
                                            title = x.Title,
                                            desc = x.Description,
-                                           filepath = x.Upload.FilePath,
+                                           upload_id = x.Upload_Id,
                                            date_start = x.DateStart,
                                            date_end = x.DateEnd,
                                            submissions = from sub in x.Submissions
@@ -115,10 +116,35 @@ namespace LMS.Controllers.API
             return new HttpStatusCodeResult(200, msg);
         }
 
+        [HttpPost]
         public HttpStatusCodeResult Create(HttpPostedFileBase file)
         {
-            var model = new JavaScriptSerializer().Deserialize(HttpContext.Request.Form["model"], typeof(AssignmentViewModel));
-            return new HttpStatusCodeResult(500, "not implemented");
+            var model = new JavaScriptSerializer()
+                .Deserialize(HttpContext.Request.Form["model"], typeof(AssignmentViewModel)) as AssignmentViewModel;
+
+            var assignment = db.Assignments.Add(new Assignment
+            {
+                Title = model.title,
+                DateStart = model.date_start,
+                DateEnd = model.date_end,
+                Subject_Id = model.subject_id
+            });
+            db.SaveChanges();
+
+            string filePath = Server.MapPath("~/Files/Assignments");
+            Directory.CreateDirectory(filePath);
+            filePath = Path.Combine(filePath, assignment.Id + "_" + file.FileName);
+            file.SaveAs(filePath);
+
+            var upload = new Upload { FilePath = filePath, User_Id = HttpContext.User.Identity.GetUserId<int>() };
+            db.Uploads.Add(upload);
+            db.SaveChanges();
+
+            assignment.Upload_Id = upload.Id;
+            db.SaveChanges();
+
+            var msg = String.Format("Uppgift med id: {0} skapades", assignment.Id);
+            return new HttpStatusCodeResult(200, msg);
         }
     }
 }
