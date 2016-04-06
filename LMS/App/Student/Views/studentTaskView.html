@@ -15,65 +15,71 @@
 <hr />
 <div class="row">
     <div class="col-md-9">
-        <p>Lista uppgifter.....filtrera</p>
+        <p>Lista aktuella uppgifter.....filtrera</p>
     </div>
 </div>
-<table id="current-tasks" class="table list-table" ng-repeat="subject in subjects">
-    <thead>
-        <tr class="table-role">
-            <td><h3>{{subject.name}}</h3></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr class="table-header">
-            <td>Titel</td>
-            <td>Ansvarig lärare</td>
-            <td>Startdatum</td>
-            <td>Slutdatum</td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="table-row" ng-repeat="task in subject.tasks | orderBy:'DateEnd'">
-            <td>{{task.name}}</td>
-            <td>{{task.teacher_name}}</td>
-            <td>{{task.dateStart}}</td>
-            <td>{{task.dateEnd}}</td>
-            <td>
-                <a class="btn btn-xs btn-info" href="#/Details/{{task.id}}">Visa</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<table id="submitted-tasks" class="table list-table" ng-repeat="subject in subjects">
-    <thead>
-        <tr class="table-role">
-            <td><h3>{{subject.name}}</h3></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr class="table-header">
-            <td>Titel</td>
-            <td>Ansvarig lärare</td>
-            <td>Inlämnad datum</td>
-            <td>Betyg</td>
-            <td></td>
-        </tr>
-    </thead>
+<div class="row">
+    <div class="col-md-9">
+        <p>Lista uppgifter i tabell</p>
+    </div>
+    <table id="current-tasks" class="table list-table" ng-repeat="subject in group.subjects">
+        <thead>
+            <tr class="table-role">
+                <td><h3>{{subject.name}}</h3></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="table-header">
+                <td>Titel</td>
+                <td>Ansvarig lärare</td>
+                <td>Startdatum</td>
+                <td>Slutdatum</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-row" ng-repeat="a in subject.assignments">
+                <td>{{a.subject}}</td>
+                <td>{{a.title}}</td>
+                <td>{{a.date_start}}</td>
+                <td>{{a.date_end}}</td>
+                <td>
+                    <a class="btn btn-xs btn-info" ng-click="details(a)" href="#/Details/{{a.id}}">Visa</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="submitted-tasks" class="table list-table" ng-repeat="subject in subjects">
+        <thead>
+            <tr class="table-role">
+                <td><h3>{{subject.name}}</h3></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="table-header">
+                <td>Titel</td>
+                <td>Ansvarig lärare</td>
+                <td>Inlämnad datum</td>
+                <td>Betyg</td>
+                <td></td>
+            </tr>
+        </thead>
 
-    <tbody>
-        <tr class="table-row" ng-repeat="task in subject.tasks | orderBy:'DateEnd'">
-            <td>{{task.name}}</td>
-            <td>{{task.teacher_name}}</td>
-            <td>{{task.dateSubmit}}</td>
-            <td>{{task.grade}}</td>
-            <td>
-                <a class="btn btn-xs btn-info" href="#/Details/{{task.id}}">Visa</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+        <tbody>
+            <tr class="table-row" ng-repeat="task in subject.tasks | orderBy:'DateEnd'">
+                <td>{{task.name}}</td>
+                <td>{{task.teacher_name}}</td>
+                <td>{{task.dateSubmit}}</td>
+                <td>{{task.grade}}</td>
+                <td>
+                    <a class="btn btn-xs btn-info" href="#/Details/{{task.id}}">Visa</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

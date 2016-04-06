@@ -15,18 +15,18 @@
                 templateUrl: LMS.rootPath + 'App/Student/Views/studentGroupView.html',
                 controller: 'groupCtrl'
             })
-            .when('/Shared', {
-                templateUrl: LMS.rootPath + 'App/Student/Views/studentSharedView.html',
-                controller: 'studentCtrl'
-            })
+            //.when('/Shared', {
+            //    templateUrl: LMS.rootPath + 'App/Student/Views/studentSharedView.html',
+            //    controller: 'studentCtrl'
+            //})
             .when('/Task', {
                 templateUrl: LMS.rootPath + 'App/Student/Views/studentTaskView.html',
-                controller: 'studentCtrl'
-            })
-            .when('/Schedule', {
-                templateUrl: LMS.rootPath + 'App/Student/Views/studentIndexView.html',
-                controller: 'studentCtrl'
+                controller: 'taskCtrl'
             });
+            //.when('/Schedule', {
+            //    templateUrl: LMS.rootPath + 'App/Student/Views/studentIndexView.html',
+            //    controller: 'studentCtrl'
+            //});
 
     });
 
@@ -81,6 +81,20 @@
             };
             dataService.post("User/UpdatePassword", data, onSuccess, onError);
         };
+    }]);
+
+    app.controller('taskCtrl', ['$scope', 'dataService', function ($scope, dataService) {
+        $scope.message = 'hello from angular task';
+
+        GetAllCurrentTasks();
+
+        function GetAllCurrentTasks() {
+            dataService.get("Submission/CurrentAssignments", function (data) {
+                $scope.group = data;
+            }, function (resp) { // Om det blir fel
+                $scope.message = resp.statusText;
+            });
+        }; 
     }]);
 
 }());
