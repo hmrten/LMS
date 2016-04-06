@@ -70,7 +70,7 @@
             dataService.post('Group/Create', data, function (resp) {
                 $scope.msg = {
                     type: 'success',
-                    strong: 'Skapa lyckades!',
+                    strong: 'Lyckades!',
                     text: resp.statusText
                 };
                 $scope.name = null;
@@ -78,7 +78,7 @@
             }, function (resp) {
                 $scope.msg = {
                     type: 'danger',
-                    strong: 'Skapa misslyckades!',
+                    strong: 'Misslyckades!',
                     text: resp.status + ': ' + resp.statusText
                 };
             });
@@ -109,10 +109,14 @@
                 dataService.get('Group/FreeStudents', function (data) {
                     var freeStudents = data;
                     dataService.get('Data/Teachers', function (data) {
-                        $scope.freeStudents = freeStudents;
-                        $scope.teachers = data;
-                        $scope.details = details;
-                        $scope.groupId = id;
+                        var teachers = data;
+                        dataService.get('Data/Subjects', function (data) {
+                            $scope.freeStudents = freeStudents;
+                            $scope.teachers = teachers;
+                            $scope.details = details;
+                            $scope.groupId = id;
+                            $scope.subjects = data;
+                        });
                     });
                 });
             });
@@ -164,16 +168,43 @@
             $http.put(LMS.rootPath + 'Group/Update/' + $scope.groupId, data).then(function (resp) {
                 $scope.msg = {
                     type: 'success',
-                    strong: 'Ändring lyckades!',
+                    strong: 'Lyckades!',
                     text: resp.statusText
                 };
             }, function (resp) {
                 $scope.msg = {
                     type: 'danger',
-                    strong: 'Ändring misslyckades!',
+                    strong: 'Misslyckades!',
                     text: resp.status + ': ' + resp.statusText
                 };
             });
+        };
+
+        $scope.addSub = function () {
+            var sub = $scope.form.sub;
+            var ul = angular.element('#subjects');
+            var lis = ul.children();
+            for (var i = 0; i < lis.length; ++i) {
+                var id = angular.element(lis[i]).attr('data-sub-id');
+                if (sub.id == id)
+                    return false;
+            }
+            var li = angular.element('<li data-sub-id="' + sub.id + '"><button class="btn btn-default" ng-click="delSub(' + sub.id + ')">' + sub.name + ' <span class="glyphicon glyphicon-remove"></span></button></li>');
+            ul.append(li);
+            $compile(li)($scope);
+        };
+
+        $scope.delSub = function (sub_id) {
+            var ul = angular.element('#subjects');
+            var lis = ul.children();
+            for (var i = 0; i < lis.length; ++i) {
+                var el = angular.element(lis[i]);
+                var id = el.attr('data-sub-id');
+                if (sub_id == id) {
+                    el.remove();
+                    break;
+                }
+            }
         };
 
         getDetails();

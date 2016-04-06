@@ -49,6 +49,11 @@ namespace LMS.Controllers
                         name = g.Name,
                         teacher_id = g.Teacher_Id,
                         teacher_name = g.Teacher.User.FirstName + " " + g.Teacher.User.FirstName,
+                        subjects = g.Subjects.Select(sub => new
+                        {
+                            id = sub.Id,
+                            name = sub.Name
+                        }),
                         students = g.Students.Select(s =>
                         new
                         {

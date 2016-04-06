@@ -26,6 +26,29 @@
         </div>
     </div>
 </form>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Klassämnen</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <select class="form-control" ng-model="form.sub" ng-options="s as s.name for s in subjects"></select>
+                        </div>
+                        <button class="btn btn-primary" ng-click="addSub()">Lägg till <span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                </form>
+                <hr />
+                <ul id="subjects" class="list-inline">
+                    <li ng-repeat="sub in details.subjects" data-sub-id="{{sub.id}}"><button class="btn btn-default" ng-click="delSub(sub.id)">{{sub.name}} <span class="glyphicon glyphicon-remove"></span></button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row vert-center">
     <div class="col-md-5 col-xs-5">
         <div class="panel panel-primary">
@@ -60,6 +83,7 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-9">
         <button class="btn btn-primary" ng-click="save()">Spara</button>
