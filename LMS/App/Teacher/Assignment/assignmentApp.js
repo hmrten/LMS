@@ -20,11 +20,12 @@
 
     app.filter('msDate', function () {
         return function (s) {
-            return new Date(parseInt(s.substr(6)));
+            return parseMSDate(s);
         };
     });
     app.filter('dayDiff', function () {
         return function (detail) {
+            if (!detail) return 0;
             var date_start = parseMSDate(detail.date_start);
             var date_end = parseMSDate(detail.date_end);
             var dt = date_end - date_start;
@@ -36,6 +37,13 @@
         function getData() {
             $http.get(LMS.rootPath + 'Assignment/List').then(function (resp) {
                 $scope.groups = resp.data;
+            });
+        };
+
+        function refreshSubmissions() {
+            var id = $scope.details.id;
+            $http.get(LMS.rootPath + 'Assignment/Submissions/' + id).then(function (resp) {
+                $scope.details.submissions = resp.data;
             });
         };
 
@@ -51,7 +59,46 @@
         };
 
         $scope.showSubmissions = function () {
+            $scope.selectedSub = null;
             $('#submissions').modal('show');
+        };
+
+        $scope.showGrading = function (sub) {
+            var tr = angular.element('#sub-' + sub.id);
+            tr.addClass('selected-row');
+            $scope.form = {};
+            $scope.selectedSub = sub;
+        };
+
+        $scope.gradeClass = function (sub) {
+            if (sub.grading.id == null) return '';
+            return sub.grading.grade ? 'glyphicon-star' : 'glyphicon-star-empty';
+        };
+        $scope.gradeString = function (sub) {
+            if (sub.grading.id == null) return '';
+            return sub.grading.grade ? 'Godkänd' : 'Ej godkänd';
+        };
+
+        $scope.grade = function () {
+            $scope.msg = null;
+            var sub = $scope.selectedSub;
+            var form = $scope.form;
+            form.sub_id = sub.id;
+            var data = angular.toJson(form);
+            $http.post(LMS.rootPath + 'Assignment/Grade', data).then(function (resp) {
+                $scope.msg = {
+                    type: 'success',
+                    strong: 'Betygsättning lyckades!',
+                    text: resp.statusText
+                };
+                refreshSubmissions();
+            }, function (resp) {
+                $scope.msg = {
+                    type: 'danger',
+                    strong: 'Betygsättning misslyckades!',
+                    text: resp.status + ': ' + resp.statusText
+                };
+            });
         };
 
         getData();

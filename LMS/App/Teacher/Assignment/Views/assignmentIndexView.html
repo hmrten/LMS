@@ -3,29 +3,28 @@
         transition: 0.2s ease-in-out all;
         opacity: 1;
     }
-    .expanded.ng-hide {
-        opacity: 0;
-    }
+
+        .expanded.ng-hide {
+            opacity: 0;
+        }
+
     .details {
         transition: 0.2s ease-in-out all;
         opacity: 0;
     }
-    .details.show {
-        /*transition: 0.2s ease-in-out all;*/
-        opacity: 1;
+
+        .details.show {
+            /*transition: 0.2s ease-in-out all;*/
+            opacity: 1;
+        }
+
+    .selected-row {
+        background-color: #eee8ed;
     }
 </style>
 <div class="row vert-center">
-    <div class="col-md-3">
+    <div class="col-md-12">
         <h2>Lista uppgifter</h2>
-    </div>
-    <div class="col-md-9">
-        <div class="alert alert-{{msg.type}} alert-dismissible" ng-show="msg">
-            <strong>{{msg.strong}}</strong> {{msg.text}}
-            <button type="button" class="close" aria-label="Close" ng-click="msg = null">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
     </div>
 </div>
 <hr />
@@ -80,17 +79,74 @@
                 <h4 class="modal-title">Inlämningar för: {{details.title}}</h4>
             </div>
             <div class="modal-body">
-                body
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                                <tr class="table-header">
+                                    <th>Student</th>
+                                    <th>Datum</th>
+                                    <th>Fil</th>
+                                    <th>Betygsatt</th>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-row" ng-repeat="s in details.submissions" ng-class="{'selected-row': selectedSub.student.id == s.student.id}">
+                                    <td>{{s.student.name}}</td>
+                                    <td>{{s.date | msDate | date : 'short'}}</td>
+                                    <td><a href="#/" style="color: darkblue">Ladda ner<span class="glyphicon glyphicon-download"></span></a></td>
+                                    <td><span class="glyphicon" ng-class="gradeClass(s)"></span>{{gradeString(s)}}</td>
+                                    <td>
+                                        <a class="btn btn-xs btn-info" href="#/" ng-class="{'disabled': s.grading.id}" ng-click="showGrading(s)">Sätt betyg</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" ng-show="selectedSub">
+                    <div class="col-md-12">
+                        <form class="form-horizontal" ng-submit="grade()">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Namn:</label>
+                                <div class="col-md-9">
+                                    <p class="form-control-static">{{selectedSub.student.name}}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Betyg:</label>
+                                <div class="col-md-9">
+                                    <label class="radio-inline"><input type="radio" name="grade" value="1" ng-model="form.grade"><span class="label label-success">Godkänt</span></label>
+                                    <label class="radio-inline"><input type="radio" name="grade" value="0" ng-model="form.grade"><span class="label label-danger">Ej godkänt</span></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Feedback</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control col-md-9" rows="5" ng-model="form.feedback"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button class="btn btn-primary" type="submit">Spara</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-{{msg.type}} alert-dismissible" ng-show="msg">
+                            <strong>{{msg.strong}}</strong> {{msg.text}}
+                            <button type="button" class="close" aria-label="Close" ng-click="msg = null">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <div class="pull-left">
-                    <button type="button" class="btn btn-default" ng-click="showForm = false">
-                        <span class="glyphicon glyphicon-chevron-left"></span> Lista
-                    </button>
-                    <button type="button" class="btn btn-primary" ng-click="showForm = true">
-                        <span class="glyphicon glyphicon-plus"></span> Lägg till
-                    </button>
-                </div>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
             </div>
         </div>
