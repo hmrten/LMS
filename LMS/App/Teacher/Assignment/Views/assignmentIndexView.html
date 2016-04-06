@@ -1,1 +1,65 @@
-﻿<h2>Index</h2>
+﻿<style>
+    .expanded {
+        transition: 0.2s ease-in-out all;
+        opacity: 1;
+    }
+    .expanded.ng-hide {
+        opacity: 0;
+    }
+    .details {
+        transition: 0.2s ease-in-out all;
+        opacity: 0;
+    }
+    .details.show {
+        /*transition: 0.2s ease-in-out all;*/
+        opacity: 1;
+    }
+</style>
+<div class="row vert-center">
+    <div class="col-md-3">
+        <h2>Lista uppgifter</h2>
+    </div>
+    <div class="col-md-9">
+        <div class="alert alert-{{msg.type}} alert-dismissible" ng-show="msg">
+            <strong>{{msg.strong}}</strong> {{msg.text}}
+            <button type="button" class="close" aria-label="Close" ng-click="msg = null">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <div class="row" ng-repeat="group in groups">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{group.name}}</h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="subject in group.subjects" ng-init="subject.expanded = false">
+                        <span class="badge">{{subject.assignments.length}}</span>
+                        <a href="#/" style="color: darkblue" ng-click="toggle(subject)">
+                            {{subject.name}}
+                        </a>
+                        <ul class="expanded" ng-show="subject.expanded">
+                            <li ng-repeat="a in subject.assignments">
+                                <a href="#/" style="color: darkblue" ng-click="showDetails(a)">{{a.title}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 details" ng-show="details">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{details.title}}</h3>
+            </div>
+            <div class="panel-body">
+                <strong>Startdatum: </strong> {{details.date_start | msDate | date: 'short'}}
+            </div>
+        </div>
+    </div>
+</div>

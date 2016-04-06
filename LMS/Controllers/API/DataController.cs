@@ -72,5 +72,46 @@ namespace LMS.Controllers
                     };
             return Json(q, JsonRequestBehavior.AllowGet);
         }
+
+        // assignments for group id
+        public JsonResult Assignments(int id)
+        {
+            var q = from g in db.Groups
+                    where g.Id == id
+                    select g.Subjects into gs
+                    from s in gs
+                    select s.Assignments into assigns
+                    from a in assigns
+                    select a into assign
+                    group assign by new
+                    {
+                        id = assign.Subject_Id,
+                        name = assign.Subject.Name
+                    } into grp
+                    orderby grp.Key.id
+                    select new
+                    {
+                        subject = grp.Key,
+                        assignments = grp.Select(x => new
+                        {
+                            id = x.Id,
+                            title = x.Title,
+                            desc = x.Description,
+                            filepath = x.Upload.FilePath,
+                            date_start = x.DateStart,
+                            date_end = x.DateEnd,
+                            submissions = from sub in x.Submissions
+                                          where sub.Assignment_Id == x.Id
+                                          select new
+                                          {
+                                              student = new { id = sub.Student_Id, name = sub.Student.User.FirstName + " " + sub.Student.User.LastName },
+                                              comment = sub.Comment,
+                                              date = sub.SubmitDate,
+                                              filepath = sub.Upload.FilePath
+                                          }
+                        })
+                    };
+            return Json(q, JsonRequestBehavior.AllowGet);
+        }
     }
 }
