@@ -296,6 +296,13 @@ namespace LMS.DataAccess
 			Teachers.Find(2).Subjects.Add(Subjects.Find(3));
 			Teachers.Find(3).Subjects.Add(Subjects.Find(4));
 			Teachers.Find(4).Subjects.Add(Subjects.Find(5));
+
+            Groups.Find(1).Subjects.Add(Subjects.Find(1));
+            Groups.Find(1).Subjects.Add(Subjects.Find(2));
+            Groups.Find(1).Subjects.Add(Subjects.Find(3));
+            Groups.Find(2).Subjects.Add(Subjects.Find(4));
+            Groups.Find(2).Subjects.Add(Subjects.Find(5));
+
 			SaveChanges();
 
             SeedSchedule();
@@ -309,10 +316,11 @@ namespace LMS.DataAccess
 				);
 
 			Assignments.AddOrUpdate(a => a.Id,
-				new Assignment {Id = 1, Subject_Id = 1, Title = "Uppgift med id 1", Description = "Beskrivning", DateStart = new DateTime(2016,3,13), DateEnd = new DateTime(2016,5,15), Upload_Id = 1},
-				new Assignment {Id = 2, Subject_Id = 2, Title = "Uppgift med id 2", Description = "Beskrivning", DateStart = new DateTime(2016,4,20), DateEnd = new DateTime(2016,6,10), Upload_Id = 1},
-				new Assignment {Id = 3, Subject_Id = 1, Title = "Uppgift med id 3", Description = "Beskrivning", DateStart = new DateTime(2016,3,13), DateEnd = new DateTime(2016,5,15), Upload_Id = 1},
-				new Assignment {Id = 4, Subject_Id = 3, Title = "Uppgift med id 4", Description = "Beskrivning", DateStart = new DateTime(2016,3,13), DateEnd = new DateTime(2016,5,15), Upload_Id = 1}
+				new Assignment {Id = 1, Subject_Id = 1, Title = "Uppgift med id 1", Description = "Beskrivning 1", DateStart = new DateTime(2016,3,13), DateEnd = new DateTime(2016,5,15), Upload_Id = 1},
+				new Assignment {Id = 2, Subject_Id = 1, Title = "Uppgift med id 2", Description = "Beskrivning 2", DateStart = new DateTime(2016,4,20), DateEnd = new DateTime(2016,6,10), Upload_Id = 1},
+				new Assignment {Id = 3, Subject_Id = 3, Title = "Uppgift med id 3", Description = "Beskrivning 3", DateStart = new DateTime(2016,3,13), DateEnd = new DateTime(2016,5,15), Upload_Id = 1},
+				new Assignment {Id = 4, Subject_Id = 4, Title = "Uppgift med id 4", Description = "Beskrivning 4", DateStart = new DateTime(2016,3,13), DateEnd = new DateTime(2016,5,15), Upload_Id = 1},
+                new Assignment { Id = 5, Subject_Id = 5, Title = "Uppgift med id 5", Description = "Beskrivning 5", DateStart = new DateTime(2016, 3, 14), DateEnd = new DateTime(2016, 5, 10), Upload_Id = 2 }
 				);
 
 			Gradings.AddOrUpdate(g => g.Id,
