@@ -4,14 +4,14 @@
     </div>
 </div>
 <hr />
-<div class="row">
+<!--<div class="row">
     <div class="col-md-9">
         <p>Lista aktuella uppgifter.....filtrera?</p>
     </div>
-</div>
+</div>-->
 <div class="row">
     <div class="col-md-9">
-        <p>Här ser du alla dina inlämningsuppgifter som är kvar att göra.</p>
+        <p>Här ser du alla inlämningsuppgifter.</p>
     </div>
     <table id="current-tasks" class="table list-table" ng-repeat="subject in group.subjects" ng-hide="!subject.assignments.length">
         <thead>
@@ -40,7 +40,8 @@
                 <td>{{a | dayDiff}}</td>
                 <td><span class="glyphicon glyphicon-check" ng-show="a.submissions.length"></span></td>
                 <td>
-                    <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#details" ng-click="showDetails(a)">Visa <span class="glyphicon glyphicon-file"></span></button>
+                    <a class="btn btn-xs btn-primary" href="/Upload/Get/{{a.upload_id}}">Ladda ner <span class="glyphicon glyphicon-download-alt"></span></a>
+                    <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#details" ng-click="showDetails(a)">Skicka in <span class="glyphicon glyphicon-file"></span></button>
                 </td>
             </tr>
         </tbody>

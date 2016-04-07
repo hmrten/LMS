@@ -98,7 +98,7 @@
                                 <tr class="table-row" ng-repeat="s in details.submissions" ng-class="{'selected-row': selectedSub.student.id == s.student.id}">
                                     <td>{{s.student.name}}</td>
                                     <td>{{s.date | msDate | date : 'short'}}</td>
-                                    <td><a href="#/">Ladda ner <span class="glyphicon glyphicon-download"></span></a></td>
+                                    <td><a href="/Upload/Get/{{s.upload_id}}">Ladda ner <span class="glyphicon glyphicon-download"></span></a></td>
                                     <td><span class="glyphicon" ng-class="gradeClass(s)"></span>{{gradeString(s)}}</td>
                                     <td>
                                         <a class="btn btn-xs btn-info" href="#/" ng-class="{'disabled': s.grading.id}" ng-click="showGrading(s)">Sätt betyg</a>

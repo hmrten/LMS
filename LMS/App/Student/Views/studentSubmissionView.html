@@ -51,7 +51,7 @@
                 <td>{{sub.submit_date | msDate | date: 'shortDate'}}</td>
                 <td><span class="glyphicon" ng-class="gradeClass(sub)"></span>{{gradeString(sub)}}</td>
                 <td>
-                    <a class="btn btn-xs btn-info" ng-click="details(a)" href="#/Details/{{a.id}}">Visa</a>
+                    <a class="btn btn-xs btn-info disabled" ng-click="details(a)" href="#/Details/{{a.id}}">Visa</a>
                 </td>
             </tr>
         </tbody>
