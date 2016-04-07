@@ -18,11 +18,6 @@
             .otherwise({
                 redirectTo: '/'
             });
-
-        //$locationProvider.html5Mode({
-        //    enabled: true,
-        //    requireBase: false
-        //});
     });
 
     app.controller('indexCtrl', ['$scope', '$location', '$http', 'dataService', function ($scope, $location, $http, dataService) {
@@ -87,20 +82,6 @@
         getTeachers();
     }]);
 
-    //app.directive('clearSelect', ['$parse', function($parse) {
-    //    return {
-    //        restrict: 'A',
-    //        link: function (scope, element, attrs) {
-    //            var expr = $parse(attrs.clearSelect);
-    //            element.bind('click', function () {
-    //                scope.$apply(function () {
-    //                    expr(scope, {});
-    //                });
-    //            });
-    //        }
-    //    };
-    //}]);
-
     app.controller('editCtrl', ['$scope', '$routeParams', 'dataService', '$compile', '$http', function ($scope, $routeParams, dataService, $compile, $http) {
         function getDetails() {
             var id = parseInt($routeParams['id']);
@@ -158,11 +139,20 @@
                 free.push(parseInt(freeStudents[i].value));
             }
 
+            var subElem = angular.element('#subjects').children();
+            var subs = [];
+            for (var i = 0; i < subElem.length; ++i) {
+                var el = angular.element(subElem[i]);
+                var id = parseInt(el.attr('data-sub-id'));
+                subs.push(id);
+            }
+
             var data = {
                 id: $scope.details.id,
                 teacher_id: $scope.details.teacher_id,
                 used: used,
-                free: free
+                free: free,
+                subs: subs
             };
 
             $http.put(LMS.rootPath + 'Group/Update/' + $scope.groupId, data).then(function (resp) {

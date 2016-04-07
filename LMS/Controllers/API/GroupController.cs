@@ -86,7 +86,7 @@ namespace LMS.Controllers
         }
 
         [HttpPut]
-        public HttpStatusCodeResult Update(int id, int teacher_id, int[] used, int[] free)
+        public HttpStatusCodeResult Update(int id, int teacher_id, int[] used, int[] free, int[] subs)
         {
             if (free != null)
             {
@@ -100,7 +100,13 @@ namespace LMS.Controllers
                     db.Students.Find(i).Group_Id = id;
                 n = used.Length;
             }
+
             var g = db.Groups.Find(id);
+            g.Subjects.Clear();
+            foreach (var i in subs)
+            {
+                g.Subjects.Add(db.Subjects.Find(i));
+            }
             g.Teacher_Id = teacher_id;
             db.SaveChanges();
             return new HttpStatusCodeResult(200, String.Format("{0} elever lades till i klass '{1}' med lärare '{2}'",
