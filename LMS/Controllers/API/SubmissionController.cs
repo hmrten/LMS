@@ -74,7 +74,7 @@ namespace LMS.Controllers.API
                                                          date_start = a.DateStart,
                                                          date_end = a.DateEnd,
                                                          upload_id = a.Upload_Id,
-                                                         submissions = from sub in a.Submissions
+                                                         submissions = from sub in a.Submissions.Where(x => x.Student_Id == student.Id)
                                                                        where sub.Assignment_Id == a.Id
                                                                        select new
                                                                        {

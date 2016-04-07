@@ -21,12 +21,14 @@
                 <th></th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
             <tr class="table-header">
                 <td>Titel</td>
                 <td>Startdatum</td>
                 <td>Slutdatum</td>
                 <td>Dagar kvar</td>
+                <td>Inlämnad</td>
                 <td></td>
             </tr>
         </thead>
@@ -36,8 +38,9 @@
                 <td>{{a.date_start | msDate | date: 'shortDate'}}</td>
                 <td>{{a.date_end | msDate | date: 'shortDate'}}</td>
                 <td>{{a | dayDiff}}</td>
+                <td><span class="glyphicon glyphicon-check" ng-show="a.submissions.length"></span></td>
                 <td>
-                    <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#details" ng-click="showDetails(a)">Skicka in <span class="glyphicon glyphicon-file"></span></button>
+                    <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#details" ng-click="showDetails(a)">Visa <span class="glyphicon glyphicon-file"></span></button>
                 </td>
             </tr>
         </tbody>
@@ -71,7 +74,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-3 col-md-8">
-                            <button class="btn btn-primary" type="submit">Skicka in</button>
+                            <button class="btn btn-primary" type="submit" ng-class="{'disabled': details.submissions.length}">Skicka in</button>
                         </div>
                     </div>
                 </form>

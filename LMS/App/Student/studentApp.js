@@ -123,6 +123,12 @@
                     };
                 });
         };
+
+        $scope.isSubmitted = function (expected) {
+            return function (actual) {
+                return !actual.submissions.length;
+            };
+        };
     }]);
 
     app.controller('submCtrl', ['$scope', 'dataService', function ($scope, dataService) {
