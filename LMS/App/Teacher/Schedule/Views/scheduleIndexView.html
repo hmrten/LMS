@@ -5,9 +5,25 @@
 </div>
 <hr />
 <div class="row">
-    <div class="col-md-6">
-        <div class="list-group">
-            <a ng-repeat="g in groups" class="list-group-item" href="#/Show/{{g.id}}">{{g.name}} <span class="badge">{{g.student_count}}</span></a>
-        </div>
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr class="table-header">
+                    <th>Klassnamn</th>
+                    <th>Antal studenter</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-row" ng-repeat="g in groups">
+                    <td>{{g.name}}</td>
+                    <td>{{g.student_count}}</td>
+                    <td>
+                        <a class="btn btn-xs btn-primary" href="#/Admin/{{g.id}}">Administrera <span class="glyphicon glyphicon-cog"></span></a>
+                        <a class="btn btn-xs btn-primary" href="#/Show/{{g.id}}" ng-click="delete(g.id)">Visa <span class="glyphicon glyphicon-eye-open"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

@@ -128,6 +128,7 @@
     <Content Include="App\Student\Views\studentProfileView.html" />
     <Content Include="App\Teacher\Schedule\scheduleApp.js" />
     <Content Include="App\Teacher\Schedule\Views\scheduleShowView.html" />
+    <Content Include="App\Teacher\Schedule\Views\scheduleAdminView.html" />
     <Content Include="App\Teacher\Schedule\Views\scheduleIndexView.html" />
     <Content Include="App\Student\studentApp.js" />
     <Content Include="App\Teacher\User\userApp.js" />

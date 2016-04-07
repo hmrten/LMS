@@ -7,6 +7,10 @@
                 templateUrl: LMS.rootPath + 'App/Teacher/Schedule/Views/scheduleIndexView.html',
                 controller: 'indexCtrl'
             })
+            .when('/Admin/:id', {
+                templateUrl: LMS.rootPath + 'App/Teacher/Schedule/Views/scheduleAdminView.html',
+                controller: 'adminCtrl'
+            })
             .when('/Show/:id', {
                 templateUrl: LMS.rootPath + 'App/Teacher/Schedule/Views/scheduleShowView.html',
                 controller: 'showCtrl'
@@ -36,6 +40,8 @@
         'November',
         'December'
     ];
+
+    function monthString(m) { return monthNames[m]; }
 
     app.directive('schedule', function ($parse, $animate) {
         return {
@@ -86,6 +92,18 @@
         };
     });
 
+    app.filter('schedTypeLabel', function () {
+        return function (type) {
+            return type == 0 ? 'default' : 'info';
+        };
+    });
+
+    app.filter('schedTypeName', function () {
+        return function (type) {
+            return type == 0 ? 'Studier' : 'Möte';
+        };
+    });
+
     app.controller('indexCtrl', function ($scope, $http, Data) {
         $http.get(LMS.rootPath + 'Data/Groups').then(function (resp) {
             $scope.groups = resp.data;
@@ -96,7 +114,7 @@
         };
     });
 
-    app.controller('showCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 'Data', function ($scope, $http, $rootScope, $routeParams, Data) {
+    app.controller('adminCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 'Data', function ($scope, $http, $rootScope, $routeParams, Data) {
         function init() {
             var id = $routeParams['id'];
             $scope.groupId = id;
@@ -216,4 +234,12 @@
         init();
     }]);
 
+    app.controller('showCtrl', function ($scope, $http, $routeParams) {
+        $scope.groupId = parseInt($routeParams['id']);
+        $scope.test = 'hello from angular';
+
+        $http.get(LMS.rootPath + 'Data/ScheduleTree/' + $scope.groupId).then(function (resp) {
+            $scope.schedTree = resp.data;
+        });
+    });
 }());

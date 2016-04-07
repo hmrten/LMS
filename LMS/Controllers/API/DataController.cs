@@ -60,6 +60,38 @@ namespace LMS.Controllers
             return Json(q, JsonRequestBehavior.AllowGet);
         }
 
+        // group id
+        public JsonResult ScheduleTree(int id)
+        {
+            var q = from sched in db.Schedules
+                    where sched.Group_Id == id
+                    group sched by sched.DateStart.Month into monthGroup
+                    orderby monthGroup.Key
+                    select new
+                    {
+                        month = monthGroup.Key - 1,
+                        days = from mg in monthGroup
+                               group mg by mg.DateStart.Day into dayGroup
+                               orderby dayGroup.Key
+                               select new
+                               {
+                                   day = dayGroup.Key,
+                                   schedules = (from dg in dayGroup
+                                                select new
+                                                {
+                                                    id = dg.Id,
+                                                    type = dg.Type,
+                                                    subject_name = dg.Subjects.FirstOrDefault().Name,
+                                                    date_start = dg.DateStart,
+                                                    date_end = dg.DateEnd,
+                                                    description = dg.Description
+                                                }).OrderByDescending(s => s.date_start)
+                               }
+                    };
+            var o = new { name = db.Groups.Find(id).Name, tree = q };
+            return Json(o, JsonRequestBehavior.AllowGet);
+        }
+
         // assignments for group id
         public JsonResult Assignments(int id)
         {

@@ -61,4 +61,25 @@
         };
     });
 
+    var monthNames = [
+    'Januari',
+    'Februari',
+    'Mars',
+    'April',
+    'Maj',
+    'Juni',
+    'Juli',
+    'Augusti',
+    'September',
+    'Oktober',
+    'November',
+    'December'
+    ];
+
+    app.filter('monthName', function () {
+        return function (m) {
+            return monthNames[m];
+        };
+    });
+
 }());
