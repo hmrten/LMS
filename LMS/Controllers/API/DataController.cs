@@ -44,28 +44,15 @@ namespace LMS.Controllers
 
         public JsonResult Schedule(int id)
         {
-            // type 1: studier
-            // type 2: uppgift
-            // type 3: mote
-
-            // subject: 1-5
-
-            // teacher: 1-5
-
-            // groups: 1-2
-
             var q = from s in db.Schedules
                     where s.Group_Id == id
                     select new
                     {
                         id = s.Id,
-                        //type_id = s.ScheduleType_Id,
-                        //type_name = s.Type.Name,
                         type = s.Type.ToString(),
                         group_id = s.Group_Id,
                         group_name = s.Group.Name,
-                        //subject_id = s.Subject_Id,
-                        //subject_name = s.Subject.Name,
+                        subject_name = s.Subjects.FirstOrDefault().Name,
                         date_start = s.DateStart,
                         date_end = s.DateEnd,
                         description = s.Description
@@ -112,6 +99,22 @@ namespace LMS.Controllers
                         })
                     };
             return Json(q, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Groups()
+        {
+            var q = db.Groups.Select(g => new
+            {
+                id = g.Id,
+                name = g.Name,
+                student_count = g.Students.Count
+            });
+            return Json(q, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GroupName(int id)
+        {
+            return Json(db.Groups.Find(id).Name, JsonRequestBehavior.AllowGet);
         }
     }
 }

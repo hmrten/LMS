@@ -18,7 +18,6 @@ namespace LMS.DataAccess
 		public DbSet<Teacher> Teachers { get; set; }
 		public DbSet<Group> Groups { get; set; }
 		public DbSet<Subject> Subjects { get; set; }
-		//public DbSet<ScheduleType> ScheduleTypes { get; set; }
 		public DbSet<Schedule> Schedules { get; set; }
 		public DbSet<Assignment> Assignments { get; set; }
 		public DbSet<Submission> Submissions { get; set; }
@@ -109,95 +108,95 @@ namespace LMS.DataAccess
 			return student;
 		}
 
-        private void SeedSchedule()
+        private void AddSchedule(int id, ScheduleType type, int gid, DateTime start, DateTime end, string description, int subId)
         {
-            Schedules.AddOrUpdate(s => s.Id,
-                new Schedule
-                {
-                    Id = 1,
-                    Type = ScheduleType.Studies,
-                    Group_Id = 1,
-                    //Subject_Id = 1,
-                    //Author_Id = 1,
-                    //Assignment_Id = null,
-                    DateStart = new DateTime(2016, 4, 4),
-                    DateEnd = new DateTime(2016, 4, 4),
-                    Description = "Study hard"
-                },
-                new Schedule
-                {
-                    Id = 2,
-                    Type = ScheduleType.Studies,
-                    Group_Id = 1,
-                    //Subject_Id = 2,
-                    //Author_Id = 2,
-                    //Assignment_Id = null,
-                    DateStart = new DateTime(2016, 4, 5),
-                    DateEnd = new DateTime(2016, 4, 5),
-                    Description = "Study hard again"
-                },
-                new Schedule
-                {
-                    Id = 3,
-                    Type = ScheduleType.Meeting,
-                    Group_Id = 1,
-                    //Subject_Id = 2,
-                    //Author_Id = 3,
-                    //Assignment_Id = null,
-                    DateStart = new DateTime(2016, 4, 8),
-                    DateEnd = new DateTime(2016, 4, 8),
-                    Description = "Time for a meeting"
-                },
-                new Schedule
-                {
-                    Id = 4,
-                    Type = ScheduleType.Studies,
-                    Group_Id = 1,
-                    //Subject_Id = 3,
-                    //Author_Id = 1,
-                    //Assignment_Id = null,
-                    DateStart = new DateTime(2016, 4, 18),
-                    DateEnd = new DateTime(2016, 4, 18),
-                    Description = "Uppgift"
-                },
-                new Schedule
-                {
-                    Id = 5,
-                    Type = ScheduleType.Studies,
-                    Group_Id = 1,
-                    //Subject_Id = 4,
-                    //Author_Id = 1,
-                    //Assignment_Id = null,
-                    DateStart = new DateTime(2016, 4, 11),
-                    DateEnd = new DateTime(2016, 4, 11),
-                    Description = "Uppgift A"
-                },
-                new Schedule
-                {
-                    Id = 6,
-                    Type = ScheduleType.Studies,
-                    Group_Id = 1,
-                    //Subject_Id = 1,
-                    //Author_Id = 1,
-                    //Assignment_Id = null,
-                    DateStart = new DateTime(2016, 4, 11),
-                    DateEnd = new DateTime(2016, 4, 11),
-                    Description = "Uppgift B"
-                },
-                new Schedule
-                {
-                    Id = 7,
-                    Type = ScheduleType.Studies,
-                    Group_Id = 1,
-                    //Subject_Id = 2,
-                    //Author_Id = 1,
-                    //Assignment_Id = null,
-                    DateStart = new DateTime(2016, 4, 11),
-                    DateEnd = new DateTime(2016, 4, 11),
-                    Description = "Uppgift C"
-                }
-                );
+            var sched = new Schedule { Id = id, Type = type, Group_Id = gid, DateStart = start, DateEnd = end, Description = description };
+            if (Schedules.Find(id) != null)
+                return;
+            Schedules.Add(sched);
+            Subjects.Find(subId).Schedules.Add(sched);
+        }
+
+        private void SeedSchedules()
+        {
+            AddSchedule(1, ScheduleType.Studies, 1, new DateTime(2016, 4, 4, 12, 0, 0), new DateTime(2016, 4, 4, 13, 0, 0), "Study hard", 1);
+            AddSchedule(2, ScheduleType.Studies, 1, new DateTime(2016, 4, 4, 13, 0, 0), new DateTime(2016, 4, 4, 14, 0, 0), "Study hard", 2);
+            AddSchedule(3, ScheduleType.Meeting, 1, new DateTime(2016, 4, 4, 15, 0, 0), new DateTime(2016, 4, 4, 16, 0, 0), "Dags for möte", 1);
+            AddSchedule(4, ScheduleType.Studies, 1, new DateTime(2016, 4, 8, 7, 0, 0), new DateTime(2016, 4, 8, 9, 0, 0), "Study hard", 3);
+            AddSchedule(5, ScheduleType.Studies, 1, new DateTime(2016, 4, 11, 12, 0, 0), new DateTime(2016, 4, 11, 17, 0, 0), "Study hard", 3);
+
+            AddSchedule(6, ScheduleType.Studies, 2, new DateTime(2016, 4, 5, 6, 0, 0), new DateTime(2016, 4, 5, 12, 0, 0), "Study hard", 4);
+            AddSchedule(7, ScheduleType.Studies, 2, new DateTime(2016, 4, 7, 6, 0, 0), new DateTime(2016, 4, 7, 9, 0, 0), "Study hard", 5);
+            AddSchedule(8, ScheduleType.Studies, 2, new DateTime(2016, 4, 7, 10, 0, 0), new DateTime(2016, 4, 7, 12, 0, 0), "Study hard", 4);
+            AddSchedule(9, ScheduleType.Meeting, 2, new DateTime(2016, 4, 14, 13, 0, 0), new DateTime(2016, 4, 14, 14, 0, 0), "Dags for möte", 5);
+
             SaveChanges();
+
+            //Schedules.AddOrUpdate(s => s.Id,
+            //    new Schedule
+            //    {
+            //        Id = 1,
+            //        Type = ScheduleType.Studies,
+            //        Group_Id = 1,
+            //        DateStart = new DateTime(2016, 4, 4),
+            //        DateEnd = new DateTime(2016, 4, 4),
+            //        Description = "Study hard"
+            //    },
+            //    new Schedule
+            //    {
+            //        Id = 2,
+            //        Type = ScheduleType.Studies,
+            //        Group_Id = 1,
+            //        DateStart = new DateTime(2016, 4, 5),
+            //        DateEnd = new DateTime(2016, 4, 5),
+            //        Description = "Study hard again"
+            //    },
+            //    new Schedule
+            //    {
+            //        Id = 3,
+            //        Type = ScheduleType.Meeting,
+            //        Group_Id = 1,
+            //        DateStart = new DateTime(2016, 4, 8),
+            //        DateEnd = new DateTime(2016, 4, 8),
+            //        Description = "Time for a meeting"
+            //    },
+            //    new Schedule
+            //    {
+            //        Id = 4,
+            //        Type = ScheduleType.Studies,
+            //        Group_Id = 1,
+            //        DateStart = new DateTime(2016, 4, 18),
+            //        DateEnd = new DateTime(2016, 4, 18),
+            //        Description = "Uppgift"
+            //    },
+            //    new Schedule
+            //    {
+            //        Id = 5,
+            //        Type = ScheduleType.Studies,
+            //        Group_Id = 1,
+            //        DateStart = new DateTime(2016, 4, 11),
+            //        DateEnd = new DateTime(2016, 4, 11),
+            //        Description = "Uppgift A"
+            //    },
+            //    new Schedule
+            //    {
+            //        Id = 6,
+            //        Type = ScheduleType.Studies,
+            //        Group_Id = 1,
+            //        DateStart = new DateTime(2016, 4, 11),
+            //        DateEnd = new DateTime(2016, 4, 11),
+            //        Description = "Uppgift B"
+            //    },
+            //    new Schedule
+            //    {
+            //        Id = 7,
+            //        Type = ScheduleType.Studies,
+            //        Group_Id = 1,
+            //        DateStart = new DateTime(2016, 4, 11),
+            //        DateEnd = new DateTime(2016, 4, 11),
+            //        Description = "Uppgift C"
+            //    }
+            //    );
         }
 
 		public void Seed()
@@ -305,7 +304,7 @@ namespace LMS.DataAccess
 
 			SaveChanges();
 
-            SeedSchedule();
+            SeedSchedules();
 
 			Uploads.AddOrUpdate(u => u.Id,
 				new Upload {Id = 1, User_Id = 2, FilePath = "fil1.pdf" },

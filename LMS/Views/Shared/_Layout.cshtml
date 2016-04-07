@@ -74,6 +74,10 @@
     <script>
         window.LMS = {};
         LMS.rootPath = '@Url.Content("~")';
+        LMS.parseMSDate = function (s) {
+            if (!s) return null;
+            return new Date(parseInt(s.substr(6)));
+        };
     </script>
     <script src="~/App/baseApp.js"></script>
     @RenderSection("scripts", false)

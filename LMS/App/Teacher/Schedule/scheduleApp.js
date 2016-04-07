@@ -7,9 +7,19 @@
                 templateUrl: LMS.rootPath + 'App/Teacher/Schedule/Views/scheduleIndexView.html',
                 controller: 'indexCtrl'
             })
+            .when('/Show/:id', {
+                templateUrl: LMS.rootPath + 'App/Teacher/Schedule/Views/scheduleShowView.html',
+                controller: 'showCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });
+    });
+
+    app.factory('Data', function () {
+        return {
+            groupName: ''
+        };
     });
 
     var monthNames = [
@@ -26,11 +36,6 @@
         'November',
         'December'
     ];
-
-    function parseMSDate(s) {
-        if (!s) return null;
-        return new Date(parseInt(s.substr(6)));
-    };
 
     app.directive('schedule', function ($parse, $animate) {
         return {
@@ -81,17 +86,33 @@
         };
     });
 
-    app.controller('indexCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
+    app.controller('indexCtrl', function ($scope, $http, Data) {
+        $http.get(LMS.rootPath + 'Data/Groups').then(function (resp) {
+            $scope.groups = resp.data;
+        });
+
+        $scope.setGroupName = function (name) {
+            Data.groupName = name;
+        };
+    });
+
+    app.controller('showCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 'Data', function ($scope, $http, $rootScope, $routeParams, Data) {
         function init() {
+            var id = $routeParams['id'];
+            $scope.groupId = id;
             $scope.json = [];
             $scope.usedDays = [];
             $scope.curMonth = new Date().getMonth();
+            $scope.groupId = id;
+            if (Data.groupName == '') {
+                $http.get(LMS.rootPath + 'Data/GroupName/' + id).then(function (resp) {
+                    $scope.groupName = resp.data;
+                });
+            } else {
+                $scope.groupName = Data.groupName;
+            }
             genCal($scope.curMonth);
-            getData();
-
-            //$rootScope.$on('$includeContentLoaded', function (ev) {
-
-            //});
+            getData(id);
         };
 
         function genCal(month) {
@@ -108,8 +129,9 @@
             var sched = [];
             for (var j = 0; j < json.length; ++j) {
                 var o = json[j];
-                if (o.date_end.getMonth() == $scope.curMonth) {
-                    var day = o.date_end.getDate();
+                var odate = LMS.parseMSDate(o.date_end);
+                if (odate.getMonth() == $scope.curMonth) {
+                    var day = odate.getDate();
                     var idx = day + $scope.firstDay - 1;
                     var y = Math.floor(idx / 7);
                     var x = idx % 7;
@@ -124,15 +146,9 @@
 
         $scope.refresh = refresh;
 
-        function getData() {
-            $http.get(LMS.rootPath + 'Data/Schedule/1').then(function (resp) {
-                var json = resp.data;
-                for (var i = 0; i < json.length; ++i) {
-                    var o = json[i];
-                    o.date_start = parseMSDate(o.date_start);
-                    o.date_end = parseMSDate(o.date_end);
-                }
-                $scope.json = json;
+        function getData(id) {
+            $http.get(LMS.rootPath + 'Data/Schedule/' + id).then(function (resp) {
+                $scope.json = resp.data;
                 refresh($scope.tbody);
             });
 
@@ -159,6 +175,14 @@
         };
 
         $scope.create = function () {
+            this.form.group_id = $scope.groupId;
+            var t0 = this.form.date_start.split(':');
+            var t1 = this.form.date_end.split(':');
+            var d0 = new Date(2016, $scope.curMonth, $scope.selectedDay, parseInt(t0[0]), parseInt(t0[1]));
+            var d1 = new Date(2016, $scope.curMonth, $scope.selectedDay, parseInt(t1[0]), parseInt(t1[1]));
+            this.form.date_start = d0;
+            this.form.date_end = d1;
+
             var json = angular.toJson(this.form);
             $http.post(LMS.rootPath + 'Schedule/Create', json).then(function (resp) {
                 $scope.msg = {

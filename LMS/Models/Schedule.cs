@@ -25,8 +25,8 @@ namespace LMS.Models
 
     public enum ScheduleType
     {
-        Studies,
-        Meeting
+        Studies = 0,
+        Meeting = 1
     }
 
     public class Schedule
