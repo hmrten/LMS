@@ -44,4 +44,26 @@
             });
         };
     }]);
+
+    function parseMSDate(s) {
+        if (!s) return null;
+        return new Date(parseInt(s.substr(6)));
+    };
+
+    app.filter('msDate', function () {
+        return function (s) {
+            return parseMSDate(s);
+        };
+    });
+
+    app.filter('dayDiff', function () {
+        return function (detail) {
+            if (!detail) return 0;
+            var date_start = parseMSDate(detail.date_start);
+            var date_end = parseMSDate(detail.date_end);
+            var dt = date_end - date_start;
+            return Math.floor(dt / (1000 * 3600 * 24));
+        };
+    });
+
 }());
