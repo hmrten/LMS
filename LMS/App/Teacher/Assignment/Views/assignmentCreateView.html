@@ -2,8 +2,20 @@
     $('#dateStart').datepicker();
     $('#dateEnd').datepicker();
 </script>
-<h2>Skapa</h2>
-<strong>{{ msg }}</strong>
+<div class="row">
+    <div class="col-md-3">
+        <h2>Skapa</h2>
+    </div>
+    <div class="col-md-9">
+        <div class="alert alert-{{msg.type}} alert-dismissible" ng-show="msg">
+            <strong>{{msg.strong}}</strong> {{msg.text}}
+            <button type="button" class="close" aria-label="Close" ng-click="msg = null">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</div>
+<hr/>
 <form class="form-horizontal" ng-submit="create()" enctype="multipart/form-data">
     <div class="form-group">
         <label class="control-label col-md-3">Ämne:</label>

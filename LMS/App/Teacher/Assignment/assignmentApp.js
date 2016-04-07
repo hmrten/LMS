@@ -13,26 +13,6 @@
             });
     });
 
-    //function parseMSDate(s) {
-    //    if (!s) return null;
-    //    return new Date(parseInt(s.substr(6)));
-    //};
-
-    //app.filter('msDate', function () {
-    //    return function (s) {
-    //        return parseMSDate(s);
-    //    };
-    //});
-    //app.filter('dayDiff', function () {
-    //    return function (detail) {
-    //        if (!detail) return 0;
-    //        var date_start = parseMSDate(detail.date_start);
-    //        var date_end = parseMSDate(detail.date_end);
-    //        var dt = date_end - date_start;
-    //        return Math.floor(dt / (1000 * 3600 * 24));
-    //    };
-    //});
-
     app.controller('indexCtrl', function ($scope, $http, $animate, $timeout) {
         function getData() {
             $http.get(LMS.rootPath + 'Assignment/List').then(function (resp) {
@@ -119,10 +99,18 @@
 
             fileUpload.uploadFile(data, 'Assignment/Create').then(
                 function (resp) {
-                    $scope.msg = 'success: ' + resp.status + ' - ' + resp.statusText;
+                    $scope.msg = {
+                        type: 'success',
+                        strong: 'Skapa lyckades!',
+                        text: resp.statusText
+                    };
                 },
                 function (resp) {
-                    $scope.msg = 'error: ' + resp.status + ' - ' + resp.statusText;
+                    $scope.msg = {
+                        type: 'danger',
+                        strong: 'Skapa misslyckades!',
+                        text: resp.status + ': ' + resp.statusText
+                    };
                 });
         };
 
