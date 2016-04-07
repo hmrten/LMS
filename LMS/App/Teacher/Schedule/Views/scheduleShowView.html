@@ -128,14 +128,12 @@
                         </tr>
                     </thead>
                     <tbody ng-show="details">
-                        <tr class="table-row" ng-repeat="d in details | filter : {day: selectedDay}">
+                        <tr class="table-row" ng-repeat="d in details | filter : detailsFilter(selectedDay)">
                             <td class="col-md-1">{{d.obj.date_start | msDate | date : 'short'}}</td>
                             <td class="col-md-1">{{d.obj.date_end | msDate | date : 'short'}}</td>
                             <td class="col-md-1">{{d.obj.type}}</td>
                             <td class="col-md-1">{{d.obj.subject_name}}</td>
                             <td class="col-md-1">
-                                <a class="btn btn-xs btn-info" href="#/Edit/">Ändra</a>
-                                <a class="btn btn-xs btn-danger" href="#/" ng-click="delete(g.id)">Ta bort</a>
                             </td>
                         </tr>
                     </tbody>

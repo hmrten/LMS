@@ -175,7 +175,8 @@
         };
 
         $scope.create = function () {
-            this.form.group_id = $scope.groupId;
+            var groupId = $scope.groupId;
+            this.form.group_id = groupId;
             var t0 = this.form.date_start.split(':');
             var t1 = this.form.date_end.split(':');
             var d0 = new Date(2016, $scope.curMonth, $scope.selectedDay, parseInt(t0[0]), parseInt(t0[1]));
@@ -190,6 +191,12 @@
                     strong: 'Skapa lyckades!',
                     text: resp.statusText
                 };
+
+                $http.get(LMS.rootPath + 'Data/Schedule/' + groupId).then(function (resp) {
+                    $scope.json = resp.data;
+                    refresh($scope.tbody);
+                    $scope.select($scope.selectedDay);
+                });
             }, function (resp) {
                 $scope.msg = {
                     type: 'danger',
@@ -198,6 +205,12 @@
                 };
                 $scope.$apply();
             });
+        };
+
+        $scope.detailsFilter = function (selectedDay) {
+            return function (d) {
+                return d.day == selectedDay;
+            };
         };
 
         init();
