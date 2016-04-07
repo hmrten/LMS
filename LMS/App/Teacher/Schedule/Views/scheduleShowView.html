@@ -6,12 +6,14 @@
 <hr />
 <style>
     ul.tree li {
-        /*margin-left: 4em;*/
-        list-style: disc;
+        margin-left: 1em;
     }
     ul.tree-days li {
-        /*margin-left: 2em;*/
-        list-style: circle;
+        margin-left: 1.5em;
+    }
+    .tree-days p.desc {
+        display: inline-block;
+        margin-left: 1em;
     }
 </style>
 <div class="row">
@@ -22,20 +24,19 @@
             </div>
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="st in schedTree.tree">
-                    <strong>{{st.month | monthName}}</strong>
+                    <h4>{{st.month | monthName}}</h4>
                     <ul class="list-group tree">
-                        <li class="list-group-item" ng-repeat="d in st.days">
-                            {{d.day}}
-                            <ul class="list-group tree-days">
-                                <li class="list-group-item" ng-repeat="s in d.schedules">
+                        <li class="" ng-repeat="d in st.days">
+                            <span class="glyphicon glyphicon-calendar"></span><strong> {{d.day}}</strong>
+                            <ul class="tree-days">
+                                <li ng-repeat="s in d.schedules">
                                     <span class="col-md-1 label label-{{s.type | schedTypeLabel}}">{{s.type | schedTypeName}}</span>
-                                    <span>
                                         {{s.date_start | msDate | date:'hh:mm'}} - {{s.date_end | msDate | date:'hh:mm'}}
                                         <span class="glyphicon glyphicon-time"></span>
-                                    </span>
-                                    {{s.description}}
+                                    <p class="text-success desc">{{s.description}}</p>
                                 </li>
                             </ul>
+                            <hr/>
                         </li>
                     </ul>
                 </li>
