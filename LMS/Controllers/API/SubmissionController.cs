@@ -118,7 +118,7 @@ namespace LMS.Controllers.API
             sub.Upload_Id = upload.Id;
             db.SaveChanges();
 
-            var msg = "Laddade upp filen: " + filePath;
+            var msg = "Laddade upp filen: " + file.FileName;
             return new HttpStatusCodeResult(200, msg);
         }
     }

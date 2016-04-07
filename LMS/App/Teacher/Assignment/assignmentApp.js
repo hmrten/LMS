@@ -71,6 +71,7 @@
                     strong: 'Betygsättning lyckades!',
                     text: resp.statusText
                 };
+                $scope.form = null;
                 refreshSubmissions();
             }, function (resp) {
                 $scope.msg = {
