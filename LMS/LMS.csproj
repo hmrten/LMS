@@ -264,6 +264,7 @@
     <Compile Include="ViewModels\GradingViewModel.cs" />
     <Compile Include="ViewModels\ScheduleViewModel.cs" />
     <Compile Include="ViewModels\AssignmentViewModel.cs" />
+    <Compile Include="ViewModels\SubmissionViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

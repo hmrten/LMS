@@ -92,18 +92,6 @@
         };
     });
 
-    app.filter('schedTypeLabel', function () {
-        return function (type) {
-            return type == 0 ? 'default' : 'info';
-        };
-    });
-
-    app.filter('schedTypeName', function () {
-        return function (type) {
-            return type == 0 ? 'Studier' : 'Möte';
-        };
-    });
-
     app.controller('indexCtrl', function ($scope, $http, Data) {
         $http.get(LMS.rootPath + 'Data/Groups').then(function (resp) {
             $scope.groups = resp.data;

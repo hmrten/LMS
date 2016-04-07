@@ -2,15 +2,6 @@
     <div class="col-md-4">
         <h2>Uppgifter</h2>
     </div>
-    <div class="col-md-8">
-        <div class="alert alert-{{msg.type}} alert-dismissible" ng-show="msg">
-            <strong>{{msg.strong}}</strong> {{msg.text}}
-            <button type="button" class="close" aria-label="Close" ng-click="msg = null">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <strong>{{ message }}</strong>
-    </div>
 </div>
 <hr />
 <div class="row">
@@ -25,11 +16,11 @@
     <table id="current-tasks" class="table list-table" ng-repeat="subject in group.subjects" ng-hide="!subject.assignments.length">
         <thead>
             <tr class="table-role">
-                <td><h3>{{subject.name}}</h3></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <th><h3>{{subject.name}}</h3></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
             <tr class="table-header">
                 <td>Titel</td>
@@ -46,11 +37,57 @@
                 <td>{{a.date_end | msDate | date: 'shortDate'}}</td>
                 <td>{{a | dayDiff}}</td>
                 <td>
-                    <a class="btn btn-xs btn-info" ng-click="details(a)" href="#/Details/{{a.id}}">Visa</a>
+                    <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#details" ng-click="showDetails(a)">Skicka in <span class="glyphicon glyphicon-file"></span></button>
                 </td>
             </tr>
         </tbody>
     </table>
- 
+</div>
+<div class="modal fade" id="details" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">{{details.title}}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" ng-submit="create()">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Beskrivning:</label>
+                        <div class="col-md-8">
+                            <p class="form-control-static">{{details.description}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Kommentar:</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" rows="5" ng-model="comment"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-8">
+                            <input type="file" name="file" file-model="file" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-8">
+                            <button class="btn btn-primary" type="submit">Skicka in</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-8">
+                <div class="alert alert-{{msg.type}} alert-dismissible" ng-show="msg">
+                    <strong>{{msg.strong}}</strong> {{msg.text}}
+                    <button type="button" class="close" aria-label="Close" ng-click="msg = null">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
+            </div>
+        </div>
+    </div>
 </div>
 

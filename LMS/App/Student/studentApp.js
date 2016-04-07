@@ -27,16 +27,13 @@
                 templateUrl: LMS.rootPath + 'App/Student/Views/studentTaskView.html',
                 controller: 'taskCtrl'
             });
-        //.when('/Schedule', {
-        //    templateUrl: LMS.rootPath + 'App/Student/Views/studentIndexView.html',
-        //    controller: 'studentCtrl'
-        //});
 
     });
 
-    app.controller('studentCtrl', ['$scope', function ($scope) {
-        $scope.message = 'hello from angular student';
-        function toDo() { }; //TO DO
+    app.controller('studentCtrl', ['$scope', '$http', function ($scope, $http) {
+        $http.get(LMS.rootPath + 'Data/StudentSchedule').then(function (resp) {
+            $scope.schedTree = resp.data;
+        });
     }]);
 
     app.controller('groupCtrl', ['$scope', 'dataService', function ($scope, dataService) {
@@ -87,7 +84,7 @@
         };
     }]);
 
-    app.controller('taskCtrl', ['$scope', 'dataService', function ($scope, dataService) {
+    app.controller('taskCtrl', ['$scope', 'dataService', 'fileUpload', function ($scope, dataService, fileUpload) {
 
         GetAllCurrentTasks();
 
@@ -99,6 +96,33 @@
             });
         };
 
+        $scope.showDetails = function (a) {
+            $scope.details = a;
+        };
+
+        $scope.create = function () {
+            var model = { aid: $scope.details.id, comment: $scope.comment };
+            var data = {
+                model: angular.toJson(model),
+                file: $scope.file
+            };
+
+            fileUpload.uploadFile(data, 'Submission/Create').then(
+                function (resp) {
+                    $scope.msg = {
+                        type: 'success',
+                        strong: 'Skicka in lyckades!',
+                        text: resp.statusText
+                    };
+                },
+                function (resp) {
+                    $scope.msg = {
+                        type: 'danger',
+                        strong: 'Skicka in misslyckades!',
+                        text: resp.status + ': ' + resp.statusText
+                    };
+                });
+        };
     }]);
 
     app.controller('submCtrl', ['$scope', 'dataService', function ($scope, dataService) {

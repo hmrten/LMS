@@ -9,12 +9,34 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <strong>{{ message }}</strong>
     </div>
 </div>
 <hr />
 <div class="row">
-    <div class="col-md-9">
-        <p>Visa schema som startvy.....</p>
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{schedTree.name}}</h3>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="st in schedTree.tree">
+                    <h4>{{st.month | monthName}}</h4>
+                    <ul class="list-group tree">
+                        <li class="" ng-repeat="d in st.days">
+                            <span class="glyphicon glyphicon-calendar"></span><strong> {{d.day}}</strong>
+                            <ul class="tree-days">
+                                <li ng-repeat="s in d.schedules">
+                                    <span class="col-md-1 label label-{{s.type | schedTypeLabel}}">{{s.type | schedTypeName}}</span>
+                                    {{s.date_start | msDate | date:'hh:mm'}} - {{s.date_end | msDate | date:'hh:mm'}}
+                                    <span class="glyphicon glyphicon-time"></span>
+                                    <p class="text-success desc">{{s.description}}</p>
+                                </li>
+                            </ul>
+                            <hr />
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

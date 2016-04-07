@@ -1,10 +1,14 @@
 ﻿using LMS.DataAccess;
 using LMS.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Security.Claims;
 
 namespace LMS.Controllers
 {
@@ -90,6 +94,13 @@ namespace LMS.Controllers
                     };
             var o = new { name = db.Groups.Find(id).Name, tree = q };
             return Json(o, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult StudentSchedule()
+        {
+            var userId = HttpContext.User.Identity.GetUserId<int>();
+            var student = db.Students.Where(s => s.User_Id == userId).SingleOrDefault();
+            return ScheduleTree(student.Group_Id.Value);
         }
 
         // assignments for group id

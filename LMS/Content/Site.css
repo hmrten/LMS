@@ -347,3 +347,14 @@ tr.table-row:hover {
         padding:0;
     }
 }
+
+ul.tree li {
+    margin-left: 1em;
+}
+ul.tree-days li {
+    margin-left: 1.5em;
+}
+.tree-days p.desc {
+    display: inline-block;
+    margin-left: 1em;
+}
