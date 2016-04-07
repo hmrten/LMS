@@ -1,4 +1,17 @@
 ﻿@import url('bootstrap.css');
+
+/*
+    COLOR CHART
+    -----------------------------------------------------
+    Very dark:      140912  (Activ bakgrund i main nav)
+    Dark purple:    #462040 (tex. bakgrund i huvudmenyn)
+    Purple:         #af6a82 (Paneler och tabbar main menu, länkfärg) (a45b74)
+    Light pink:     #ffe6ff (sub menu background, Hover on sub menu) (tidigare #eaeaea)
+    Silver:         #C0C0C0 ()
+    Dark grey:      #808080 (Text color sub menu)
+    Beige:          #ded3ba (Header background)
+
+*/
 body {
     font-family: 'Arimo', sans-serif;
     font-size:1.5em;
@@ -25,22 +38,7 @@ textarea {
     height:420px;
     background:url('/Content/Images/jumbotron-image3.jpg') no-repeat center center;
 }
-@media all and (max-width: 700px)
-{
-    .jumbotron
-    {
-        height: 150px;
-    }
-}
-@media all and (max-width: 390px)
-{
-    .jumbotron
-    {
-        height: 0px;
-        margin:0;
-        padding:0;
-    }
-}
+
 
 /* HEADING */
 h1 {
@@ -48,9 +46,13 @@ h1 {
 }
 /* Links */
 
-a {
-    color:#eee8ed;
+a {color:#955068;}
+a:hover,
+a:focus {
+    text-decoration:none;
+    color:#462040;
 }
+
 .clear {clear:both;height:1px;overflow:hidden}
 /*Content*/
 .left-col {}
@@ -64,7 +66,7 @@ color: #ccc;  /*Sets the text hover color on navbar*/
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active >   
  a:hover, .navbar-default .navbar-nav > .active > a:focus {
 color: white; /*BACKGROUND color for active*/
-background-color: #030033;
+background-color: #140912;
 }
   .navbar-default {
     background-color: #462040; /*#0f006f*/
@@ -82,7 +84,7 @@ background-color: #030033;
  .nav > li > a:hover,
  .nav > li > a:focus {
     text-decoration: none;
-    background-color: silver; /*Change rollover cell color here*/
+    background-color: #C0C0C0; /*Change rollover cell color here*/
   }
 
 
@@ -103,20 +105,22 @@ background-color: #030033;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary,
 .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open > .dropdown-toggle.btn-info {
-    background: #7d3f73;
+    background: #af6a82;
     border-color:#462040;
 }
  
 .btn-primary:active, .btn-primary.active {
-    background: #5D3241;
+    background: #af6a82;
     box-shadow: none;
 }
 
 
 /* HEADER */
-.header {position:relative;}
+.header {
+    position:relative;
+}
 .header-background-color {
-    background-color:#eee8ed;
+    background-color:#ded3ba;
     margin:0;
     padding-top:10px;
 }
@@ -129,47 +133,32 @@ background-color: #030033;
     color:#462040;
     position:relative;
     float:left;
-    height:50px;
     width:300px;
-    font-size:60px;
+    font-size:80px;
     margin-right:0px;
     padding:0;
+    text-shadow: 5px 5px 0px #eee, 7px 7px 0px #707070;
 }
 .login-holder {
     float:right;
 }
-/* MAIN MENU */
 
+/* MAIN MENU */
+#main-menu {margin-bottom:-1px;}
+#main-menu li a {
+    color:#fff;
+}
 .main-menu-holder {
     float:right;
     bottom:-1px;
 }
-.login-name {
-    margin-bottom:5px;
-}
-.login-name,
-.login-link {
-    text-align:right;
-}
-.login-link a {
-    color:#7d3f73;
-    text-decoration:none;
-    padding:5px;
-}
-.login-link a:hover {
-    color:#ccc;
-    background-color:#462040;
-    border-radius:4px;
-}
-
-#main-menu {margin-bottom:-1px;}
 
 #main-menu li {
     display:block;
     float:left;
     padding-right:1px;
     border: 1px solid #e7e7e7;
-    background-color:#7d3f73;
+    background-color:#af6a82;
     border-radius: 10px 10px 0 0;
 }
 #main-menu li:last-child {
@@ -178,7 +167,8 @@ background-color: #030033;
 #main-menu.nav>li>a {
     padding:8px 15px 2px 15px;
 }
-#main-menu.nav > li > a:hover {
+#main-menu.nav > li > a:hover,
+#main-menu.nav > li.active {
     background-color:#462040;
     color:#fff;
 }
@@ -186,15 +176,39 @@ background-color: #030033;
 #main-menu.nav > li > a:hover {
     border-radius:10px 10px 0 0;
 }
+
+/* LOGIN */
+.login-name {
+    margin-bottom:5px;
+}
+.login-name,
+.login-link {
+    text-align:right;
+}
+.login-link a {
+    color:#af6a82;
+    text-decoration:none;
+    padding:5px;
+}
+.login-link a:hover {
+    color:#ccc;
+    background-color:#462040;
+    border-radius:4px;
+}
+#logo-log-in {
+    margin-bottom:-25px;
+}
 /* SUB MENU */
 #sub-menu {}
 #sub-menu ul li {
-    background-color:#eaeaea;
+    background-color:#af6a82;
     margin-bottom:4px;
     padding:6px;
 }
 #sub-menu ul li a {
-    color:#808080;
+    color:#fff;
+    padding:5px;
+    display:block
 }
 #sub-menu ul li a:hover,
 #sub-menu ul li.active a {
@@ -206,7 +220,9 @@ background-color: #030033;
 #sub-menu ul li:hover {
     background-color:#ccc;
 }
-
+div #sub-menu {
+    margin-top:30px;
+}
 /* LIST view */
 .list-table th {
     font-weight:bold;
@@ -222,16 +238,30 @@ background-color: #030033;
     padding: 5px;
     min-height: 15em;
     max-width: none;
-}/* Table */
+}
+.list-group ul li a {
+    color:#a45b74;
+} 
+ul.expanded li a:hover {
+    color:#462040;
+}
+
+ul.expanded li {
+    padding-left:20px;
+}
+ul.list-group > li > a {
+    font-weight:bold;
+}
+/* Table */
 .table-header {
-    background-color: #7d3f73;
+    background-color: #af6a82;
     color:#fff;
 }
 .table-role {
     text-transform:uppercase;
 }
 tr.table-row:hover {
-    background-color: #eee8ed;
+    background-color: #ffe6ff;
     color:#000;
 }
 /*tr:nth-child(even) {background-color: #eee8ed}*/
@@ -259,6 +289,61 @@ tr.table-row:hover {
 
 .panel-info > .panel-heading {
     color: #fff;
-    background-color: #7d3f73;
-    border-color: #7d3f73;
+    background-color: #af6a82;
+    border-color: #af6a82;
+}
+
+.panel-info {
+    border-color:#af6a82;
+}
+/*Assignment*/
+.expanded {
+    transition: 0.2s ease-in-out all;
+    opacity: 1;
+}
+
+.expanded.ng-hide {
+    opacity: 0;
+}
+
+.details {
+    transition: 0.2s ease-in-out all;
+    opacity: 0;
+}
+
+.details.show {
+    /*transition: 0.2s ease-in-out all;*/
+    opacity: 1;
+}
+
+.selected-row {
+    background-color: #eee8ed;
+}
+
+@media all and (max-width: 990px)
+{
+    .jumbotron
+    {
+        height: 150px;
+    }
+    div #sub-menu {
+    margin-top:0px;
+    }
+}
+
+@media all and (max-width: 700px)
+{
+    .jumbotron
+    {
+        height: 150px;
+    }
+}
+@media all and (max-width: 390px)
+{
+    .jumbotron
+    {
+        height: 0px;
+        margin:0;
+        padding:0;
+    }
 }

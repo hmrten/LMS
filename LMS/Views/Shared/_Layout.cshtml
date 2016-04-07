@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @*<link href="~/Content/reset.css" rel="stylesheet" type="text/css" />*@
+    <link href="~/Content/reset.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/jquery-ui.css" rel="stylesheet" type="text/css" />
@@ -21,9 +21,16 @@
         </div>
         <div class="header main-menu-holder">
             <ul class="nav" id="main-menu">
-                <li>@Html.ActionLink("Hem", "Index", "Home")</li>
-                <li>@Html.ActionLink("Om", "About", "Home")</li>
-                <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                @using LMS;
+                <li @Html.IsActive("Home/Index", "class=\"active\"")>
+                    @Html.ActionLink("Hem", "Index", "Home")
+                </li>
+                <li @Html.IsActive("Home/About", "class=\"active\"")>
+                    @Html.ActionLink("Om", "About", "Home")
+                </li>
+                <li @Html.IsActive("Home/Contact", "class=\"active\"")>
+                    @Html.ActionLink("Kontakt", "Contact", "Home")
+                </li>
             </ul>
         </div>
         <div class="clear">&nbsp;</div>

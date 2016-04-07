@@ -1,8 +1,8 @@
 ﻿<div class="row vert-center">
-    <div class="col-md-4">
-        <h2>Uppgifter</h2>
+    <div class="col-md-5">
+        <h2>Inlämnade uppgifter</h2>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-7">
         <div class="alert alert-{{msg.type}} alert-dismissible" ng-show="msg">
             <strong>{{msg.strong}}</strong> {{msg.text}}
             <button type="button" class="close" aria-label="Close" ng-click="msg = null">
@@ -15,42 +15,47 @@
 <hr />
 <div class="row">
     <div class="col-md-9">
-        <p>Lista aktuella uppgifter.....filtrera?</p>
+        <form>
+            <div class="form-group">
+                <label class="control-label">Visa betygsatta</label>
+                <input type="checkbox" ng-model="onlyGraded">
+            </div>
+        </form>
     </div>
 </div>
 <div class="row">
     <div class="col-md-9">
-        <p>Här ser du alla dina inlämningsuppgifter som är kvar att göra.</p>
+        <p>Här ser du alla dina inlämnade uppgifter.</p>
     </div>
-    <table id="current-tasks" class="table list-table" ng-repeat="subject in group.subjects" ng-hide="!subject.assignments.length">
+    <table id="current-tasks" class="table list-table">
         <thead>
-            <tr class="table-role">
-                <td><h3>{{subject.name}}</h3></td>
+            <!--<tr class="table-role">
+                <td><h3></h3></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-            </tr>
+            </tr>-->
             <tr class="table-header">
                 <td>Titel</td>
-                <td>Startdatum</td>
-                <td>Slutdatum</td>
-                <td>Dagar kvar</td>
+                <td>Ämne</td>
+                <td>Inlämnad datum</td>
+                <td>Betyg</td>
                 <td></td>
             </tr>
         </thead>
         <tbody>
-            <tr class="table-row" ng-repeat="a in subject.assignments">
-                <td>{{a.title}}</td>
-                <td>{{a.date_start | msDate | date: 'shortDate'}}</td>
-                <td>{{a.date_end | msDate | date: 'shortDate'}}</td>
-                <td>{{a | dayDiff}}</td>
+            <tr class="table-row" ng-repeat="sub in submissions | filter:gradeFilter(onlyGraded)">
+                <td>{{sub.assignment.title}}</td>
+                <td>{{sub.assignment.subject}}</td>
+                <td>{{sub.submit_date | msDate | date: 'shortDate'}}</td>
+                <td><span class="glyphicon" ng-class="gradeClass(sub)"></span>{{gradeString(sub)}}</td>
                 <td>
                     <a class="btn btn-xs btn-info" ng-click="details(a)" href="#/Details/{{a.id}}">Visa</a>
                 </td>
             </tr>
         </tbody>
     </table>
- 
+
 </div>
 

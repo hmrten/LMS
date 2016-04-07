@@ -1,4 +1,4 @@
-﻿<style>
+﻿<!--<style>
     .expanded {
         transition: 0.2s ease-in-out all;
         opacity: 1;
@@ -21,7 +21,7 @@
     .selected-row {
         background-color: #eee8ed;
     }
-</style>
+</style>-->
 <div class="row vert-center">
     <div class="col-md-12">
         <h2>Lista uppgifter</h2>
@@ -38,12 +38,12 @@
                 <ul class="list-group">
                     <li class="list-group-item" ng-repeat="subject in group.subjects" ng-init="subject.expanded = false">
                         <span class="badge">{{subject.assignments.length}}</span>
-                        <a href="#/" style="color: darkblue" ng-click="toggle(subject)">
+                        <a href="#/" ng-click="toggle(subject)">
                             {{subject.name}}
                         </a>
                         <ul class="expanded" ng-show="subject.expanded">
                             <li ng-repeat="a in subject.assignments">
-                                <a href="#/" style="color: darkblue" ng-click="showDetails(a)">{{a.title}}</a>
+                                <a href="#/" ng-click="showDetails(a)">{{a.title}}</a>
                             </li>
                         </ul>
                     </li>
@@ -61,7 +61,7 @@
                 <strong class="col-md-4 text-right">Slutdatum: </strong> <span class="col-md-8">{{details.date_end | msDate | date: 'shortDate'}}</span>
                 <strong class="col-md-4 text-right">Dagar kvar: </strong> <span class="col-md-8">{{details | dayDiff}}</span>
                 <strong class="col-md-4 text-right">Fil: </strong> <span class="col-md-8">
-                    <a href="/Upload/Get/{{details.upload_id}}" style="color: darkblue">Ladda ner <span class="glyphicon glyphicon-download"></span></a>
+                    <a href="/Upload/Get/{{details.upload_id}}">Ladda ner <span class="glyphicon glyphicon-download"></span></a>
                 </span>
                 <strong class="col-md-4 text-right">Beskrivning: </strong> <p class="col-md-8">{{details.desc}}</p>
                 <div class="col-md-offset-4 col-md-8">
@@ -98,7 +98,7 @@
                                 <tr class="table-row" ng-repeat="s in details.submissions" ng-class="{'selected-row': selectedSub.student.id == s.student.id}">
                                     <td>{{s.student.name}}</td>
                                     <td>{{s.date | msDate | date : 'short'}}</td>
-                                    <td><a href="#/" style="color: darkblue">Ladda ner <span class="glyphicon glyphicon-download"></span></a></td>
+                                    <td><a href="#/">Ladda ner <span class="glyphicon glyphicon-download"></span></a></td>
                                     <td><span class="glyphicon" ng-class="gradeClass(s)"></span>{{gradeString(s)}}</td>
                                     <td>
                                         <a class="btn btn-xs btn-info" href="#/" ng-class="{'disabled': s.grading.id}" ng-click="showGrading(s)">Sätt betyg</a>

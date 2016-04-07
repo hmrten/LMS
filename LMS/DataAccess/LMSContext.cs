@@ -330,7 +330,8 @@ namespace LMS.DataAccess
 			Submissions.AddOrUpdate(s => s.Id,
 				new Submission {Id = 1, Assignment_Id = 1, Student_Id = 1, Upload_Id = 3, SubmitDate = new DateTime(2016,5,14), Grading_Id = 1 },
 				new Submission {Id = 2, Assignment_Id = 1, Student_Id = 2, Upload_Id = 4, SubmitDate = new DateTime(2016,5,13) },
-				new Submission {Id = 3, Assignment_Id = 2, Student_Id = 3, Upload_Id = 5, SubmitDate = new DateTime(2016,5,29) }
+				new Submission {Id = 3, Assignment_Id = 2, Student_Id = 3, Upload_Id = 5, SubmitDate = new DateTime(2016,5,29) },
+				new Submission {Id = 4, Assignment_Id = 2, Student_Id = 1, Upload_Id = 3, SubmitDate = new DateTime(2016,5,14)}
 				);
 			SaveChanges();
 		}

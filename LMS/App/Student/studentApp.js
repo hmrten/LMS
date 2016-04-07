@@ -19,20 +19,24 @@
             //    templateUrl: LMS.rootPath + 'App/Student/Views/studentSharedView.html',
             //    controller: 'studentCtrl'
             //})
+            .when('/Submissions', {
+                templateUrl: LMS.rootPath + 'App/Student/Views/studentSubmissionView.html',
+                controller: 'submCtrl'
+            })
             .when('/Task', {
                 templateUrl: LMS.rootPath + 'App/Student/Views/studentTaskView.html',
                 controller: 'taskCtrl'
             });
-            //.when('/Schedule', {
-            //    templateUrl: LMS.rootPath + 'App/Student/Views/studentIndexView.html',
-            //    controller: 'studentCtrl'
-            //});
+        //.when('/Schedule', {
+        //    templateUrl: LMS.rootPath + 'App/Student/Views/studentIndexView.html',
+        //    controller: 'studentCtrl'
+        //});
 
     });
 
     app.controller('studentCtrl', ['$scope', function ($scope) {
         $scope.message = 'hello from angular student';
-        function toDo () {}; //TO DO
+        function toDo() { }; //TO DO
     }]);
 
     app.controller('groupCtrl', ['$scope', 'dataService', function ($scope, dataService) {
@@ -84,7 +88,6 @@
     }]);
 
     app.controller('taskCtrl', ['$scope', 'dataService', function ($scope, dataService) {
-        $scope.message = 'hello from angular task';
 
         GetAllCurrentTasks();
 
@@ -94,7 +97,60 @@
             }, function (resp) { // Om det blir fel
                 $scope.message = resp.statusText;
             });
-        }; 
+        };
+
     }]);
+
+    app.controller('submCtrl', ['$scope', 'dataService', function ($scope, dataService) {
+
+        GetAllMySubmissions();
+
+        function GetAllMySubmissions() {
+            dataService.get("Submission/MySubmissions", function (data) {
+                $scope.submissions = data;
+            }, function (resp) { // Om det blir fel
+                $scope.message = resp.statusText;
+            });
+        };
+
+        $scope.gradeClass = function (sub) {
+            if (sub.grading_id == null) return '';
+            return sub.grading_grade ? 'glyphicon-star' : 'glyphicon-star-empty';
+        };
+        $scope.gradeString = function (sub) {
+            if (sub.grading_id == null) return '';
+            return sub.grading_grade ? 'Godkänd' : 'Ej godkänd';
+        };
+
+        $scope.gradeFilter = function (onlyGraded) {
+            return function (sub) {
+                if (!onlyGraded) {
+                    return true;
+                }
+
+                if (sub.grading_id != null) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+    }]);
+
+    //app.filter('onlyGradedFilter', function(){
+    //    return function (sub, onlyGraded) {
+    //        if (!onlyGraded) {
+    //            return true;
+    //        }
+
+    //        if (sub.grading_id != null) {
+    //            return true;
+    //        } else {
+    //            return false;
+    //        }
+    //    }
+    //});
+
+
 
 }());

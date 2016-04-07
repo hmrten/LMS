@@ -11,8 +11,8 @@ using System.Security.Claims;
 
 namespace LMS.Controllers.API
 {
-    public class SubmissionController : Controller
-    {
+	public class SubmissionController : Controller
+	{
 		private LMSContext db = new LMSContext();
 
 		public AppUserManager UserManager
@@ -20,12 +20,37 @@ namespace LMS.Controllers.API
 			get { return HttpContext.GetOwinContext().GetUserManager<AppUserManager>(); }
 		}
 
-        // LIST: Submission
+
+		public JsonResult MySubmissions()
+		{
+			var userId = HttpContext.User.Identity.GetUserId<int>();
+			var student = db.Students.Where(s => s.User_Id == userId).SingleOrDefault();
+			var res = db.Submissions.Where(s => s.Student_Id == student.Id)
+				 .Select(t => new
+					{
+						grading_id = t.Grading_Id,
+						submit_date = t.SubmitDate,
+						comment = t.Comment,
+						upload_id = t.Upload.Id,
+						grading_grade = t.Grading_Id == null ? 0 : t.Grading.Grade,
+						feedback = t.Grading_Id == null ? "" : t.Grading.Feedback,
+						assignment = new
+								{
+									title = t.Assignment.Title,
+									subject = t.Assignment.Subject.Name,
+									description = t.Assignment.Description
+								}
+					});
+			return Json(res, JsonRequestBehavior.AllowGet);
+		}
+
+
+		// LIST: Submission
 		public JsonResult CurrentAssignments()
 		{
-			
-			var user = UserManager.FindByName(HttpContext.User.Identity.Name);
-			var student = db.Students.Where(s => s.User_Id == user.Id).SingleOrDefault();
+
+			var userId = HttpContext.User.Identity.GetUserId<int>();
+			var student = db.Students.Where(s => s.User_Id == userId).SingleOrDefault();
 			var q = from g in db.Groups
 					where g.Id == student.Group_Id
 					select new
@@ -39,52 +64,25 @@ namespace LMS.Controllers.API
 									   assignments = from a in s.Assignments
 													 select new
 													 {
-														title = a.Title,
-														description = a.Description,
-														date_start = a.DateStart,
-														date_end =  a.DateEnd,
-														filepath = a.Upload.FilePath,
-														submissions = from sub in a.Submissions
-																	  where sub.Assignment_Id == a.Id
-																	  select new
-																	  {
-																		  sub.Grading_Id,
-																		  sub.SubmitDate,
-																		  sub.Comment,
-																		  sub.Upload.FilePath
-																	  }
+														 title = a.Title,
+														 description = a.Description,
+														 date_start = a.DateStart,
+														 date_end = a.DateEnd,
+														 filepath = a.Upload.FilePath,
+														 submissions = from sub in a.Submissions
+																	   where sub.Assignment_Id == a.Id
+																	   select new
+																	   {
+																		   sub.Grading_Id,
+																		   sub.SubmitDate,
+																		   sub.Comment,
+																		   sub.Upload.FilePath
+																	   }
 													 }
 								   }
 					};
-			//var q = from u in db.Users
-			//	join r in db.Roles on u.Roles.FirstOrDefault().RoleId equals r.Id
-			//	select new
-			//	{
-			//		id = u.Id,
-			//		fname = u.FirstName,
-			//		lname = u.LastName,
-			//		email = u.Email,
-			//		phone = u.PhoneNumber,
-			//		uname = u.UserName,
-			//		role_id = r.Id,
-			//		role_name = r.Name
-			//	}
-			//		into usr
-			//		group usr by new
-			//		{
-			//			id = usr.role_id,
-			//			name = usr.role_name
-			//		}
-			//			into g
-			//			orderby g.Key.id
-			//			select new
-			//			{
-			//				role = g.Key.name,
-			//				users = g.ToList()
-			//			};
-			//return Json(q, JsonRequestBehavior.AllowGet);
 			return Json(q.SingleOrDefault(), JsonRequestBehavior.AllowGet);
 		}
 
-    }
+	}
 }
